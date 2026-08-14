@@ -1,4 +1,4 @@
-# Trinca — Landing Pages & Divulgação
+# Portifólio  — Landing Pages & Divulgação
 
 Portfólio de landing pages desenvolvido pela dupla **Carlos & Gabriela**, com divulgação por **Rebeca**.
 
