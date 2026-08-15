@@ -32,16 +32,21 @@ O projeto usa exclusivamente **HTML5, CSS3 e JavaScript puro** — sem framework
 ```
 index.html          → shell HTML: <link> do CSS e <script> dos arquivos JS, em ordem
 css/
-  styles.css              → CSS do portfólio + landing page da Professora (.lp) + dashboard
+  styles.css              → CSS do portfólio (sistema "blueprint") + landing da Professora (.lp) + dashboard
   landing-advocacia.css   → CSS isolado da landing da Advocacia, sob .lp-advocacia
   landing-clinica.css     → CSS isolado da landing da Clínica, sob .lp-clinica
 js/
-  storage.js          → storageService: única camada que fala com window.storage
-  analytics.js         → rastreamento de eventos (congelado, ver "Fora de escopo")
-  projects.js           → dados dos cases (CASES), status de cada projeto, cards do portfólio
-  dashboard.js           → painel de divulgação (congelado, ver "Fora de escopo")
-  app.js                  → tema claro/escuro, navegação, página inicial, landing pages, 404
-  router.js                → roteamento por hash e boot da aplicação
+  storage.js                    → storageService: única camada que fala com window.storage
+  analytics.js                   → rastreamento de eventos (congelado, ver "Fora de escopo")
+  projects.js                     → dados dos cases (CASES), status de cada projeto, cards do portfólio
+  dashboard.js                     → painel de divulgação (congelado, ver "Fora de escopo")
+  shared.js                         → tema claro/escuro, nav()/footer() compartilhados, 404, observers
+  portfolio.js                       → página inicial (renderHome) + diagrama-assinatura do hero
+  landing-professora-ingles.js        → landing page da Professora de Inglês
+  landing-advocacia.js                 → landing page da Advocacia
+  landing-clinica.js                    → landing page da Clínica
+  landing-registry.js                    → LANDING_PAGES + renderLanding(id)
+  router.js                               → roteamento por hash e boot da aplicação
 ```
 
 ## Rotas
@@ -68,8 +73,8 @@ Projetos sem `status: 'live'` continuam apresentáveis no portfólio (desafio, s
 
 1. Adicionar o case em `CASES` (`js/projects.js`), com `status: PROJECT_STATUS.LIVE`.
 2. Se a landing tiver identidade visual própria com CSS extenso, criar um arquivo `css/landing-<id>.css` com todos os seletores prefixados por uma classe única (ex.: `.lp-<id> .hero{...}`) — isso evita que o CSS de uma landing vaze para outra ou para o portfólio. Ligar o arquivo em `index.html`. Para uma variação simples, dá pra reaproveitar o padrão `.lp` já existente em `css/styles.css`.
-3. Escrever a função de render da landing page em `js/app.js`, com o HTML todo dentro de um elemento raiz com a classe usada no passo 2 (ex.: `<div class="lp-<id>">...</div>`).
-4. Registrar a função em `LANDING_PAGES` (`js/app.js`), com a chave igual ao id do case.
+3. Criar `js/landing-<id>.js` com a função de render da landing page, HTML todo dentro de um elemento raiz com a classe usada no passo 2 (ex.: `<div class="lp-<id>">...</div>`). Componentes compartilhados (`nav()`, `footer()`, `themeToggleBtn()`, `demoBadge()`) vêm de `js/shared.js`.
+4. Ligar `js/landing-<id>.js` em `index.html`, antes de `js/landing-registry.js`, e registrar a função em `LANDING_PAGES` (`js/landing-registry.js`) com a chave igual ao id do case.
 
 Não é necessário duplicar boilerplate — o roteador (`js/router.js`) e o rastreamento de `landing_page_view` já funcionam para qualquer id novo automaticamente.
 

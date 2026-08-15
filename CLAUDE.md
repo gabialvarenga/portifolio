@@ -29,14 +29,14 @@ A rota `#/dashboard` e todo o rastreamento de eventos (`js/analytics.js`, `js/da
 
 1. Case novo em `CASES` (`js/projects.js`), `status: PROJECT_STATUS.LIVE`.
 2. Se tiver identidade visual própria (CSS extenso), criar `css/landing-<id>.css` com **todo seletor prefixado por uma classe única** (`.lp-<id> .hero{...}`, `.lp-<id> h1{...}`, etc.) — inclusive seletores de elemento (`body`, `section`, `footer`, `h1,h2,h3`, `p`, `a`) que no arquivo original não eram escopados. Sem isso, o CSS vaza pro resto da SPA (é tudo uma stylesheet global, não por rota). Ligar o arquivo em `index.html`.
-3. Função de render em `js/app.js`, HTML todo dentro de `<div class="lp-<id>">...</div>`. Trocar qualquer link/texto de "voltar" para `#/` e créditos para "Carlos & Gabriela" (nunca reaproveitar nome de marca de um arquivo externo).
-4. Registrar em `LANDING_PAGES` (`js/app.js`).
+3. Função de render em `js/landing-<id>.js` (arquivo próprio, um por landing page), HTML todo dentro de `<div class="lp-<id>">...</div>`. Trocar qualquer link/texto de "voltar" para `#/` e créditos para "Carlos & Gabriela" (nunca reaproveitar nome de marca de um arquivo externo). Componentes compartilhados (`nav()`, `footer()`, `themeToggleBtn()`, `demoBadge()`) vêm de `js/shared.js`.
+4. Ligar `js/landing-<id>.js` em `index.html`, **antes** de `js/landing-registry.js`, e registrar a função lá: `LANDING_PAGES['<id>'] = renderMinhaLanding`.
 
 O roteador e o `track('landing_page_view', id)` já funcionam pra qualquer id novo automaticamente — não precisa mexer em `js/router.js`.
 
 ## Sistema visual do portfólio ("blueprint")
 
-O portfólio (home, `#/`) tem identidade própria e fixa — **não** segue mais o alternador claro/escuro (esse toggle foi removido só do portfólio; `js/app.js#toggleTheme` continua existindo e é usado pela landing da Professora e pelo dashboard, que mantêm seus próprios esquemas).
+O portfólio (home, `#/`, código em `js/portfolio.js`) tem identidade própria e fixa — **não** segue mais o alternador claro/escuro (esse toggle foi removido só do portfólio; `toggleTheme()` em `js/shared.js` continua existindo e é usado pela landing da Professora e pelo dashboard, que mantêm seus próprios esquemas).
 
 Conceito: a home parece uma prancheta de desenho técnico — o produto de vocês é literalmente desenhar a página antes de construir, e o visual leva isso ao pé da letra.
 
@@ -61,10 +61,10 @@ Conceito: a home parece uma prancheta de desenho técnico — o produto de você
 6. Nav — barra fixa navy translúcida com blur, constante em todas as faixas.
 7. Footer — navy.
 
-O mockup de blueprint reutilizado nos hero/cases (`previewInner()` em `js/projects.js`, classes `.bp`/`.marker`/`.frame`) deve ser restilizado com os tokens `--bp-*` para ficar coerente com o resto — hoje ainda usa os tokens antigos (`--white`, `--cobalt-dim` etc.).
+O mockup de blueprint dos cases (`previewInner()` em `js/projects.js`, classes `.bp`/`.marker`/`.frame`) já foi restilizado com os tokens `--bp-*` (ver `.portfolio .bp` etc. em `css/styles.css`) — ele só aparece dentro do portfólio (nos cards de case), nunca nas landing pages individuais.
 
 **Landing pages individuais não seguem esse sistema** — cada uma (Professora, Clínica, Advocacia, e as futuras) mantém identidade própria, isolada por CSS escopado. O sistema "blueprint" é exclusivo da home do portfólio.
 
 ## Verificação
 
-Não existe suíte de testes. Para validar mudanças visuais, suba um servidor estático (`.claude/launch.json` já tem `portfolio-static` configurado, porta 8877) e confira no navegador — nunca declare uma mudança visual pronta sem ver renderizada. Atenção a cache do navegador ao testar: um hard refresh (`Ctrl+Shift+R`) costuma ser necessário depois de editar CSS/JS.
+Não existe suíte de testes. Para validar mudanças visuais, suba um servidor estático (`.claude/launch.json` já tem `portfolio-static` configurado — mude a porta ali se estiver ocupada) e confira no navegador — nunca declare uma mudança visual pronta sem ver renderizada. Atenção a cache do navegador ao testar: um hard refresh nem sempre basta para os `<script src>`; se o conteúdo parecer desatualizado mesmo após editar o arquivo, confirme via `fetch(url, {cache:'no-store'})` e, se preciso, troque a porta do servidor para forçar uma origem sem cache.
