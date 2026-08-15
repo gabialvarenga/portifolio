@@ -1,0 +1,68 @@
+/* Landing page: Bastos & Vieira Advocacia — identidade própria,
+ * isolada do resto do site sob o wrapper .lp-advocacia. */
+.lp-advocacia{
+  --bg:#1A1F27; --bg-2:#20262F; --paper:#EDEAE0; --paper-dim:rgba(237,234,224,0.68);
+  --brass:#C9A15A; --burgundy:#7A2E2E; --line:rgba(237,234,224,0.14);
+  --font-d:'Literata', serif; --font-b:'IBM Plex Sans', sans-serif;
+  background:var(--bg); color:var(--paper); font-family:var(--font-b); line-height:1.65; min-height:100vh;
+}
+.lp-advocacia a{color:inherit}
+.lp-advocacia h1,.lp-advocacia h2,.lp-advocacia h3{font-family:var(--font-d); font-weight:600; margin:0; letter-spacing:-.01em}
+.lp-advocacia p{margin:0}
+.lp-advocacia :focus-visible{outline:2px solid var(--brass); outline-offset:3px}
+.lp-advocacia .container{max-width:1080px; margin-inline:auto; padding-inline:clamp(1.25rem,4vw,3rem)}
+.lp-advocacia .eyebrow{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--brass); font-weight:500}
+.lp-advocacia .mark{box-shadow:inset 0 -0.4em 0 rgba(122,46,46,0.55); padding-inline:.05em}
+
+.lp-advocacia .concept-badge{position:fixed; left:16px; bottom:16px; z-index:60; background:var(--bg-2); border:1px solid var(--line); padding:.5rem .85rem; border-radius:2px; font-size:.72rem; text-decoration:none; color:var(--paper-dim)}
+.lp-advocacia .concept-badge:hover{color:var(--brass); border-color:var(--brass)}
+
+.lp-advocacia .btn{display:inline-flex; align-items:center; gap:.5rem; font-size:.88rem; text-decoration:none; padding:.85rem 1.5rem; border-radius:2px; transition:background .2s ease, color .2s ease}
+.lp-advocacia .btn-primary{background:var(--brass); color:var(--bg); font-weight:600}
+.lp-advocacia .btn-primary:hover{background:#DAB36F}
+.lp-advocacia .btn-ghost{border:1px solid var(--line); color:var(--paper)}
+.lp-advocacia .btn-ghost:hover{border-color:var(--brass); color:var(--brass)}
+
+.lp-advocacia .nav{position:sticky; top:0; z-index:50; background:rgba(26,31,39,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.lp-advocacia .nav-inner{display:flex; align-items:center; justify-content:space-between; padding-block:1.1rem}
+.lp-advocacia .brand{font-family:var(--font-d); font-size:1.1rem; text-decoration:none}
+.lp-advocacia .nav-links{display:flex; gap:1.7rem; list-style:none; margin:0; padding:0; font-size:.86rem; color:var(--paper-dim)}
+.lp-advocacia .nav-links a{text-decoration:none}
+@media (max-width:760px){ .lp-advocacia .nav-links{display:none} }
+
+.lp-advocacia .hero{padding-block:clamp(3.5rem,8vw,6rem); border-bottom:1px solid var(--line)}
+.lp-advocacia .hero-inner{max-width:680px}
+.lp-advocacia .hero h1{font-size:clamp(2rem,4.6vw,3.1rem); line-height:1.2; margin-top:.9rem}
+.lp-advocacia .hero p.lead{font-family:var(--font-b); font-size:1.02rem; color:var(--paper-dim); margin-top:1.15rem; max-width:42ch}
+.lp-advocacia .hero-actions{display:flex; gap:.9rem; margin-top:2rem; flex-wrap:wrap}
+
+.lp-advocacia section{padding-block:clamp(3rem,6vw,4.5rem)}
+.lp-advocacia .section-head{max-width:46ch; margin-bottom:2.4rem}
+.lp-advocacia .section-head h2{font-size:clamp(1.5rem,3vw,2rem)}
+
+.lp-advocacia .articles{display:flex; flex-direction:column}
+.lp-advocacia .article{display:grid; grid-template-columns:110px 1fr; gap:1.5rem; padding-block:1.5rem; border-top:1px solid var(--line)}
+.lp-advocacia .articles .article:last-child{border-bottom:1px solid var(--line)}
+@media (max-width:640px){ .lp-advocacia .article{grid-template-columns:1fr} }
+.lp-advocacia .article .tag{font-family:var(--font-d); font-style:italic; color:var(--brass); font-size:.95rem}
+.lp-advocacia .article h3{font-size:1.15rem}
+.lp-advocacia .article p{font-family:var(--font-b); font-size:.9rem; color:var(--paper-dim); margin-top:.5rem}
+
+.lp-advocacia .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem}
+@media (max-width:780px){ .lp-advocacia .steps{grid-template-columns:1fr} }
+.lp-advocacia .step-card{background:var(--bg-2); border:1px solid var(--line); border-radius:2px; padding:1.5rem}
+.lp-advocacia .step-card .n{font-family:var(--font-d); font-style:italic; color:var(--brass); font-size:1.1rem}
+.lp-advocacia .step-card h3{font-size:1.02rem; margin-top:.6rem}
+.lp-advocacia .step-card p{font-family:var(--font-b); font-size:.88rem; color:var(--paper-dim); margin-top:.55rem}
+
+.lp-advocacia .trust-strip{display:flex; gap:2.2rem; flex-wrap:wrap; margin-top:2.6rem; padding-top:1.6rem; border-top:1px solid var(--line)}
+.lp-advocacia .trust-item{font-size:.85rem; color:var(--paper-dim)}
+
+.lp-advocacia .cta-final{background:var(--bg-2); border:1px solid var(--line); border-radius:2px; padding:clamp(2.2rem,5vw,3.6rem); text-align:center}
+.lp-advocacia .cta-final h2{font-size:clamp(1.5rem,3.2vw,2.1rem)}
+.lp-advocacia .cta-final p{font-family:var(--font-b); color:var(--paper-dim); margin-top:.9rem; max-width:40ch; margin-inline:auto}
+.lp-advocacia .cta-final .hero-actions{justify-content:center; margin-top:2rem}
+
+.lp-advocacia footer{padding-block:2rem; border-top:1px solid var(--line)}
+.lp-advocacia .footer-inner{display:flex; justify-content:space-between; flex-wrap:wrap; gap:.8rem; font-size:.78rem; color:var(--paper-dim)}
+.lp-advocacia .footer-inner a{text-decoration:underline}

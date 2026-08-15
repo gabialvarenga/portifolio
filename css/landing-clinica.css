@@ -1,0 +1,71 @@
+/* Landing page: Clínica Sorriso — identidade própria,
+ * isolada do resto do site sob o wrapper .lp-clinica. */
+.lp-clinica{
+  --bg:#F2F6F1; --bg-2:#FFFFFF; --ink:#16302B; --ink-dim:rgba(22,48,43,0.68);
+  --accent:#FF7A59; --accent-2:#FFDCC9; --line:rgba(22,48,43,0.12);
+  --font-d:'Fraunces', serif; --font-b:'Plus Jakarta Sans', sans-serif;
+  background:var(--bg); color:var(--ink); font-family:var(--font-b); line-height:1.6; min-height:100vh;
+}
+.lp-clinica a{color:inherit}
+.lp-clinica h1,.lp-clinica h2,.lp-clinica h3{font-family:var(--font-d); margin:0; letter-spacing:-.01em}
+.lp-clinica p{margin:0}
+.lp-clinica :focus-visible{outline:2px solid var(--ink); outline-offset:3px}
+.lp-clinica .arc-rule{display:block; width:52px; height:14px; margin-top:.7rem; border-bottom:4px solid var(--accent); border-radius:0 0 60% 60%}
+.lp-clinica .eyebrow{font-size:.82rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); font-weight:600}
+
+.lp-clinica .concept-badge{position:fixed; left:16px; bottom:16px; z-index:60; background:rgba(255,255,255,0.9); border:1px solid var(--line); backdrop-filter:blur(6px); padding:.5rem .85rem; border-radius:999px; font-size:.74rem; text-decoration:none; color:var(--ink-dim); box-shadow:0 4px 14px rgba(22,48,43,.08)}
+.lp-clinica .concept-badge:hover{color:var(--ink)}
+
+.lp-clinica .btn{display:inline-flex; align-items:center; gap:.5rem; font-weight:600; font-size:.95rem; text-decoration:none; padding:.85rem 1.5rem; border-radius:999px; transition:transform .2s ease, box-shadow .2s ease}
+.lp-clinica .btn-primary{background:var(--ink); color:var(--bg)}
+.lp-clinica .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(22,48,43,.22)}
+.lp-clinica .btn-ghost{border:1.5px solid var(--ink); color:var(--ink)}
+.lp-clinica .btn-ghost:hover{background:var(--ink); color:var(--bg)}
+
+.lp-clinica .nav{position:sticky; top:0; z-index:50; background:rgba(242,246,241,0.88); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.lp-clinica .nav-inner{display:flex; align-items:center; justify-content:space-between; padding-block:1rem}
+.lp-clinica .brand{font-family:var(--font-d); font-weight:600; font-size:1.15rem; text-decoration:none}
+.lp-clinica .nav-links{display:flex; gap:1.6rem; list-style:none; margin:0; padding:0; font-size:.92rem}
+.lp-clinica .nav-links a{text-decoration:none}
+@media (max-width:720px){ .lp-clinica .nav-links{display:none} }
+
+.lp-clinica .hero{position:relative; overflow:hidden; padding-block:clamp(3.5rem,8vw,6rem)}
+.lp-clinica .hero-blob{position:absolute; width:640px; height:640px; background:var(--accent-2); border-radius:44% 56% 60% 40%/50% 45% 55% 50%; top:-220px; right:-180px; z-index:0}
+.lp-clinica .hero-inner{position:relative; z-index:1; max-width:640px}
+.lp-clinica .hero h1{font-size:clamp(2.1rem,5vw,3.4rem); line-height:1.12; margin-top:.9rem}
+.lp-clinica .hero p.lead{font-size:1.08rem; color:var(--ink-dim); margin-top:1.1rem; max-width:36ch}
+.lp-clinica .hero-actions{display:flex; gap:.9rem; margin-top:2rem; flex-wrap:wrap}
+
+.lp-clinica .trust-row{display:flex; gap:2.2rem; flex-wrap:wrap; margin-top:3rem; position:relative; z-index:1}
+.lp-clinica .trust-item{display:flex; align-items:center; gap:.6rem; font-size:.9rem; color:var(--ink-dim)}
+.lp-clinica .arc-dot{width:26px; height:26px; border-radius:50%; border:3px solid transparent; border-bottom-color:var(--accent); border-left-color:var(--accent); transform:rotate(45deg); flex-shrink:0}
+
+.lp-clinica section{padding-block:clamp(3rem,6vw,4.5rem)}
+.lp-clinica .section-head{max-width:42ch; margin-bottom:2.4rem}
+.lp-clinica .section-head h2{font-size:clamp(1.6rem,3.2vw,2.15rem)}
+
+.lp-clinica .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem}
+@media (max-width:860px){ .lp-clinica .services-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:560px){ .lp-clinica .services-grid{grid-template-columns:1fr} }
+.lp-clinica .service-card{background:var(--bg-2); border-radius:22px; padding:1.7rem; border:1px solid var(--line)}
+.lp-clinica .service-card h3{font-size:1.05rem; margin-top:1rem}
+.lp-clinica .service-card p{font-size:.88rem; color:var(--ink-dim); margin-top:.55rem}
+
+.lp-clinica .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem}
+@media (max-width:780px){ .lp-clinica .steps{grid-template-columns:1fr} }
+.lp-clinica .step-card{position:relative; padding-left:2.6rem}
+.lp-clinica .step-num{position:absolute; left:0; top:0; width:2rem; height:2rem; border-radius:50%; background:var(--ink); color:var(--bg); font-family:var(--font-d); font-weight:600; display:flex; align-items:center; justify-content:center; font-size:.95rem}
+.lp-clinica .step-card h3{font-size:1.05rem; margin-top:.1rem}
+.lp-clinica .step-card p{font-size:.88rem; color:var(--ink-dim); margin-top:.5rem}
+
+.lp-clinica .cta-final{background:var(--ink); color:var(--bg); border-radius:28px; padding:clamp(2.2rem,5vw,3.8rem); text-align:center}
+.lp-clinica .cta-final h2{color:var(--bg); font-size:clamp(1.6rem,3.4vw,2.3rem)}
+.lp-clinica .cta-final p{color:rgba(242,246,241,0.75); margin-top:.85rem; max-width:40ch; margin-inline:auto}
+.lp-clinica .cta-final .hero-actions{justify-content:center; margin-top:2rem}
+.lp-clinica .cta-final .btn-primary{background:var(--accent); color:var(--ink)}
+.lp-clinica .cta-final .btn-ghost{border-color:var(--bg); color:var(--bg)}
+.lp-clinica .cta-final .btn-ghost:hover{background:var(--bg); color:var(--ink)}
+
+.lp-clinica footer{padding-block:2rem; border-top:1px solid var(--line)}
+.lp-clinica .footer-inner{display:flex; justify-content:space-between; flex-wrap:wrap; gap:.8rem; font-size:.8rem; color:var(--ink-dim)}
+.lp-clinica .footer-inner a{text-decoration:underline}
