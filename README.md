@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Portfólio de Landing Pages
+=======
+# Portifólio  — Landing Pages & Divulgação
+>>>>>>> 7571757d556eef57d82b04f9e21e7663e160d588
 
 Sistema de portfólio desenvolvido pela dupla **Carlos & Gabriela** para apresentar as landing pages que desenvolvemos: uma vitrine dos projetos/cases, com cada case abrindo em sua própria landing page demonstrativa.
 
