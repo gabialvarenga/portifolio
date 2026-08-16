@@ -24,9 +24,9 @@
   --bp-paper-2:#DCE8ED;
   --bp-ink:#0B1B2B;
   --bp-chalk:#F3F7FA;
-  --bp-stamp:#D2452C;
+  --bp-stamp:#0891B2;
   --bp-blue-ink:#1F5C82;
-  --bp-font-display:'Space Grotesk', sans-serif;
+  --bp-font-display:'Poppins', sans-serif;
 }
 html[data-theme="dark"]{
   --ink:#F3EFE6;

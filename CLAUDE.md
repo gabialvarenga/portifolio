@@ -48,9 +48,9 @@ Conceito: a home parece uma prancheta de desenho técnico — o produto de você
 - `--bp-paper-2 #DCE8ED` — tom secundário de papel
 - `--bp-ink #0B1B2B` — texto sobre paper
 - `--bp-chalk #F3F7FA` — texto sobre navy
-- `--bp-stamp #D2452C` — acento "carimbo de revisão": CTAs, números, marcações
+- `--bp-stamp #0891B2` — acento (teal/ciano saturado, combina com `--bp-line`): CTAs, números, marcações
 
-**Tipografia** — títulos em **Space Grotesk** (já carregada no Google Fonts do projeto, antes não usada em lugar nenhum — não adicionar Playfair Display de volta nos títulos do portfólio). Corpo continua Inter, legendas/anotações continuam JetBrains Mono.
+**Tipografia** — títulos em **Poppins** (carregada no Google Fonts do projeto). Corpo continua Inter, legendas/anotações continuam JetBrains Mono.
 
 **Ritmo das seções** — faixas alternando navy e paper, começando e terminando em navy (hero e CTA final fazem um "bookend"):
 1. Hero — navy. Elemento-assinatura: diagrama estático da anatomia de uma landing page, com linhas de chamada reais ligando cada anotação à região certa (não pontinhos numerados soltos).
