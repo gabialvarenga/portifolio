@@ -28,22 +28,57 @@
 .lp-advocacia .brand{font-family:var(--font-d); font-size:1.1rem; text-decoration:none}
 .lp-advocacia .nav-links{display:flex; gap:1.7rem; list-style:none; margin:0; padding:0; font-size:.86rem; color:var(--paper-dim)}
 .lp-advocacia .nav-links a{text-decoration:none}
+.lp-advocacia .nav-links a:hover{color:var(--brass)}
 @media (max-width:760px){ .lp-advocacia .nav-links{display:none} }
 
+/* HERO */
 .lp-advocacia .hero{padding-block:clamp(3.5rem,8vw,6rem); border-bottom:1px solid var(--line)}
-.lp-advocacia .hero-inner{max-width:680px}
+.lp-advocacia .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:3rem; align-items:center}
+.lp-advocacia .hero-inner{max-width:640px}
 .lp-advocacia .hero h1{font-size:clamp(2rem,4.6vw,3.1rem); line-height:1.2; margin-top:.9rem}
 .lp-advocacia .hero p.lead{font-family:var(--font-b); font-size:1.02rem; color:var(--paper-dim); margin-top:1.15rem; max-width:42ch}
 .lp-advocacia .hero-actions{display:flex; gap:.9rem; margin-top:2rem; flex-wrap:wrap}
 
+/* balança da justiça — visual-assinatura do hero, em SVG */
+.lp-advocacia .scale-visual{position:relative; width:min(280px,80vw); margin-inline:auto}
+.lp-advocacia .scale-visual svg{width:100%; height:auto; display:block; overflow:visible}
+.lp-advocacia .scale-post{stroke:var(--brass); stroke-width:3}
+.lp-advocacia .scale-base{fill:var(--brass)}
+.lp-advocacia .scale-pivot{fill:var(--brass)}
+.lp-advocacia .scale-beam{stroke:var(--brass); stroke-width:3}
+.lp-advocacia .scale-chain{stroke:var(--brass); stroke-width:1.5; opacity:.85}
+.lp-advocacia .scale-pan{stroke:var(--brass); stroke-width:2; fill:none; opacity:.85}
+.lp-advocacia .scale-dot{fill:var(--brass)}
+.lp-advocacia .scale-group{animation:scaleTilt 5s ease-in-out infinite; transform-origin:160px 52px}
+@keyframes scaleTilt{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+
+.lp-advocacia .hero-badge{position:absolute; z-index:2; bottom:-6%; left:-8%; background:var(--bg-2); border:1px solid var(--line); border-radius:2px; padding:.85rem 1.1rem; box-shadow:0 20px 40px -20px rgba(0,0,0,.5); text-align:center; animation:floaty 5s ease-in-out infinite}
+.lp-advocacia .hero-badge strong{display:block; font-family:var(--font-d); font-size:1.3rem; color:var(--paper)}
+.lp-advocacia .hero-badge span{display:block; font-size:.64rem; color:var(--paper-dim); text-transform:uppercase; letter-spacing:.05em; margin-top:.15rem}
+@media (max-width:900px){ .lp-advocacia .hero-grid{grid-template-columns:1fr} .lp-advocacia .hero-badge{display:none} }
+
 .lp-advocacia section{padding-block:clamp(3rem,6vw,4.5rem)}
+.lp-advocacia section.alt{background:var(--bg-2)}
 .lp-advocacia .section-head{max-width:46ch; margin-bottom:2.4rem}
 .lp-advocacia .section-head h2{font-size:clamp(1.5rem,3vw,2rem)}
+.lp-advocacia .section-head p{color:var(--paper-dim); margin-top:.7rem; font-size:.92rem}
 
+/* SOBRE */
+.lp-advocacia .about{display:grid; grid-template-columns:1.1fr .9fr; gap:2.6rem; align-items:start}
+.lp-advocacia .about p{color:var(--paper-dim); font-family:var(--font-b); font-size:.95rem; margin-top:.9rem; max-width:48ch}
+.lp-advocacia .credentials{list-style:none; display:flex; flex-direction:column; gap:.85rem; margin:0; padding:0}
+.lp-advocacia .credentials li{display:flex; gap:.7rem; align-items:flex-start; font-size:.9rem}
+.lp-advocacia .credentials .ico{flex-shrink:0; width:24px; height:24px; border-radius:50%; background:var(--brass); color:var(--bg); display:inline-flex; align-items:center; justify-content:center; font-size:.7rem; font-weight:700; margin-top:1px}
+@media (max-width:780px){ .lp-advocacia .about{grid-template-columns:1fr} }
+
+/* ÁREAS DE ATUAÇÃO */
 .lp-advocacia .articles{display:flex; flex-direction:column}
 .lp-advocacia .article{display:grid; grid-template-columns:110px 1fr; gap:1.5rem; padding-block:1.5rem; border-top:1px solid var(--line)}
 .lp-advocacia .articles .article:last-child{border-bottom:1px solid var(--line)}
 @media (max-width:640px){ .lp-advocacia .article{grid-template-columns:1fr} }
+.lp-advocacia .article .tag-col{display:flex; flex-direction:column; gap:.7rem}
+.lp-advocacia .article .ico{width:34px; height:34px; border-radius:8px; background:rgba(201,161,90,.14); color:var(--brass); display:inline-flex; align-items:center; justify-content:center}
+.lp-advocacia .article .ico svg{width:18px; height:18px}
 .lp-advocacia .article .tag{font-family:var(--font-d); font-style:italic; color:var(--brass); font-size:.95rem}
 .lp-advocacia .article h3{font-size:1.15rem}
 .lp-advocacia .article p{font-family:var(--font-b); font-size:.9rem; color:var(--paper-dim); margin-top:.5rem}
@@ -51,12 +86,47 @@
 .lp-advocacia .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem}
 @media (max-width:780px){ .lp-advocacia .steps{grid-template-columns:1fr} }
 .lp-advocacia .step-card{background:var(--bg-2); border:1px solid var(--line); border-radius:2px; padding:1.5rem}
+.lp-advocacia section.alt .step-card{background:var(--bg)}
 .lp-advocacia .step-card .n{font-family:var(--font-d); font-style:italic; color:var(--brass); font-size:1.1rem}
 .lp-advocacia .step-card h3{font-size:1.02rem; margin-top:.6rem}
 .lp-advocacia .step-card p{font-family:var(--font-b); font-size:.88rem; color:var(--paper-dim); margin-top:.55rem}
 
 .lp-advocacia .trust-strip{display:flex; gap:2.2rem; flex-wrap:wrap; margin-top:2.6rem; padding-top:1.6rem; border-top:1px solid var(--line)}
 .lp-advocacia .trust-item{font-size:.85rem; color:var(--paper-dim)}
+
+/* PLANOS */
+.lp-advocacia .plans{display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; align-items:stretch}
+@media (max-width:900px){ .lp-advocacia .plans{grid-template-columns:1fr} }
+.lp-advocacia .plan{background:var(--bg); border:1px solid var(--line); border-radius:2px; padding:1.8rem 1.6rem; display:flex; flex-direction:column; position:relative}
+.lp-advocacia .plan.featured{background:var(--brass); color:var(--bg); border-color:var(--brass)}
+.lp-advocacia .plan-tag{position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--bg); color:var(--brass); border:1px solid var(--brass); font-size:.68rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:.32rem .85rem; border-radius:999px}
+.lp-advocacia .plan h3{font-size:1.1rem}
+.lp-advocacia .plan .price{font-family:var(--font-d); font-size:1.7rem; margin-top:.6rem}
+.lp-advocacia .plan .price span{font-family:var(--font-b); font-size:.78rem; font-weight:400; opacity:.75}
+.lp-advocacia .plan .desc{font-family:var(--font-b); font-size:.85rem; opacity:.8; margin-top:.5rem; margin-bottom:1.1rem}
+.lp-advocacia .plan ul{list-style:none; display:flex; flex-direction:column; gap:.55rem; margin:0 0 1.3rem; padding:0; flex:1}
+.lp-advocacia .plan li{font-family:var(--font-b); font-size:.85rem; display:flex; gap:.5rem; align-items:flex-start}
+.lp-advocacia .plan li::before{content:"✓"; color:var(--brass); font-weight:700; flex-shrink:0}
+.lp-advocacia .plan.featured li::before{color:var(--bg)}
+.lp-advocacia .plan .btn{justify-content:center; width:100%; margin-top:auto}
+.lp-advocacia .plan.featured .btn-primary{background:var(--bg); color:var(--brass)}
+.lp-advocacia .plans-note{font-family:var(--font-b); font-size:.78rem; color:var(--paper-dim); text-align:center; margin-top:1.3rem; max-width:60ch; margin-inline:auto}
+
+/* DEPOIMENTOS */
+.lp-advocacia .testimonials{display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem}
+@media (max-width:860px){ .lp-advocacia .testimonials{grid-template-columns:1fr} }
+.lp-advocacia .testi{background:var(--bg-2); border:1px solid var(--line); border-radius:2px; padding:1.6rem}
+.lp-advocacia .testi p{font-family:var(--font-d); font-style:italic; font-size:.95rem; color:var(--paper)}
+.lp-advocacia .testi .who{font-family:var(--font-b); font-size:.78rem; margin-top:.9rem; color:var(--paper-dim)}
+
+/* FAQ */
+.lp-advocacia .faq{max-width:44rem}
+.lp-advocacia .faq-item{border-bottom:1px solid var(--line); padding:1.1rem 0}
+.lp-advocacia .faq-item summary{cursor:pointer; font-family:var(--font-d); font-weight:600; font-size:1rem; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:.8rem}
+.lp-advocacia .faq-item summary::-webkit-details-marker{display:none}
+.lp-advocacia .faq-item summary::after{content:"+"; font-size:1.4rem; font-weight:400; color:var(--brass); transition:transform .2s ease; flex-shrink:0}
+.lp-advocacia .faq-item[open] summary::after{transform:rotate(45deg)}
+.lp-advocacia .faq-item p{font-family:var(--font-b); font-size:.88rem; color:var(--paper-dim); margin-top:.7rem; max-width:60ch}
 
 .lp-advocacia .cta-final{background:var(--bg-2); border:1px solid var(--line); border-radius:2px; padding:clamp(2.2rem,5vw,3.6rem); text-align:center}
 .lp-advocacia .cta-final h2{font-size:clamp(1.5rem,3.2vw,2.1rem)}
