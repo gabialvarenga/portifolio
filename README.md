@@ -1,6 +1,6 @@
 # Portfólio de Landing Pages
 
-Sistema de portfólio desenvolvido pela dupla **Carlos & Gabriela** para apresentar as landing pages que desenvolvemos: uma vitrine dos projetos/cases, com cada case abrindo em sua própria landing page demonstrativa.
+Sistema de portfólio desenvolvido pelo trio **Carlos, Gabriela e Rebeca** para apresentar as landing pages que desenvolvemos: uma vitrine dos projetos/cases, com cada case abrindo em sua própria landing page demonstrativa. Carlos e Gabriela cuidam do desenvolvimento; Rebeca cuida da divulgação.
 
 > O nome do produto ainda não está definido. Enquanto isso, o projeto é tratado apenas como "Portfólio" / "Sistema".
 
@@ -70,7 +70,7 @@ Cada projeto é uma entrada em `CASES` (`js/projects.js`), com um `status`:
 - `coming-soon` — landing page prevista, ainda não iniciada
 - `concept` — projeto-conceito, sem landing page própria prevista
 
-Projetos sem `status: 'live'` continuam apresentáveis no portfólio (desafio, solução, estratégia), só não têm link de landing page — mostram um selo com o estado atual em vez de parecer quebrado.
+**A home só renderiza os projetos com `status: 'live'`.** Os demais continuam em `CASES` como planejamento (e no roadmap abaixo), mas não aparecem para o visitante — a vitrine mostra só o que está pronto, sem selos de "em breve".
 
 ## Como adicionar uma nova landing page
 
@@ -83,7 +83,7 @@ Não é necessário duplicar boilerplate — o roteador (`js/router.js`) e o ras
 
 ## Fora de escopo (por enquanto)
 
-A rota `#/dashboard`, o rastreamento de eventos (`portfolio_view`, `project_view`, `landing_page_view`, `contact_click`) e a captura de UTM são uso interno da Rebeca (divulgação/campanhas). Esse código foi apenas **realocado** para `js/analytics.js` e `js/dashboard.js` durante a reorganização em arquivos — o comportamento não mudou. Não é o foco de desenvolvimento atual; evoluir rastreamento, funil, UTM ou análise de campanhas fica para uma etapa futura.
+A rota `#/dashboard`, o rastreamento de eventos (`portfolio_view`, `project_view`, `landing_page_view`, `contact_click`) e a captura de UTM são uso interno da Rebeca, responsável pela divulgação/campanhas. Esse código foi apenas **realocado** para `js/analytics.js` e `js/dashboard.js` durante a reorganização em arquivos — o comportamento não mudou. Não é o foco de desenvolvimento atual; evoluir rastreamento, funil, UTM ou análise de campanhas fica para uma etapa futura.
 
 ## Limitações atuais
 
@@ -99,4 +99,4 @@ A rota `#/dashboard`, o rastreamento de eventos (`portfolio_view`, `project_view
 
 ## Créditos
 
-Desenvolvido por **Carlos & Gabriela**. Divulgação por **Rebeca**.
+Desenvolvido por **Carlos, Gabriela e Rebeca**. Carlos e Gabriela: desenvolvimento. Rebeca: divulgação.

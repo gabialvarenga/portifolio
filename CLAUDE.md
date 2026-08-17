@@ -4,7 +4,7 @@ Guia para trabalhar neste repositório. Leia antes de alterar qualquer coisa.
 
 ## O que é o projeto
 
-Portfólio de landing pages da dupla **Carlos & Gabriela**, com divulgação da **Rebeca**. Site único, sem build, com duas frentes:
+Portfólio de landing pages do trio **Carlos, Gabriela e Rebeca** — Carlos e Gabriela cuidam do desenvolvimento, Rebeca cuida da divulgação. Site único, sem build, com duas frentes:
 
 1. **Portfólio** (`#/`) — vitrine dos projetos/cases.
 2. **Landing pages demonstrativas** (`#/landing/:id`) — cada case pode ter a sua, com identidade visual própria.
@@ -52,16 +52,21 @@ Conceito: a home parece uma prancheta de desenho técnico — o produto de você
 
 **Tipografia** — títulos em **Poppins** (carregada no Google Fonts do projeto). Corpo continua Inter, legendas/anotações continuam JetBrains Mono.
 
-**Ritmo das seções** — faixas alternando navy e paper, começando e terminando em navy (hero e CTA final fazem um "bookend"):
-1. Hero — navy. Elemento-assinatura: diagrama estático da anatomia de uma landing page, com linhas de chamada reais ligando cada anotação à região certa (não pontinhos numerados soltos).
-2. Serviços — paper.
-3. Projetos/cases — navy, cards de case como folhas de papel presas na prancheta.
-4. Como funciona — paper (numeração 01–04 se justifica aqui: é uma sequência real).
-5. Contato (CTA final) — navy.
-6. Nav — barra fixa navy translúcida com blur, constante em todas as faixas.
-7. Footer — navy.
+**Marca** — símbolo abstrato do próprio vocabulário de desenho técnico (corte de canto de prancheta + linha de cota com pino), não um nome de produto (ver "Regra de nome do produto" acima). Definido em `brandMark()` (`js/shared.js`), usado em três escalas: pequeno no nav (dentro de `.brand`), grande e bem sutil como marca-d'água nas faixas navy (`brandWatermark()`, classes `.wm-host`/`.bp-watermark`) e pequeno de novo como marca de canto nos cards da seção "quem faz" (`.team-mark`). Ao criar uma nova aplicação da marca, reaproveite `brandMark()` — não desenhe um símbolo novo solto.
+
+**Ritmo das seções** — faixas alternando navy e paper, começando e terminando em navy (hero e contato fazem um "bookend"):
+1. Hero — navy. Elemento-assinatura: diagrama estático da anatomia de uma landing page, com linhas de chamada reais ligando cada anotação à região certa (não pontinhos numerados soltos). Também carrega a marca-d'água (`wm-hero`).
+2. Como trabalhamos — paper. Etapas numeradas 01–04 que já declaram o entregável de cada uma (fusão do que antes eram duas seções separadas, "Serviços" e "Como funciona").
+3. Projetos/cases — navy. **Só entram os cases com `status: LIVE`** (`renderHome()` filtra). Card compacto: preview clicável, resumo, botão "Ver página" e um `<details>` discreto com as decisões. Cases sem landing page ficam em `CASES` como planejamento e não aparecem na home — nada de selo "em breve" para o visitante.
+4. Quem faz — paper. Carlos, Gabriela e Rebeca, um card cada, com a marca de canto (`.team-mark`).
+5. FAQ — navy. Acordeão (`.faq-list`, `<details>`), itens em largura total da faixa, com o `<summary>` ocupando a linha inteira como área de clique.
+6. Contato (CTA final) — navy, com a marca-d'água (`wm-cta`). É a única quebra na alternância navy/paper: FAQ e contato são duas faixas navy seguidas, e o contraste vem do `.cta-box`, um cartão de papel flutuando sobre o navy.
+7. Nav — barra fixa navy translúcida com blur, constante em todas as faixas.
+8. Footer — navy. Inclui o carimbo decorativo `.bp-stamp-mark` ("Prancha 01 · Rev. ..."), visível só dentro do portfólio (`display:none` fora de `.portfolio`, já que o `footer()` é compartilhado com as landing pages e o dashboard).
 
 O mockup de blueprint dos cases (`previewInner()` em `js/projects.js`, classes `.bp`/`.marker`/`.frame`) já foi restilizado com os tokens `--bp-*` (ver `.portfolio .bp` etc. em `css/styles.css`) — ele só aparece dentro do portfólio (nos cards de case), nunca nas landing pages individuais.
+
+**Âncoras internas da home** — o roteador é por hash, então um `href="#secao"` que siga seu curso normal dispara `hashchange`, cai no `else` do `render()` e redesenha a home com `scrollTo(0,0)` (o clique parece não fazer nada). Toda âncora interna usa `goToSection(event, id)` de `js/shared.js`, que cancela o default e só rola.
 
 **Landing pages individuais não seguem esse sistema** — cada uma (Professora, Clínica, Advocacia, e as futuras) mantém identidade própria, isolada por CSS escopado. O sistema "blueprint" é exclusivo da home do portfólio.
 

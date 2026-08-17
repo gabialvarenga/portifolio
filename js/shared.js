@@ -21,10 +21,45 @@ async function toggleTheme(){
 function go(hash){ location.hash = hash; }
 function scrollToId(id){ const el = document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth'}); }
 
+/* Âncora interna da home. O roteador é por hash, então deixar um
+ * href="#projetos" seguir seu curso normal dispara hashchange, cai no
+ * else do render() e redesenha a home inteira com scrollTo(0,0) — o
+ * clique parecia não fazer nada. Por isso cancelamos o default e só
+ * rolamos, sem mexer no hash. */
+function goToSection(event, id){ if(event) event.preventDefault(); scrollToId(id); }
+
+/* A barra do topo é sticky, então rolar até uma seção deixava o título
+ * dela escondido atrás da barra. Publicamos a altura real da barra em
+ * --nav-h e o CSS usa isso no scroll-margin-top das seções — medir em
+ * vez de chutar um valor fixo, porque a barra muda de altura conforme
+ * a largura da tela. */
+function syncNavHeight(){
+  const bar = document.querySelector('.nav');
+  if(!bar) return;
+  document.documentElement.style.setProperty('--nav-h', Math.round(bar.getBoundingClientRect().height) + 'px');
+}
+window.addEventListener('resize', syncNavHeight);
+
 /* ---------- componentes compartilhados ----------
  * Usados pelo portfólio (js/portfolio.js) e pelas landing pages
  * (js/landing-*.js). Nada aqui é específico de uma página.
  */
+/* marca: corte de canto de prancheta + linha de cota com pino — o
+ * mesmo vocabulário do diagrama do hero e dos marcadores dos cases,
+ * reduzido a um símbolo. Usada no nav, como marca-d'água nas faixas
+ * navy e como marca de canto na seção "quem faz". */
+function brandMark(){
+  return `<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <path class="bm-corner" d="M5 17 V5 H17"/>
+    <line class="bm-dim" x1="10" y1="26" x2="25" y2="11"/>
+    <line class="bm-tick" x1="8.2" y1="24.2" x2="11.8" y2="27.8"/>
+    <line class="bm-tick" x1="23.2" y1="9.2" x2="26.8" y2="12.8"/>
+    <circle class="bm-pin" cx="25" cy="11" r="2.3"/>
+  </svg>`;
+}
+function brandWatermark(posClass){
+  return `<div class="bp-watermark ${posClass}" aria-hidden="true">${brandMark()}</div>`;
+}
 function themeToggleBtn(){
   return `<button type="button" class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar entre modo claro e escuro">
     <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.4A9 9 0 1 1 11.6 3a7 7 0 0 0 9.4 9.4Z"/></svg>
@@ -33,20 +68,21 @@ function themeToggleBtn(){
 }
 function nav(){
   return `<div class="nav"><div class="wrap nav-inner">
-    <a href="#/" class="brand"><span class="brand-mark"></span>Portfólio</a>
+    <a href="#/" class="brand">${brandMark()}Portfólio</a>
     <ul class="nav-links">
-      <li><a href="#servicos" onclick="scrollToId('servicos')">Serviços</a></li>
-      <li><a href="#projetos" onclick="scrollToId('projetos')">Projetos</a></li>
-      <li><a href="#processo" onclick="scrollToId('processo')">Como funciona</a></li>
+      <li><a href="#servicos" onclick="goToSection(event,'servicos')">Processo</a></li>
+      <li><a href="#projetos" onclick="goToSection(event,'projetos')">Projetos</a></li>
+      <li><a href="#equipe" onclick="goToSection(event,'equipe')">Equipe</a></li>
+      <li><a href="#faq" onclick="goToSection(event,'faq')">FAQ</a></li>
     </ul>
-    <a href="#contato" class="btn btn-primary" onclick="scrollToId('contato')">Falar com a gente</a>
+    <a href="#contato" class="btn btn-primary" onclick="goToSection(event,'contato')">Contato</a>
   </div></div>`;
 }
 function footer(){
   return `<footer><div class="wrap footer-inner">
     <div class="footer-credit">
-      <span class="made">Desenvolvido pela dupla</span>
-      <span class="names">Carlos <span>&amp;</span> Gabriela</span>
+      <span class="made">Desenvolvido por</span>
+      <span class="names">Carlos<span>,</span> Gabriela <span>&amp;</span> Rebeca</span>
     </div>
     <div class="footer-links">
       <a href="mailto:gabrielaalvarengc@gmail.com">contato</a>
@@ -81,6 +117,64 @@ function initReveal(){
   },{threshold:0.12, rootMargin:'0px 0px -6% 0px'});
   els.forEach(e=>io.observe(e));
 }
+/* ---------- carrossel de cases ----------
+ * Rolagem nativa com scroll-snap; o JS só cuida dos controles. Quando
+ * todos os cards já cabem na largura disponível (desktop), os controles
+ * se escondem sozinhos — não faz sentido paginar o que já está visível.
+ */
+function initCarousels(){
+  document.querySelectorAll('[data-carousel]').forEach(root => {
+    const rail = root.querySelector('.carousel-rail');
+    const dotsBox = root.querySelector('.carousel-dots');
+    const btns = root.querySelectorAll('.carousel-btn');
+    const cards = Array.from(rail.children);
+    if(!cards.length) return;
+
+    dotsBox.innerHTML = cards.map((_, i) =>
+      `<button type="button" class="carousel-dot" data-i="${i}" role="tab" aria-label="Ir para o projeto ${i+1}"></button>`
+    ).join('');
+    const dots = Array.from(dotsBox.children);
+
+    const step = () => {
+      if(cards.length < 2) return rail.clientWidth;
+      return cards[1].offsetLeft - cards[0].offsetLeft;
+    };
+    /* índice do card mais próximo do início visível da pista */
+    const current = () => Math.round(rail.scrollLeft / step());
+    const overflows = () => rail.scrollWidth - rail.clientWidth > 2;
+
+    function sync(){
+      const on = overflows();
+      root.classList.toggle('is-static', !on);
+      if(!on) return;
+      const i = current();
+      const maxIndex = cards.length - Math.round(rail.clientWidth / step());
+      dots.forEach((d, di) => d.classList.toggle('is-on', di === i));
+      btns.forEach(b => {
+        const dir = Number(b.dataset.dir);
+        b.disabled = dir < 0 ? i <= 0 : i >= maxIndex;
+      });
+    }
+
+    function scrollToIndex(i){
+      rail.scrollTo({ left: i * step(), behavior: 'smooth' });
+    }
+
+    btns.forEach(b => b.addEventListener('click', () => {
+      scrollToIndex(Math.max(0, current() + Number(b.dataset.dir)));
+    }));
+    dots.forEach(d => d.addEventListener('click', () => scrollToIndex(Number(d.dataset.i))));
+
+    let raf = null;
+    rail.addEventListener('scroll', () => {
+      if(raf) return;
+      raf = requestAnimationFrame(() => { raf = null; sync(); });
+    }, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  });
+}
+
 /* fire project_view quando um case entra na tela (uma vez por sessão) */
 function initProjectTracking(){
   const cards = document.querySelectorAll('.case-track');

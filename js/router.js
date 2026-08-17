@@ -15,7 +15,7 @@ function render(){
     app.innerHTML = renderDashboard();
   } else {
     app.innerHTML = renderHome(); track('portfolio_view', null);
-    requestAnimationFrame(initProjectTracking);
+    requestAnimationFrame(() => { syncNavHeight(); initProjectTracking(); initCarousels(); });
   }
   requestAnimationFrame(initReveal);
 }

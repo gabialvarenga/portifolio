@@ -56,12 +56,22 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-0.005em;line-height:1.1
 :focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
 
 /* reveal + keyframes */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s cubic-bezier(.2,.7,.2,1), transform .65s cubic-bezier(.2,.7,.2,1)}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
 .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+/* escalonamento automático dos cards do carrossel, sem precisar de
+   classe .d1/.d2 em cada um */
+.carousel-rail>.reveal:nth-child(2){transition-delay:.1s}
+.carousel-rail>.reveal:nth-child(3){transition-delay:.2s}
+.carousel-rail>.reveal:nth-child(4){transition-delay:.3s}
+/* etapas do processo: a linha superior "desenha" da esquerda pra direita */
+.step{position:relative}
+.step::after{content:"";position:absolute;top:-1px;left:0;height:2px;width:0;background:var(--cobalt);transition:width .7s cubic-bezier(.2,.7,.2,1) .15s}
+.step.in::after{width:100%}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes markerPulse{0%{box-shadow:0 0 0 0 rgba(139,47,61,.35)}70%{box-shadow:0 0 0 8px rgba(139,47,61,0)}100%{box-shadow:0 0 0 0 rgba(139,47,61,0)}}
+@keyframes markerPulseBp{0%{box-shadow:0 0 0 0 rgba(8,145,178,.35)}70%{box-shadow:0 0 0 8px rgba(8,145,178,0)}100%{box-shadow:0 0 0 0 rgba(8,145,178,0)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition-duration:.001ms!important}.reveal{opacity:1;transform:none}}
 
 /* corner frame marks */
@@ -93,9 +103,11 @@ html[data-theme="dark"] .theme-toggle .icon-sun{display:block}
 .nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb, var(--paper) 86%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
 .brand{display:flex;align-items:center;gap:.6rem;font-family:var(--font-display);font-weight:700;font-size:1.05rem}
-.brand-mark{width:22px;height:22px;border-radius:6px;background:var(--cobalt);position:relative;flex-shrink:0;transition:transform .3s ease}
-.brand-mark::after{content:"";position:absolute;inset:6px;border:2px solid var(--white);border-radius:2px}
-.brand:hover .brand-mark{transform:rotate(45deg)}
+.brand-mark{width:24px;height:24px;flex-shrink:0;overflow:visible;transition:transform .3s ease}
+.brand-mark .bm-corner{fill:none;stroke:var(--cobalt);stroke-width:2;stroke-linecap:square}
+.brand-mark .bm-dim,.brand-mark .bm-tick{stroke:var(--cobalt);stroke-width:1.6;opacity:.55}
+.brand-mark .bm-pin{fill:var(--cobalt)}
+.brand:hover .brand-mark{transform:rotate(6deg)}
 .nav-links{display:flex;align-items:center;gap:1.75rem;list-style:none;font-size:.92rem;color:var(--muted)}
 .nav-links a:hover{color:var(--ink)}
 @media(max-width:760px){.nav-links{display:none}}
@@ -103,8 +115,8 @@ html[data-theme="dark"] .theme-toggle .icon-sun{display:block}
 /* HERO */
 .hero{padding:clamp(3rem,7vw,5.5rem) 0}
 .hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:center}
-.hero h1{font-size:clamp(2.4rem,5vw,3.9rem);font-weight:600;line-height:1.08;margin:1.1rem 0 1.2rem}
-.hero h1 em{font-style:italic;color:var(--cobalt)}
+.hero h1,.hero .hero-title{font-size:clamp(2.4rem,5vw,3.9rem);font-weight:600;line-height:1.08;margin:1.1rem 0 1.2rem}
+.hero h1 em,.hero .hero-title em{font-style:italic;color:var(--cobalt)}
 .hero .lead{font-size:1.05rem;color:var(--muted);max-width:40ch}
 .hero-actions{display:flex;gap:.85rem;margin-top:1.75rem;flex-wrap:wrap}
 .hero-anim>*{opacity:0;animation:fadeInUp .7s cubic-bezier(.2,.7,.2,1) forwards}
@@ -134,31 +146,62 @@ html[data-theme="dark"] .theme-toggle .icon-sun{display:block}
 .marker{position:absolute;width:19px;height:19px;border-radius:50%;background:var(--cobalt);color:var(--white);font-family:var(--font-mono);font-weight:600;font-size:.68rem;display:flex;align-items:center;justify-content:center;animation:markerPulse 2.6s ease-out infinite}
 .marker.m2{animation-delay:.5s}.marker.m3{animation-delay:1s}
 
-.hero-legend{margin-top:.8rem;display:flex;flex-direction:column;gap:.45rem;font-size:.84rem;color:var(--muted);list-style:none}
-.hero-legend li{display:flex;gap:.55rem;align-items:flex-start}
 .num-badge{flex-shrink:0;width:17px;height:17px;border-radius:50%;background:var(--cobalt);color:var(--white);font-family:var(--font-mono);font-weight:600;font-size:.65rem;display:flex;align-items:center;justify-content:center;margin-top:.12rem}
+
+/* legenda do diagrama do hero: tira compacta de tags, não lista de frases */
+.hero-legend{margin-top:1rem;display:flex;flex-wrap:wrap;gap:.5rem 1rem;list-style:none}
+.hero-legend li{display:flex;gap:.4rem;align-items:center;font-size:.78rem;color:var(--muted)}
+.hero-legend .num-badge{margin-top:0}
 
 /* generic section */
 section{padding:clamp(3rem,6vw,4.5rem) 0}
-.section-head{max-width:48ch;margin-bottom:2.4rem}
-.section-head h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-top:.7rem}
-.section-head p{color:var(--muted);margin-top:.75rem;font-size:.98rem}
+/* folga para a barra sticky: --nav-h vem medido em syncNavHeight()
+   (js/shared.js); o 68px é só o valor de partida antes da medição. */
+section[id]{scroll-margin-top:calc(var(--nav-h, 68px) + 1.25rem)}
+/* o max-width fica no parágrafo, não no bloco todo: preso a 48ch o h2
+ * quebrava em duas linhas mesmo sendo curto. */
+.section-head{margin-bottom:2.4rem}
+.section-head h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-top:.7rem;text-wrap:balance}
+.section-head p{color:var(--muted);margin-top:.75rem;font-size:.98rem;max-width:62ch}
 
-/* SERVICES */
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-.service-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:1.7rem;transition:transform .2s ease, box-shadow .2s ease}
-.service-card:hover{transform:translateY(-4px);box-shadow:0 22px 44px -28px rgba(27,31,38,0.5)}
-.service-card .idx{font-family:var(--font-mono);font-size:.75rem;color:var(--cobalt)}
-.service-card h3{font-size:1.25rem;font-weight:600;margin-top:.8rem}
-.service-card p{color:var(--muted);margin-top:.65rem;font-size:.92rem}
+/* TEAM (quem faz) */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.team-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:1.7rem;transition:transform .2s ease, box-shadow .2s ease}
+.team-card:hover{transform:translateY(-4px);box-shadow:0 22px 44px -28px rgba(27,31,38,0.5)}
+.team-mark{display:inline-flex;width:26px;height:26px;margin-bottom:.9rem}
+.team-role{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cobalt);display:block}
+.team-card h3{font-size:1.2rem;font-weight:600;margin-top:.4rem}
+.team-card p{color:var(--muted);margin-top:.65rem;font-size:.92rem}
 
 /* PROJECTS */
-.concept-note{display:flex;gap:.7rem;align-items:flex-start;background:var(--cobalt-dim);border:1px solid rgba(139,47,61,0.22);border-radius:var(--radius);padding:1rem 1.15rem;margin-bottom:2rem;font-size:.9rem;color:var(--muted)}
-.concept-note strong{color:var(--ink)}
-.case-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(1.25rem,3vw,2rem);margin-bottom:1.5rem;display:grid;grid-template-columns:minmax(240px,360px) 1fr;gap:clamp(1.5rem,3vw,2.5rem)}
+
+/* CARROSSEL — rolagem nativa com scroll-snap; o JS só liga os controles.
+ * .is-static (posto pelo JS quando tudo já cabe) esconde a paginação. */
+.carousel{position:relative}
+/* overflow-x:auto força overflow-y a recortar: o padding vertical dá
+ * espaço pro lift do hover e pra sombra do card não serem cortados. */
+.carousel-rail{display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 0 26px;scrollbar-width:none;-ms-overflow-style:none}
+.carousel-rail::-webkit-scrollbar{display:none}
+.carousel-rail>*{flex:0 0 calc((100% - 3rem)/3);scroll-snap-align:start}
+.carousel-controls{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1.75rem}
+.carousel.is-static .carousel-controls{display:none}
+.carousel-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line-strong);background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s ease, background .2s ease, opacity .2s ease}
+.carousel-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.carousel-btn:disabled{opacity:.3;cursor:default}
+.carousel-dots{display:flex;align-items:center;gap:.5rem}
+.carousel-dot{width:7px;height:7px;padding:0;border-radius:50%;border:none;background:currentColor;opacity:.3;cursor:pointer;transition:opacity .2s ease, transform .2s ease}
+.carousel-dot.is-on{opacity:1;transform:scale(1.5)}
+
+/* cases com landing page */
+.case-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(1.1rem,2.5vw,1.5rem);display:flex;flex-direction:column;gap:1.1rem}
+.case-card.in:hover{transform:translateY(-6px)}
+.case-meta{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.case-badge{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);border:1px solid var(--line-strong);border-radius:999px;padding:.24rem .6rem;white-space:nowrap}
 .case-fig{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
-.case-title{font-size:1.45rem;font-weight:600;margin-top:.4rem}
+.case-title{font-size:1.2rem;font-weight:600;margin-top:.4rem}
+.case-summary{font-size:.9rem;color:var(--muted);margin-top:.4rem}
 .case-block{margin-top:1rem}
+.case-block:first-child{margin-top:0}
 .case-block .label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mustard)}
 .case-block p{margin-top:.35rem;font-size:.92rem;color:var(--muted)}
 .legend-list{list-style:none;margin:.5rem 0 0;display:flex;flex-direction:column;gap:.45rem}
@@ -168,11 +211,16 @@ section{padding:clamp(3rem,6vw,4.5rem) 0}
 .preview-link:hover .bp,.preview-link:focus-visible .bp{border-color:var(--cobalt);transform:translateY(-2px)}
 .preview-hint{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:.8rem;background:linear-gradient(to top, rgba(27,31,38,0.72), transparent 55%);opacity:0;transition:opacity .2s ease;border-radius:var(--radius)}
 .preview-link:hover .preview-hint,.preview-link:focus-visible .preview-hint{opacity:1}
-.preview-hint span{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--white);border:1px solid var(--white);padding:.4rem .8rem;border-radius:999px}
-.case-foot{margin-top:1.3rem;display:flex;gap:.7rem;align-items:center;flex-wrap:wrap}
-.case-status{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);border:1px dashed var(--line-strong);padding:.35rem .7rem;border-radius:999px}
-.case-status.is-progress{color:var(--mustard);border-color:var(--mustard);border-style:solid}
-.case-status.is-soon{color:var(--cobalt);border-color:var(--cobalt);border-style:solid}
+.preview-hint span{font-size:.82rem;font-weight:500;color:var(--white);border:1px solid rgba(255,255,255,.6);padding:.4rem .9rem;border-radius:999px}
+/* detalhe do case: link de texto discreto, deliberadamente sem cara
+ * de botão — o botão "Ver página" é a ação principal do card. */
+.case-detail{border-top:1px solid var(--line);padding-top:.85rem}
+.case-detail summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.45rem;font-size:.82rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong)}
+.case-detail summary::-webkit-details-marker{display:none}
+.case-detail summary::before{content:"+";font-family:var(--font-mono);font-size:.9rem;text-decoration:none;flex-shrink:0}
+.case-detail[open] summary::before{content:"–"}
+.case-detail summary:hover{color:var(--ink)}
+.case-foot{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap}
 
 /* PROCESS */
 .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
@@ -180,6 +228,16 @@ section{padding:clamp(3rem,6vw,4.5rem) 0}
 .step .n{font-family:var(--font-mono);color:var(--cobalt);font-size:.85rem}
 .step h3{font-size:1.02rem;margin-top:.55rem}
 .step p{font-size:.86rem;color:var(--muted);margin-top:.5rem}
+
+/* FAQ — cada item ocupa a largura toda da faixa; o <summary> é o
+ * clique inteiro da linha, não só o texto da pergunta. */
+.faq-list{display:flex;flex-direction:column;gap:.7rem}
+.faq-item{border:1px solid var(--line-strong);border-radius:var(--radius)}
+.faq-item summary{cursor:pointer;font-weight:600;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.15rem 1.5rem}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";font-family:var(--font-mono);font-size:1.1rem;flex-shrink:0;transition:transform .2s ease;color:var(--cobalt)}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-item p{margin:0 1.5rem 1.15rem;font-size:.92rem;color:var(--muted);max-width:72ch}
 
 /* CTA */
 .cta-box{background:var(--white);border:1px solid var(--line-strong);border-radius:var(--radius);padding:clamp(2rem,5vw,3.5rem);text-align:center}
@@ -196,6 +254,7 @@ footer{border-top:1px solid var(--line);padding:2.2rem 0}
 .footer-credit .names span{color:var(--cobalt)}
 .footer-links{display:flex;gap:1.1rem;font-size:.78rem;color:var(--faint);font-family:var(--font-mono)}
 .footer-links a:hover{color:var(--cobalt)}
+.bp-stamp-mark{display:none}
 
 /* DASHBOARD */
 .dash{background:var(--white);min-height:100vh}
@@ -227,15 +286,38 @@ th{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;color:va
 .portfolio h1,.portfolio h2,.portfolio h3{font-family:var(--bp-font-display)}
 .portfolio :focus-visible{outline-color:var(--bp-stamp)}
 
-.portfolio .band-navy{background:var(--bp-navy);color:var(--bp-chalk)}
+.portfolio .band-navy{
+  color:var(--bp-chalk);
+  background-color:var(--bp-navy);
+  background-image:
+    linear-gradient(rgba(111,168,199,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111,168,199,.07) 1px, transparent 1px);
+  background-size:32px 32px;
+}
 .portfolio .band-navy .eyebrow{color:var(--bp-stamp)}
 .portfolio .band-navy .eyebrow::before{background:var(--bp-stamp)}
 .portfolio .band-navy .section-head p{color:rgba(243,247,250,.72)}
+
+/* faixa navy secundária: mesmo idioma, um tom acima. Existe para
+ * separar duas faixas escuras vizinhas (FAQ e contato) sem quebrar a
+ * paleta — só o navy puro não bastava, as duas liam como uma faixa só. */
+.portfolio .band-navy-2{
+  color:var(--bp-chalk);
+  background-color:var(--bp-navy-2);
+  background-image:
+    linear-gradient(rgba(111,168,199,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111,168,199,.06) 1px, transparent 1px);
+  background-size:32px 32px;
+  border-top:1px solid rgba(111,168,199,.22);
+}
+.portfolio .band-navy-2 .eyebrow{color:var(--bp-stamp)}
+.portfolio .band-navy-2 .eyebrow::before{background:var(--bp-stamp)}
 
 .portfolio .band-paper{background:var(--bp-paper);color:var(--bp-ink)}
 .portfolio .band-paper .eyebrow{color:var(--bp-stamp)}
 .portfolio .band-paper .eyebrow::before{background:var(--bp-stamp)}
 .portfolio .band-paper .section-head p{color:rgba(11,27,43,.64)}
+
 
 /* .frame só aparece sobre superfícies de papel (cards), nunca direto no navy */
 .portfolio .frame::before,.portfolio .frame::after{border-color:rgba(11,27,43,.32)}
@@ -243,24 +325,36 @@ th{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;color:va
 /* NAV — sempre navy translúcido, independente da faixa por trás */
 .portfolio .nav{background:rgba(14,42,71,.86);border-bottom:1px solid rgba(111,168,199,.22)}
 .portfolio .brand{color:var(--bp-chalk);font-family:var(--bp-font-display)}
-.portfolio .brand-mark{background:var(--bp-stamp)}
-.portfolio .brand-mark::after{border-color:var(--bp-navy)}
+.portfolio .brand-mark .bm-corner,.portfolio .brand-mark .bm-dim,.portfolio .brand-mark .bm-tick{stroke:var(--bp-stamp)}
+.portfolio .brand-mark .bm-pin{fill:var(--bp-stamp)}
+
+/* marca-d'água — mesmo símbolo, grande e sutil, nas faixas navy */
+.portfolio .wm-host{position:relative;overflow:hidden}
+.portfolio .wm-host>.wrap{position:relative;z-index:1}
+.portfolio .bp-watermark{position:absolute;width:440px;height:440px;z-index:0;opacity:.07;pointer-events:none}
+.portfolio .bp-watermark .bm-corner,.portfolio .bp-watermark .bm-dim,.portfolio .bp-watermark .bm-tick{stroke:var(--bp-line);stroke-width:.6}
+.portfolio .bp-watermark .bm-pin{fill:var(--bp-line)}
+.portfolio .bp-watermark.wm-hero{top:-70px;right:-90px;transform:rotate(-8deg)}
+.portfolio .bp-watermark.wm-cta{bottom:-110px;left:-70px;transform:rotate(9deg)}
+@media(max-width:760px){.portfolio .bp-watermark{width:280px;height:280px}}
 .portfolio .nav-links{color:rgba(243,247,250,.65)}
 .portfolio .nav-links a:hover{color:var(--bp-chalk)}
 
-/* BOTÕES */
+/* BOTÕES — no portfólio são discretos: sans, caixa normal, sem
+ * letter-spacing. O .btn global (mono/caixa-alta) continua valendo
+ * para o dashboard e as landing pages. */
+.portfolio .btn{font-family:var(--font-body);font-size:.92rem;font-weight:500;letter-spacing:0;text-transform:none;padding:.8rem 1.45rem}
 .portfolio .btn-primary{background:var(--bp-stamp);color:var(--bp-chalk);border:1px solid var(--bp-stamp)}
-.portfolio .btn-primary:hover{background:#E35A3F;border-color:#E35A3F;box-shadow:0 10px 24px -12px var(--bp-stamp)}
+.portfolio .btn-primary:hover{background:#0A7691;border-color:#0A7691;box-shadow:0 10px 24px -12px var(--bp-stamp)}
 .portfolio .btn-ghost{border:1px solid rgba(243,247,250,.35);color:var(--bp-chalk);background:transparent}
 .portfolio .btn-ghost:hover{border-color:var(--bp-chalk)}
 .portfolio .case-card .btn-ghost,.portfolio .cta-box .btn-ghost{border-color:rgba(11,27,43,.28);color:var(--bp-ink)}
 .portfolio .case-card .btn-ghost:hover,.portfolio .cta-box .btn-ghost:hover{border-color:var(--bp-stamp);color:var(--bp-stamp)}
 
 /* HERO + diagrama-assinatura */
-.portfolio .hero h1{color:var(--bp-chalk)}
-.portfolio .hero h1 em{color:var(--bp-stamp);font-style:normal}
+.portfolio .hero h1,.portfolio .hero .hero-title{color:var(--bp-chalk)}
+.portfolio .hero h1 em,.portfolio .hero .hero-title em{color:var(--bp-stamp);font-style:normal}
 .portfolio .hero .lead{color:rgba(243,247,250,.72)}
-.portfolio .hero-legend{color:rgba(243,247,250,.8)}
 .portfolio .num-badge{background:var(--bp-stamp);color:var(--bp-chalk)}
 .portfolio .hero-diagram{background:transparent}
 .portfolio .hero-diagram svg{width:100%;height:auto;display:block;overflow:visible}
@@ -277,36 +371,52 @@ th{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;color:va
 .portfolio .hd-leader{stroke:var(--bp-line);stroke-width:1.5}
 .portfolio .hd-pin{fill:var(--bp-stamp)}
 .portfolio .hd-pin-text{fill:var(--bp-chalk);font-family:var(--font-mono);font-size:12px;font-weight:600}
+.portfolio .hero-legend li{color:rgba(243,247,250,.8)}
 
-/* SERVIÇOS */
-.portfolio .service-card{background:#FFFFFF;border-color:rgba(11,27,43,.12)}
-.portfolio .service-card:hover{box-shadow:0 22px 44px -28px rgba(11,27,43,.35)}
-.portfolio .service-card .idx{color:var(--bp-stamp)}
-.portfolio .service-card h3{color:var(--bp-ink)}
-.portfolio .service-card p{color:rgba(11,27,43,.64)}
+/* EQUIPE */
+.portfolio .team-card{background:#FFFFFF;border-color:rgba(11,27,43,.12)}
+.portfolio .team-card:hover{box-shadow:0 22px 44px -28px rgba(11,27,43,.35)}
+.portfolio .team-mark .bm-corner,.portfolio .team-mark .bm-dim,.portfolio .team-mark .bm-tick{stroke:var(--bp-stamp)}
+.portfolio .team-mark .bm-pin{fill:var(--bp-stamp)}
+.portfolio .team-role{color:var(--bp-stamp)}
+.portfolio .team-card h3{color:var(--bp-ink)}
+.portfolio .team-card p{color:rgba(11,27,43,.64)}
+
+/* FAQ — seção própria, faixa navy */
+.portfolio .faq-item{border-color:rgba(111,168,199,.28);background:rgba(234,242,246,.04);transition:border-color .2s ease, background-color .2s ease}
+.portfolio .faq-item:hover{border-color:rgba(111,168,199,.5);background:rgba(234,242,246,.07)}
+.portfolio .faq-item summary{color:var(--bp-chalk)}
+.portfolio .faq-item summary::after{color:var(--bp-stamp)}
+.portfolio .faq-item p{color:rgba(243,247,250,.72)}
 
 /* PROJETOS — cards flutuam como papel sobre o navy */
-.portfolio .concept-note{background:rgba(234,242,246,.08);border:1px dashed rgba(111,168,199,.4);color:rgba(243,247,250,.8)}
-.portfolio .concept-note strong{color:var(--bp-chalk)}
 .portfolio .case-card{background:var(--bp-paper);border-color:rgba(11,27,43,.12);color:var(--bp-ink);box-shadow:0 26px 50px -32px rgba(0,0,0,.55)}
+.portfolio .case-card.in:hover{box-shadow:0 34px 60px -30px rgba(0,0,0,.65)}
+.portfolio .case-badge{color:rgba(11,27,43,.5);border-color:rgba(11,27,43,.22)}
 .portfolio .case-fig{color:rgba(11,27,43,.45)}
+.portfolio .carousel-btn{color:var(--bp-chalk);border-color:rgba(111,168,199,.4)}
+.portfolio .carousel-btn:not(:disabled):hover{border-color:var(--bp-stamp);background:rgba(8,145,178,.12)}
+.portfolio .carousel-dots{color:var(--bp-line)}
+.portfolio .carousel-dot.is-on{color:var(--bp-stamp)}
 .portfolio .case-title{color:var(--bp-ink)}
+.portfolio .case-summary{color:rgba(11,27,43,.66)}
+.portfolio .case-detail{border-top-color:rgba(11,27,43,.14)}
+.portfolio .case-detail summary{color:rgba(11,27,43,.6);text-decoration-color:rgba(11,27,43,.28)}
+.portfolio .case-detail summary:hover{color:var(--bp-stamp);text-decoration-color:var(--bp-stamp)}
 .portfolio .case-block .label{color:var(--bp-blue-ink)}
 .portfolio .case-block p{color:rgba(11,27,43,.66)}
 .portfolio .legend-list li{color:rgba(11,27,43,.66)}
-.portfolio .case-status{color:rgba(11,27,43,.55);border-color:rgba(11,27,43,.3)}
-.portfolio .case-status.is-progress{color:var(--bp-blue-ink);border-color:var(--bp-blue-ink)}
-.portfolio .case-status.is-soon{color:var(--bp-stamp);border-color:var(--bp-stamp)}
 .portfolio .bp{background:var(--bp-paper);border-color:rgba(11,27,43,.18)}
 .portfolio .bp-dot{background:var(--bp-paper-2)}
-.portfolio .bp-btn{background:rgba(210,69,44,.15);border-color:var(--bp-stamp)}
+.portfolio .bp-btn{background:rgba(8,145,178,.15);border-color:var(--bp-stamp)}
 .portfolio .bp-fab{background:var(--bp-stamp);border-color:var(--bp-paper)}
 .portfolio .bp-tag{color:var(--bp-blue-ink);border-color:var(--bp-blue-ink)}
-.portfolio .marker{background:var(--bp-stamp);color:var(--bp-chalk)}
+.portfolio .marker{background:var(--bp-stamp);color:var(--bp-chalk);animation-name:markerPulseBp}
 .portfolio .preview-link:hover .bp,.portfolio .preview-link:focus-visible .bp{border-color:var(--bp-stamp)}
 
 /* PROCESSO */
 .portfolio .step{border-top-color:rgba(11,27,43,.16)}
+.portfolio .step::after{background:var(--bp-stamp)}
 .portfolio .step .n{color:var(--bp-stamp)}
 .portfolio .step h3{color:var(--bp-ink)}
 .portfolio .step p{color:rgba(11,27,43,.6)}
@@ -322,15 +432,19 @@ th{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;color:va
 .portfolio .footer-credit .names span{color:var(--bp-stamp)}
 .portfolio .footer-links{color:rgba(243,247,250,.55)}
 .portfolio .footer-links a:hover{color:var(--bp-stamp)}
+.portfolio .bp-stamp-mark{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(243,247,250,.55);border:1px dashed rgba(111,168,199,.4);padding:.3rem .6rem;border-radius:3px;transform:rotate(-2deg)}
 
 @media(max-width:900px){
   .hero-grid{grid-template-columns:1fr}
   .hero-visual{order:-1}
   .portfolio .hero-diagram{order:-1}
-  .services-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr}
   .process-grid{grid-template-columns:1fr;gap:0}
   .step{border-top:none;border-left:1px solid var(--line-strong);padding:0 0 1.75rem 1.1rem;margin-left:.3rem}
   .portfolio .step{border-left-color:rgba(11,27,43,.16)}
+  /* a linha da etapa vira vertical aqui, então a animação também */
+  .step::after{top:0;left:-1px;width:2px;height:0;transition:height .7s cubic-bezier(.2,.7,.2,1) .15s}
+  .step.in::after{width:2px;height:100%}
   .lp-hero .wrap{grid-template-columns:1fr;gap:36px;text-align:center}
   .lp-hero-copy .lp-btn{align-self:center}
   .lp-hero p{margin-left:auto;margin-right:auto}
@@ -342,7 +456,8 @@ th{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;color:va
   .funnel{flex-direction:column}
   footer .footer-inner{flex-direction:column;align-items:flex-start}
 }
-@media(max-width:860px){.case-card{grid-template-columns:1fr}}
+@media(max-width:1000px){.carousel-rail>*{flex-basis:calc((100% - 1.5rem)/2)}}
+@media(max-width:720px){.carousel-rail>*{flex-basis:100%}}
 @media(max-width:640px){
   table{display:block;overflow-x:auto;white-space:nowrap}
   .dash-cards{grid-template-columns:1fr}

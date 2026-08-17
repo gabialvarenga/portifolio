@@ -5,7 +5,7 @@
  */
 function heroBlueprintDiagram(){
   return `<div class="hero-diagram">
-    <svg viewBox="0 0 545 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama anotado da anatomia de uma landing page: título, CTA, prova social e formulário">
+    <svg viewBox="0 0 545 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama anotado da anatomia de uma landing page: título direto, CTA sem precisar rolar, prova social e formulário curto">
       <rect class="hd-card" x="8" y="8" width="480" height="384" rx="8"/>
       <circle class="hd-dot" cx="28" cy="32" r="4"/>
       <circle class="hd-dot" cx="44" cy="32" r="4"/>
@@ -39,75 +39,131 @@ function heroBlueprintDiagram(){
 
 /* ---------- HOME (portfólio) ---------- */
 function renderHome(){
-  const cases = Object.keys(CASES).map(caseCard).join('');
+  /* só os cases com landing page pronta entram na home; os demais
+   * seguem em CASES aguardando a sua página. */
+  const liveCases = Object.keys(CASES)
+    .filter(id => CASES[id].status === PROJECT_STATUS.LIVE)
+    .map(caseCardLive).join('');
   return `
   <div class="portfolio">
   ${nav()}
   <main>
-    <section class="hero band-navy"><div class="wrap hero-grid">
+    <section class="hero band-navy wm-host">
+    ${brandWatermark('wm-hero')}
+    <div class="wrap hero-grid">
       <div class="hero-anim">
         <span class="eyebrow">Landing pages &amp; divulgação</span>
-        <h1>Projetamos a página antes de construir. Depois, cuidamos de quem chega nela.</h1>
-        <p class="lead">Uma dupla enxuta: desenvolvemos landing pages com foco em conversão e trabalhamos junto da divulgação para levar as pessoas certas até elas — página e campanha pensadas como <em>uma coisa só</em>.</p>
+        <h2 class="hero-title" style="font-size: clamp(2.5rem, 4vw, 3.35rem); line-height: 1.08;">Projetamos a página <em>antes</em> de construir.</h2>
+        <p class="lead" style="font-size: 1.08rem; line-height: 1.7;">Cada seção com uma função, cada palavra com um motivo. Depois que a página entra no ar, cuidamos de quem chega nela.</p>
         <div class="hero-actions">
-          <a href="#projetos" class="btn btn-primary" onclick="scrollToId('projetos')">Ver projetos</a>
-          <a href="#contato" class="btn btn-ghost" onclick="scrollToId('contato')">Falar com a gente</a>
+          <a href="#projetos" class="btn btn-primary" onclick="goToSection(event,'projetos')">Ver projetos</a>
+          <a href="#contato" class="btn btn-ghost" onclick="goToSection(event,'contato')">Falar com a gente</a>
         </div>
       </div>
       <div class="hero-visual">
         ${heroBlueprintDiagram()}
         <ul class="hero-legend">
-          <li><span class="num-badge">1</span> Título direto, sem enrolação</li>
-          <li><span class="num-badge">2</span> CTA visível sem precisar rolar a página</li>
-          <li><span class="num-badge">3</span> Prova social logo abaixo da dobra</li>
-          <li><span class="num-badge">4</span> Formulário curto — só o essencial</li>
+          <li><span class="num-badge">1</span>Título direto</li>
+          <li><span class="num-badge">2</span>CTA sem rolar</li>
+          <li><span class="num-badge">3</span>Prova social</li>
+          <li><span class="num-badge">4</span>Formulário curto</li>
         </ul>
       </div>
     </div></section>
 
     <section id="servicos" class="band-paper"><div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">O que fazemos</span>
-        <h2>Duas frentes, um só objetivo: trazer resultado</h2>
+        <span class="eyebrow">Como trabalhamos</span>
+        <h2>Como uma página toma forma</h2>
       </div>
-      <div class="services-grid">
-        <div class="service-card reveal"><span class="idx">01</span><h3>Desenvolvimento de landing pages</h3><p>Páginas rápidas, responsivas e construídas em torno de um único objetivo por página. Rastreamento configurado desde o primeiro dia, não depois.</p></div>
-        <div class="service-card reveal d1"><span class="idx">02</span><h3>Divulgação e tráfego pago</h3><p>Planejamento e otimização de campanhas em Google Ads e Meta Ads, com relatórios simples de entender — o que está trazendo retorno e o que precisa mudar.</p></div>
-        <div class="service-card reveal d2"><span class="idx">03</span><h3>Página + campanha juntas</h3><p>Página e divulgação rodando lado a lado, acompanhadas pela mesma equipe — para o anúncio levar exatamente para o que ele promete.</p></div>
+      <div class="process-grid">
+        <div class="step reveal"><span class="n">01</span><h3>Diagnóstico</h3><p>Entendemos o negócio, o público e o que a página precisa fazer.</p></div>
+        <div class="step reveal d1"><span class="n">02</span><h3>Landing page</h3><p>Organizamos conteúdo, estrutura e interface em torno do objetivo definido.</p></div>
+        <div class="step reveal d2"><span class="n">03</span><h3>Campanha</h3><p>Quando há divulgação, conectamos a campanha à página e configuramos o acompanhamento das conversões.</p></div>
+        <div class="step reveal d3"><span class="n">04</span><h3>Acompanhamento</h3><p>Acompanhamos os dados da página e das campanhas para identificar o que precisa ser ajustado.</p></div>
       </div>
     </div></section>
 
     <section id="projetos" class="band-navy"><div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">Portfólio</span>
-        <h2>Projetos-conceito, por tipo de negócio</h2>
-        <p>Como ainda estamos começando, estes são projetos desenvolvidos para mostrar como aplicaríamos nosso processo a diferentes tipos de negócio — não são clientes reais.</p>
+        <span class="eyebrow">Projetos</span>
+        <h2>Algumas páginas que construímos</h2>
+        <p>Os projetos apresentados são cases conceituais desenvolvidos para demonstrar diferentes possibilidades de aplicação.</p>
       </div>
-      <div class="concept-note reveal">
-        <span>◆</span>
-        <span><strong>Sobre estes projetos:</strong> cada um foi construído para demonstrar decisões de estrutura e estratégia, não como um trabalho entregue a um cliente. Contamos isso com transparência em qualquer apresentação.</span>
+      <div class="carousel" data-carousel>
+        <div class="carousel-rail">${liveCases}</div>
+        <div class="carousel-controls">
+          <button type="button" class="carousel-btn" data-dir="-1" aria-label="Projeto anterior">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+          </button>
+          <div class="carousel-dots" role="tablist" aria-label="Projetos"></div>
+          <button type="button" class="carousel-btn" data-dir="1" aria-label="Próximo projeto">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
       </div>
-      ${cases}
     </div></section>
 
-    <section id="processo" class="band-paper"><div class="wrap">
+    <section id="equipe" class="band-paper"><div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">Como funciona</span>
-        <h2>Da conversa inicial à campanha rodando</h2>
+        <span class="eyebrow">Quem faz</span>
+        <h2>Um trio, não uma agência</h2>
+        <p>Sem camadas de atendimento entre você e quem constrói a página.</p>
       </div>
-      <div class="process-grid">
-        <div class="step reveal"><span class="n">01</span><h3>Diagnóstico</h3><p>Entendemos o negócio, o objetivo e o público antes de desenhar qualquer tela.</p></div>
-        <div class="step reveal d1"><span class="n">02</span><h3>Design &amp; desenvolvimento</h3><p>Landing page construída sob medida, com rastreamento configurado desde o início.</p></div>
-        <div class="step reveal d2"><span class="n">03</span><h3>Configuração de divulgação</h3><p>Campanhas estruturadas com base no objetivo definido no diagnóstico.</p></div>
-        <div class="step reveal d3"><span class="n">04</span><h3>Otimização contínua</h3><p>Acompanhamento de métricas e ajustes periódicos — nada roda no piloto automático.</p></div>
+      <div class="team-grid">
+        <div class="team-card reveal">
+          <span class="team-mark">${brandMark()}</span>
+          <span class="team-role">Desenvolvimento</span>
+          <h3>Carlos</h3>
+          <p>Desenvolve a página, da estrutura ao rastreamento.</p>
+        </div>
+        <div class="team-card reveal d1">
+          <span class="team-mark">${brandMark()}</span>
+          <span class="team-role">Desenvolvimento</span>
+          <h3>Gabriela</h3>
+          <p>Define a arquitetura da página: conteúdo, hierarquia e sequência de navegação.</p>
+        </div>
+        <div class="team-card reveal d2">
+          <span class="team-mark">${brandMark()}</span>
+          <span class="team-role">Divulgação</span>
+          <h3>Rebeca</h3>
+          <p>Planeja e acompanha a divulgação das páginas nas campanhas digitais.</p>
+        </div>
       </div>
     </div></section>
 
-    <section id="contato" class="band-navy"><div class="wrap">
+    <section id="faq" class="band-navy"><div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Perguntas frequentes</span>
+        <h2>Antes de conversar</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details class="faq-item">
+          <summary>Preciso já ter um site pronto?</summary>
+          <p>Não. A landing page pode ser criada como uma página independente, mesmo que você ainda não tenha um site.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Quanto tempo leva?</summary>
+          <p>O prazo depende do escopo do projeto. Definimos as etapas e a entrega antes de começar.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Como funciona o início?</summary>
+          <p>Começamos entendendo o negócio, o público e o objetivo da página. A partir disso, definimos escopo, prazo e, se fizer sentido, a estratégia de divulgação.</p>
+        </details>
+        <details class="faq-item">
+          <summary>A divulgação é obrigatória?</summary>
+          <p>Não. A landing page pode ser desenvolvida de forma independente. A divulgação é uma etapa adicional, caso faça sentido para o projeto.</p>
+        </details>
+      </div>
+    </div></section>
+
+    <section id="contato" class="band-navy-2 wm-host">
+    ${brandWatermark('wm-cta')}
+    <div class="wrap">
       <div class="cta-box frame reveal">
         <span class="eyebrow" style="justify-content:center">Vamos conversar</span>
-        <h2>Vamos falar sobre o seu projeto</h2>
-        <p>Conte um pouco sobre o seu negócio e a gente te mostra como aplicaríamos esse mesmo processo a ele.</p>
+        <h2>Tem um projeto em mente?</h2>
+        <p>Conte um pouco sobre o negócio e o que você precisa. A partir disso, pensamos na estrutura da página.</p>
         <div class="cta-actions">
           <a href="https://wa.me/5531999999999" class="btn btn-primary" onclick="track('contact_click', null)">Chamar no WhatsApp</a>
           <a href="mailto:gabrielaalvarengc@gmail.com" class="btn btn-ghost" onclick="track('contact_click', null)">Enviar e-mail</a>

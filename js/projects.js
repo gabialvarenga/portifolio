@@ -1,10 +1,14 @@
 /* ---------- dados dos projetos/cases do portfólio ----------
  * Adicionar um novo projeto = adicionar uma entrada aqui.
  * status:
- *   'live'         → tem landing page própria (ver LANDING_PAGES em app.js)
+ *   'live'         → tem landing page própria (ver LANDING_PAGES em landing-registry.js)
  *   'in-progress'  → landing page está sendo construída
  *   'coming-soon'  → landing page prevista, ainda não iniciada
  *   'concept'      → projeto-conceito, sem landing page própria prevista
+ *
+ * A home só renderiza os cases 'live'. Os demais ficam aqui como
+ * planejamento até a sua landing page existir — sem status pendente
+ * aparecendo para o visitante.
  */
 const PROJECT_STATUS = {
   LIVE: 'live',
@@ -13,18 +17,11 @@ const PROJECT_STATUS = {
   CONCEPT: 'concept'
 };
 
-const STATUS_META = {
-  [PROJECT_STATUS.LIVE]:         { label: 'Landing page disponível', cssClass: '' },
-  [PROJECT_STATUS.IN_PROGRESS]:  { label: 'Em desenvolvimento',      cssClass: 'is-progress' },
-  [PROJECT_STATUS.COMING_SOON]:  { label: 'Landing page em breve',   cssClass: 'is-soon' },
-  [PROJECT_STATUS.CONCEPT]:      { label: 'Projeto-conceito',        cssClass: '' }
-};
-
 const CASES = {
   'professora-ingles': {
     fig:'Fig. 01 — Professora de inglês', segment:'Educação', status: PROJECT_STATUS.LIVE,
     title:'Captar alunos sem depender só de indicação',
-    challenge:'Professora particular que dependia quase só de boca a boca e queria começar a captar alunos ativamente pela internet.',
+    challenge:'Aulas particulares com agenda cheia: prova social, método claro e um único CTA de contato.',
     resolves:['CTA de "agendar aula experimental" logo na primeira dobra','Método e depoimentos organizados para gerar confiança','Contato curto e direto pelo WhatsApp'],
     traffic:'Meta Ads segmentado por interesse (intercâmbio, viagem, carreira) + remarketing para quem visitou e não agendou.',
     preview:'lead'
@@ -32,7 +29,7 @@ const CASES = {
   'clinica': {
     fig:'Fig. 02 — Clínica odontológica', segment:'Saúde', status: PROJECT_STATUS.LIVE,
     title:'Serviço local com foco em agendamento',
-    challenge:'Consultório que dependia quase só de indicação, com poucos agendamentos vindo da internet.',
+    challenge:'Especialidades em blocos fáceis de escanear e selos de confiança na primeira dobra.',
     resolves:['CTA de "agendar avaliação" logo na primeira dobra','Especialidades em blocos fáceis de escanear','Selo de confiança (anos de atuação, bioseguridade) logo na primeira dobra'],
     traffic:'Google Ads de busca com foco local + remarketing para quem visitou e não agendou, com conversões medidas via GA4.',
     preview:'lead'
@@ -40,7 +37,7 @@ const CASES = {
   'restaurante': {
     fig:'Fig. 03 — Restaurante & delivery', segment:'Gastronomia', status: PROJECT_STATUS.LIVE,
     title:'Pedido direto, sem depender só de apps',
-    challenge:'Delivery concentrado em aplicativos de terceiros, com taxas altas comendo a margem de cada pedido.',
+    challenge:'Cardápio por categoria, fotos em destaque e botão fixo de WhatsApp.',
     resolves:['Fotos dos pratos em destaque, logo no topo','Cardápio organizado por categoria','Botão fixo de pedido direto pelo WhatsApp'],
     traffic:'Meta Ads segmentado por raio de entrega, com promoções sazonais e pixel de conversão no pedido.',
     preview:'menu'
@@ -48,7 +45,7 @@ const CASES = {
   'advocacia': {
     fig:'Fig. 04 — Escritório de advocacia', segment:'Direito', status: PROJECT_STATUS.LIVE,
     title:'Consulta jurídica sem parecer distante',
-    challenge:'Escritório que queria atrair clientes pela internet sem parecer burocrático ou intimidador logo no primeiro contato.',
+    challenge:'Áreas de atuação em blocos claros, com sigilo e prazo de resposta declarados.',
     resolves:['CTA de "consulta inicial sem custo" logo na primeira dobra','Áreas de atuação organizadas em blocos fáceis de entender','Selos de confiança (sigilo, prazo de resposta) reduzindo a hesitação de quem nunca contratou um advogado'],
     traffic:'Google Ads de busca segmentado por área do direito (trabalhista, cível, família) + prova social para reduzir a hesitação do primeiro contato.',
     preview:'lead'
@@ -90,28 +87,34 @@ function previewInner(type){
     <div class="bp-form"><div class="bp-line w90" style="height:6px"></div></div>` + markers;
 }
 
-function caseCard(id){
-  const c = CASES[id];
-  const status = STATUS_META[c.status] || STATUS_META[PROJECT_STATUS.CONCEPT];
+function caseDetailBlocks(c){
   const resolves = c.resolves.map((r,i)=>`<li><span class="num-badge">${i+1}</span>${r}</li>`).join('');
-  const live = c.status === PROJECT_STATUS.LIVE;
-  const preview = live
-    ? `<a class="frame preview-link case-track" data-project="${id}" onclick="go('#/landing/${id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}" tabindex="0" role="button" aria-label="Abrir a landing page do case ${c.segment}">
-         <div class="bp">${previewInner(c.preview)}<div class="preview-hint"><span>Ver landing page →</span></div></div>
-       </a>`
-    : `<div class="frame case-track" data-project="${id}"><div class="bp">${previewInner(c.preview)}</div></div>`;
-  const foot = live
-    ? `<div class="case-foot"><button type="button" class="btn btn-ghost" onclick="go('#/landing/${id}')">Ver landing page →</button></div>`
-    : `<div class="case-foot"><span class="case-status ${status.cssClass}">◆ ${status.label}</span></div>`;
+  return `<div class="case-block"><span class="label">O que a página resolve</span><ul class="legend-list">${resolves}</ul></div>
+    <div class="case-block"><span class="label">Estratégia de divulgação</span><p>${c.traffic}</p></div>`;
+}
+
+/* case com landing page real: card compacto, preview clicável, detalhe
+ * completo (o que resolve + estratégia) fica atrás de um <details>. */
+function caseCardLive(id){
+  const c = CASES[id];
   return `<article class="case-card reveal">
-    ${preview}
-    <div>
-      <span class="case-fig">${c.fig}</span>
+    <a class="frame preview-link case-track" data-project="${id}" onclick="go('#/landing/${id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}" tabindex="0" role="button" aria-label="Abrir a landing page do case ${c.segment}">
+      <div class="bp">${previewInner(c.preview)}<div class="preview-hint"><span>Abrir página</span></div></div>
+    </a>
+    <div class="case-body">
+      <div class="case-meta">
+        <span class="case-fig">${c.fig}</span>
+        <span class="case-badge">Case conceitual</span>
+      </div>
       <h3 class="case-title">${c.title}</h3>
-      <div class="case-block"><span class="label">Desafio</span><p>${c.challenge}</p></div>
-      <div class="case-block"><span class="label">O que a página resolve</span><ul class="legend-list">${resolves}</ul></div>
-      <div class="case-block"><span class="label">Estratégia de divulgação</span><p>${c.traffic}</p></div>
-      ${foot}
+      <p class="case-summary">${c.challenge}</p>
+      <div class="case-foot">
+        <button type="button" class="btn btn-primary" onclick="go('#/landing/${id}')">Ver página</button>
+      </div>
+      <details class="case-detail">
+        <summary>Decisões por trás dessa página</summary>
+        ${caseDetailBlocks(c)}
+      </details>
     </div>
   </article>`;
 }
