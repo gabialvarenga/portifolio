@@ -32,9 +32,10 @@ O projeto usa exclusivamente **HTML5, CSS3 e JavaScript puro** — sem framework
 ```
 index.html          → shell HTML: <link> do CSS e <script> dos arquivos JS, em ordem
 css/
-  styles.css              → CSS do portfólio (sistema "blueprint") + landing da Professora (.lp) + dashboard
-  landing-advocacia.css   → CSS isolado da landing da Advocacia, sob .lp-advocacia
-  landing-clinica.css     → CSS isolado da landing da Clínica, sob .lp-clinica
+  styles.css                    → CSS do portfólio (sistema "blueprint") + dashboard
+  landing-professora-ingles.css → CSS isolado da landing da Professora, sob .lp-professora
+  landing-advocacia.css         → CSS isolado da landing da Advocacia, sob .lp-advocacia
+  landing-clinica.css           → CSS isolado da landing da Clínica, sob .lp-clinica
 js/
   storage.js                    → storageService: única camada que fala com window.storage
   analytics.js                   → rastreamento de eventos (congelado, ver "Fora de escopo")
@@ -72,7 +73,7 @@ Projetos sem `status: 'live'` continuam apresentáveis no portfólio (desafio, s
 ## Como adicionar uma nova landing page
 
 1. Adicionar o case em `CASES` (`js/projects.js`), com `status: PROJECT_STATUS.LIVE`.
-2. Se a landing tiver identidade visual própria com CSS extenso, criar um arquivo `css/landing-<id>.css` com todos os seletores prefixados por uma classe única (ex.: `.lp-<id> .hero{...}`) — isso evita que o CSS de uma landing vaze para outra ou para o portfólio. Ligar o arquivo em `index.html`. Para uma variação simples, dá pra reaproveitar o padrão `.lp` já existente em `css/styles.css`.
+2. Se a landing tiver identidade visual própria com CSS extenso, criar um arquivo `css/landing-<id>.css` com todos os seletores prefixados por uma classe única (ex.: `.lp-<id> .hero{...}`) — isso evita que o CSS de uma landing vaze para outra ou para o portfólio. Ligar o arquivo em `index.html`.
 3. Criar `js/landing-<id>.js` com a função de render da landing page, HTML todo dentro de um elemento raiz com a classe usada no passo 2 (ex.: `<div class="lp-<id>">...</div>`). Componentes compartilhados (`nav()`, `footer()`, `themeToggleBtn()`, `demoBadge()`) vêm de `js/shared.js`.
 4. Ligar `js/landing-<id>.js` em `index.html`, antes de `js/landing-registry.js`, e registrar a função em `LANDING_PAGES` (`js/landing-registry.js`) com a chave igual ao id do case.
 

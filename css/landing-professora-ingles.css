@@ -1,0 +1,161 @@
+/* Landing page: Ana Duarte — Professora de Inglês — identidade própria,
+ * isolada do resto do site sob o wrapper .lp-professora. */
+.lp-professora{
+  --lp-cream:#FBF3E7; --lp-cream-2:#F4E7D5; --lp-plum:#3A1F2B; --lp-rose:#D96B72; --lp-rose-soft:#E89AA0; --lp-line:rgba(58,31,43,0.14);
+  background:var(--lp-cream); color:var(--lp-plum); font-family:'Work Sans',sans-serif; line-height:1.6; min-height:100vh;
+}
+html[data-theme="dark"] .lp-professora{
+  --lp-cream:#221A1B; --lp-cream-2:#2B2022; --lp-plum:#F6E9DE; --lp-rose:#E8919B; --lp-rose-soft:#8A4B52; --lp-line:rgba(246,233,222,0.14);
+}
+html[data-theme="dark"] .lp-professora .lp-avatar{background:linear-gradient(160deg,#4A3324,#8A4B52 120%)}
+
+.lp-professora h1,.lp-professora h2,.lp-professora h3{font-family:'Fraunces',serif}
+.lp-professora a{color:inherit}
+.lp-professora .demo-badge{top:auto; bottom:16px}
+.lp-professora .theme-toggle{background:var(--lp-cream); border-color:var(--lp-line)}
+.lp-professora .theme-toggle svg{stroke:var(--lp-plum)}
+.lp-professora .theme-toggle:hover{border-color:var(--lp-rose)}
+
+/* NAV */
+.lp-professora .lp-nav{padding:18px 0; position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--lp-cream) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--lp-line)}
+.lp-professora .lp-nav .wrap{display:flex; justify-content:space-between; align-items:center; gap:14px}
+.lp-professora .lp-logo{font-family:'Fraunces',serif; font-weight:600; font-style:italic; font-size:21px}
+.lp-professora .lp-nav-links{display:flex; align-items:center; gap:22px; list-style:none; font-size:14px; color:color-mix(in srgb, var(--lp-plum) 70%, transparent)}
+.lp-professora .lp-nav-links a:hover{color:var(--lp-rose)}
+@media (max-width:760px){ .lp-professora .lp-nav-links{display:none} }
+.lp-professora .lp-nav-actions{display:flex; align-items:center; gap:12px}
+
+/* BOTÕES */
+.lp-professora .lp-btn{display:inline-flex; align-items:center; gap:8px; padding:14px 26px; border-radius:30px; background:var(--lp-plum); color:var(--lp-cream); font-weight:600; font-size:14.5px; transition:transform .18s ease, background .18s ease, box-shadow .18s ease}
+.lp-professora .lp-btn:hover{background:var(--lp-rose); transform:translateY(-2px); box-shadow:0 14px 30px -14px var(--lp-rose)}
+.lp-professora .lp-btn-ghost{background:transparent; border:1.5px solid var(--lp-line); color:var(--lp-plum)}
+.lp-professora .lp-btn-ghost:hover{border-color:var(--lp-rose); color:var(--lp-rose); background:transparent}
+.lp-professora .lp-btn-sm{padding:10px 18px; font-size:13px}
+
+/* HERO */
+.lp-professora .lp-hero{padding:32px 0 76px; position:relative}
+.lp-professora .lp-hero .wrap{display:grid; grid-template-columns:1fr 0.85fr; gap:50px; align-items:center; position:relative; z-index:2}
+.lp-professora .lp-hero h1{font-size:clamp(32px,6vw,54px); font-weight:500; line-height:1.12; margin-bottom:20px}
+.lp-professora .lp-hero h1 em{color:var(--lp-rose); font-style:italic}
+.lp-professora .lp-hero p.lead{font-size:16.5px; color:color-mix(in srgb, var(--lp-plum) 72%, transparent); max-width:460px; margin-bottom:28px}
+.lp-professora .lp-hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:28px}
+.lp-professora .lp-trust{display:flex; gap:22px; flex-wrap:wrap}
+.lp-professora .lp-trust-item{display:flex; align-items:center; gap:8px; font-size:13.5px; color:color-mix(in srgb, var(--lp-plum) 68%, transparent)}
+.lp-professora .lp-trust-item .dot{width:6px; height:6px; border-radius:50%; background:var(--lp-rose); flex-shrink:0}
+
+.lp-professora .lp-hero-copy>*{opacity:0; animation:fadeInUp .75s cubic-bezier(.2,.7,.2,1) forwards}
+.lp-professora .lp-hero-copy>*:nth-child(1){animation-delay:.05s}
+.lp-professora .lp-hero-copy>*:nth-child(2){animation-delay:.16s}
+.lp-professora .lp-hero-copy>*:nth-child(3){animation-delay:.28s}
+.lp-professora .lp-hero-copy>*:nth-child(4){animation-delay:.40s}
+.lp-professora .lp-hero-copy>*:nth-child(5){animation-delay:.5s}
+
+.lp-professora .lp-avatar-wrap{display:flex; justify-content:center; position:relative; opacity:0; animation:fadeInUp .9s cubic-bezier(.2,.7,.2,1) .25s forwards}
+.lp-professora .lp-avatar{width:100%; max-width:320px; aspect-ratio:1; border-radius:50% 50% 46% 54%/54% 46% 54% 46%; background:linear-gradient(160deg,#EBD3B6,#D96B72 120%); position:relative; animation:floaty 6s ease-in-out infinite}
+.lp-professora .lp-avatar::before{content:""; position:absolute; inset:-18px; border:1px dashed var(--lp-rose-soft); border-radius:inherit; opacity:.6; animation:floaty 6s ease-in-out infinite reverse}
+.lp-professora .lp-avatar::after{content:"\201C Speak with confidence \201D"; font-family:'Fraunces',serif; font-style:italic; position:absolute; bottom:-14px; left:50%; transform:translateX(-50%); background:var(--lp-cream); border:1px solid var(--lp-line); padding:10px 18px; border-radius:30px; font-size:13px; white-space:nowrap; box-shadow:0 12px 26px -14px color-mix(in srgb, var(--lp-plum) 35%, transparent)}
+.lp-professora .lp-avatar-badge{position:absolute; top:6%; left:-8%; background:var(--lp-cream); border:1px solid var(--lp-line); border-radius:14px; padding:10px 16px; box-shadow:0 14px 30px -16px color-mix(in srgb, var(--lp-plum) 40%, transparent); text-align:center; animation:floaty 5s ease-in-out infinite}
+.lp-professora .lp-avatar-badge strong{display:block; font-family:'Fraunces',serif; font-size:18px; line-height:1}
+.lp-professora .lp-avatar-badge span{display:block; font-size:10.5px; color:color-mix(in srgb, var(--lp-plum) 60%, transparent); margin-top:3px; text-transform:uppercase; letter-spacing:.04em}
+.lp-professora .lp-blob{position:absolute; border-radius:50%; filter:blur(2px); opacity:.5; z-index:1}
+
+/* SEÇÃO genérica */
+.lp-professora .lp-section{padding:60px 0}
+.lp-professora .lp-section.alt{background:var(--lp-cream-2)}
+.lp-professora .lp-eyebrow{font-family:'Fraunces',serif; font-style:italic; color:var(--lp-rose); font-size:15px; margin-bottom:8px}
+.lp-professora .lp-section h2{font-size:clamp(23px,4vw,34px); font-weight:500; margin-bottom:16px; max-width:520px}
+.lp-professora .lp-section h2 + p{color:color-mix(in srgb, var(--lp-plum) 70%, transparent); max-width:520px; margin-bottom:36px; font-size:15px}
+
+/* SOBRE A PROFESSORA */
+.lp-professora .lp-about{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start}
+.lp-professora .lp-about p{color:color-mix(in srgb, var(--lp-plum) 78%, transparent); font-size:15px; margin-bottom:14px}
+.lp-professora .lp-credentials{list-style:none; display:flex; flex-direction:column; gap:12px}
+.lp-professora .lp-credentials li{display:flex; gap:10px; align-items:flex-start; font-size:14px}
+.lp-professora .lp-credentials .ico{flex-shrink:0; width:22px; height:22px; border-radius:50%; background:var(--lp-rose-soft); color:var(--lp-cream); display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; margin-top:1px}
+
+/* CARDS com ícone (Método / Modalidade) */
+.lp-professora .lp-cols3{display:grid; grid-template-columns:repeat(3,1fr); gap:24px}
+.lp-professora .lp-card{background:var(--lp-cream); border:1px solid var(--lp-line); border-radius:16px; padding:26px; transition:transform .22s ease, box-shadow .22s ease}
+.lp-professora .lp-card:hover{transform:translateY(-4px); box-shadow:0 20px 40px -24px color-mix(in srgb, var(--lp-plum) 40%, transparent)}
+.lp-professora .lp-section.alt .lp-card{background:var(--lp-cream)}
+.lp-professora .lp-card .ico{width:38px; height:38px; border-radius:10px; background:var(--lp-rose-soft); color:var(--lp-cream); display:inline-flex; align-items:center; justify-content:center; margin-bottom:14px}
+.lp-professora .lp-card .ico svg{width:19px; height:19px}
+.lp-professora .lp-card h3{font-size:18px; font-weight:600; margin-bottom:10px}
+.lp-professora .lp-card p{font-size:14px; color:color-mix(in srgb, var(--lp-plum) 70%, transparent)}
+
+.lp-professora .lp-chips{display:flex; flex-wrap:wrap; gap:10px}
+.lp-professora .lp-chip{background:var(--lp-cream); border:1px solid var(--lp-line); border-radius:30px; padding:10px 18px; font-size:13.5px; font-weight:500; transition:background .2s ease, color .2s ease}
+.lp-professora .lp-chip:hover{background:var(--lp-plum); color:var(--lp-cream)}
+
+/* COMO FUNCIONA */
+.lp-professora .lp-steps{display:grid; grid-template-columns:repeat(4,1fr); gap:20px}
+.lp-professora .lp-step .n{display:flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%; background:var(--lp-plum); color:var(--lp-cream); font-family:'Fraunces',serif; font-weight:600; font-size:14px; margin-bottom:14px}
+.lp-professora .lp-step h3{font-size:16px; margin-bottom:6px}
+.lp-professora .lp-step p{font-size:13.5px; color:color-mix(in srgb, var(--lp-plum) 68%, transparent)}
+
+/* PLANOS */
+.lp-professora .lp-plans{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch}
+.lp-professora .lp-plan{background:var(--lp-cream); border:1px solid var(--lp-line); border-radius:20px; padding:30px 26px; display:flex; flex-direction:column; position:relative}
+.lp-professora .lp-plan.featured{background:var(--lp-plum); color:var(--lp-cream); border-color:var(--lp-plum); transform:scale(1.03); box-shadow:0 26px 50px -28px color-mix(in srgb, var(--lp-plum) 55%, transparent)}
+.lp-professora .lp-plan-tag{position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--lp-rose); color:var(--lp-cream); font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 14px; border-radius:20px}
+.lp-professora .lp-plan h3{font-size:18px; margin-bottom:4px}
+.lp-professora .lp-plan .price{font-family:'Fraunces',serif; font-size:32px; font-weight:600; margin:10px 0 2px}
+.lp-professora .lp-plan .price span{font-family:'Work Sans',sans-serif; font-size:13px; font-weight:400; opacity:.7}
+.lp-professora .lp-plan .desc{font-size:13px; opacity:.75; margin-bottom:18px}
+.lp-professora .lp-plan ul{list-style:none; display:flex; flex-direction:column; gap:9px; margin-bottom:22px; flex:1}
+.lp-professora .lp-plan li{font-size:13.5px; display:flex; gap:8px; align-items:flex-start}
+.lp-professora .lp-plan li::before{content:"✓"; color:var(--lp-rose); font-weight:700; flex-shrink:0}
+.lp-professora .lp-plan.featured li::before{color:var(--lp-rose-soft)}
+.lp-professora .lp-plan .lp-btn{justify-content:center; width:100%}
+.lp-professora .lp-plan.featured .lp-btn{background:var(--lp-cream); color:var(--lp-plum)}
+.lp-professora .lp-plan.featured .lp-btn:hover{background:var(--lp-rose); color:var(--lp-cream)}
+.lp-professora .lp-plans-note{font-size:12.5px; color:color-mix(in srgb, var(--lp-plum) 55%, transparent); margin-top:20px; text-align:center}
+
+/* DEPOIMENTOS */
+.lp-professora .lp-testimonials{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+.lp-professora .lp-testi{background:var(--lp-cream-2); border-radius:16px; padding:24px; transition:transform .22s ease}
+.lp-professora .lp-testi:hover{transform:translateY(-4px)}
+.lp-professora .lp-section.alt .lp-testi{background:var(--lp-cream)}
+.lp-professora .lp-testi p{font-size:14px; font-style:italic; margin-bottom:14px; color:color-mix(in srgb, var(--lp-plum) 80%, transparent)}
+.lp-professora .lp-testi .who{font-weight:600; font-size:13px}
+
+/* FAQ */
+.lp-professora .lp-faq{max-width:720px}
+.lp-professora .lp-faq-item{border-bottom:1px solid var(--lp-line); padding:18px 0}
+.lp-professora .lp-faq-item summary{cursor:pointer; font-family:'Fraunces',serif; font-weight:600; font-size:16px; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px}
+.lp-professora .lp-faq-item summary::-webkit-details-marker{display:none}
+.lp-professora .lp-faq-item summary::after{content:"+"; font-size:22px; font-weight:400; color:var(--lp-rose); transition:transform .2s ease; flex-shrink:0}
+.lp-professora .lp-faq-item[open] summary::after{transform:rotate(45deg)}
+.lp-professora .lp-faq-item p{font-size:14px; color:color-mix(in srgb, var(--lp-plum) 72%, transparent); margin-top:12px; max-width:60ch}
+
+/* CTA FINAL */
+.lp-professora .lp-final{background:var(--lp-plum); color:var(--lp-cream); border-radius:24px; margin:0 28px 56px; padding:60px 40px; text-align:center; position:relative; overflow:hidden}
+.lp-professora .lp-final::before{content:""; position:absolute; width:280px; height:280px; background:radial-gradient(circle,var(--lp-rose),transparent 70%); top:-120px; right:-60px; opacity:.5}
+.lp-professora .lp-final h2{color:var(--lp-cream); font-size:clamp(24px,4.5vw,38px); margin:0 auto 14px; position:relative}
+.lp-professora .lp-final p{color:color-mix(in srgb, var(--lp-cream) 75%, transparent); margin-bottom:26px; position:relative; max-width:46ch; margin-inline:auto}
+.lp-professora .lp-final-actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; position:relative}
+.lp-professora .lp-final .lp-btn{background:var(--lp-cream); color:var(--lp-plum); position:relative}
+.lp-professora .lp-final .lp-btn:hover{background:var(--lp-rose); color:var(--lp-cream)}
+.lp-professora .lp-final .lp-btn-ghost{border-color:color-mix(in srgb, var(--lp-cream) 40%, transparent); color:var(--lp-cream)}
+.lp-professora .lp-final .lp-btn-ghost:hover{border-color:var(--lp-cream); background:transparent; color:var(--lp-cream)}
+
+.lp-professora .lp-foot{padding:30px 0 40px; font-size:12px; color:color-mix(in srgb, var(--lp-plum) 55%, transparent); text-align:center}
+.lp-professora .lp-foot strong{color:var(--lp-plum)}
+
+@media (max-width:900px){
+  .lp-professora .lp-hero .wrap{grid-template-columns:1fr; gap:36px; text-align:center}
+  .lp-professora .lp-hero-actions{justify-content:center}
+  .lp-professora .lp-trust{justify-content:center}
+  .lp-professora .lp-avatar-wrap{order:-1}
+  .lp-professora .lp-avatar{max-width:240px}
+  .lp-professora .lp-avatar-badge{display:none}
+  .lp-professora .lp-about{grid-template-columns:1fr}
+  .lp-professora .lp-cols3,.lp-professora .lp-testimonials{grid-template-columns:1fr}
+  .lp-professora .lp-steps{grid-template-columns:repeat(2,1fr)}
+  .lp-professora .lp-plans{grid-template-columns:1fr}
+  .lp-professora .lp-plan.featured{transform:none}
+  .lp-professora .lp-final{margin:0 20px 40px; padding:44px 24px}
+}
+@media (max-width:640px){
+  .lp-professora .lp-steps{grid-template-columns:1fr}
+}
