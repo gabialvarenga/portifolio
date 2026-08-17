@@ -7,7 +7,8 @@
 const LANDING_PAGES = {
   'professora-ingles': renderLandingProfessoraIngles,
   'advocacia': renderLandingAdvocacia,
-  'clinica': renderLandingClinica
+  'clinica': renderLandingClinica,
+  'restaurante': renderLandingRestaurante
 };
 
 function renderLanding(id){

@@ -38,7 +38,7 @@ const CASES = {
     preview:'lead'
   },
   'restaurante': {
-    fig:'Fig. 03 — Restaurante & delivery', segment:'Gastronomia', status: PROJECT_STATUS.CONCEPT,
+    fig:'Fig. 03 — Restaurante & delivery', segment:'Gastronomia', status: PROJECT_STATUS.LIVE,
     title:'Pedido direto, sem depender só de apps',
     challenge:'Delivery concentrado em aplicativos de terceiros, com taxas altas comendo a margem de cada pedido.',
     resolves:['Fotos dos pratos em destaque, logo no topo','Cardápio organizado por categoria','Botão fixo de pedido direto pelo WhatsApp'],
