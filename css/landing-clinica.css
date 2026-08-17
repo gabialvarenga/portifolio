@@ -76,23 +76,6 @@
 .lp-clinica .step-card h3{font-size:1.05rem; margin-top:.1rem}
 .lp-clinica .step-card p{font-size:.88rem; color:var(--ink-dim); margin-top:.5rem}
 
-/* PLANOS */
-.lp-clinica .plans{display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; align-items:stretch}
-@media (max-width:900px){ .lp-clinica .plans{grid-template-columns:1fr} }
-.lp-clinica .plan{background:var(--bg-2); border:1px solid var(--line); border-radius:24px; padding:1.8rem 1.6rem; display:flex; flex-direction:column; position:relative}
-.lp-clinica .plan.featured{background:var(--ink); color:var(--bg); border-color:var(--ink)}
-.lp-clinica .plan-tag{position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--accent); color:var(--ink); font-size:.7rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:.35rem .9rem; border-radius:999px}
-.lp-clinica .plan h3{font-size:1.1rem}
-.lp-clinica .plan .price{font-family:var(--font-d); font-size:2rem; font-weight:600; margin-top:.6rem}
-.lp-clinica .plan .price span{font-family:var(--font-b); font-size:.8rem; font-weight:400; opacity:.7}
-.lp-clinica .plan .desc{font-size:.85rem; opacity:.75; margin-top:.3rem; margin-bottom:1.1rem}
-.lp-clinica .plan ul{list-style:none; display:flex; flex-direction:column; gap:.55rem; margin:0 0 1.3rem; padding:0; flex:1}
-.lp-clinica .plan li{font-size:.85rem; display:flex; gap:.5rem; align-items:flex-start}
-.lp-clinica .plan li::before{content:"✓"; color:var(--accent); font-weight:700; flex-shrink:0}
-.lp-clinica .plan .btn{justify-content:center; width:100%}
-.lp-clinica .plan.featured .btn-primary{background:var(--accent); color:var(--ink)}
-.lp-clinica .plans-note{font-size:.78rem; color:var(--ink-dim); text-align:center; margin-top:1.2rem}
-
 /* DEPOIMENTOS */
 .lp-clinica .testimonials{display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem}
 @media (max-width:860px){ .lp-clinica .testimonials{grid-template-columns:1fr} }

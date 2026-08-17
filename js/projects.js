@@ -45,16 +45,8 @@ const CASES = {
     traffic:'Meta Ads segmentado por raio de entrega, com promoções sazonais e pixel de conversão no pedido.',
     preview:'menu'
   },
-  'moda': {
-    fig:'Fig. 04 — Loja de moda', segment:'Moda', status: PROJECT_STATUS.LIVE,
-    title:'Testar venda online sem montar um e-commerce inteiro',
-    challenge:'Loja física querendo vender uma coleção específica online, sem investir numa loja virtual completa ainda.',
-    resolves:['Vitrine enxuta com os produtos da coleção','Compra finalizada direto pelo WhatsApp','Rastreamento pronto para remarketing'],
-    traffic:'Google Shopping + remarketing dinâmico para quem viu peças específicas e não finalizou a compra.',
-    preview:'gallery'
-  },
   'advocacia': {
-    fig:'Fig. 05 — Escritório de advocacia', segment:'Direito', status: PROJECT_STATUS.LIVE,
+    fig:'Fig. 04 — Escritório de advocacia', segment:'Direito', status: PROJECT_STATUS.LIVE,
     title:'Consulta jurídica sem parecer distante',
     challenge:'Escritório que queria atrair clientes pela internet sem parecer burocrático ou intimidador logo no primeiro contato.',
     resolves:['CTA de "consulta inicial sem custo" logo na primeira dobra','Áreas de atuação organizadas em blocos fáceis de entender','Selos de confiança (sigilo, prazo de resposta) reduzindo a hesitação de quem nunca contratou um advogado'],

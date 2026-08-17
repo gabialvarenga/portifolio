@@ -24,7 +24,6 @@ function renderLandingClinica(){
         <ul class="nav-links">
           <li><a href="#especialidades">Especialidades</a></li>
           <li><a href="#como-funciona">Como funciona</a></li>
-          <li><a href="#planos">Planos</a></li>
         </ul>
         <a href="${wa}" class="btn btn-primary" style="padding:.6rem 1.2rem; font-size:.85rem" onclick="track('contact_click','clinica')">Agendar avaliação</a>
       </div>
@@ -99,54 +98,6 @@ function renderLandingClinica(){
           <div class="step-card"><span class="step-num">2</span><h3>Plano de tratamento</h3><p>Você recebe o passo a passo e o valor, sem letras miúdas.</p></div>
           <div class="step-card"><span class="step-num">3</span><h3>Acompanhamento</h3><p>Retornos combinados com você, no seu ritmo.</p></div>
         </div>
-      </div>
-    </section>
-
-    <section id="planos">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Planos</span>
-          <h2>Cuidado contínuo, sem depender de emergência</h2>
-          <span class="arc-rule"></span>
-        </div>
-        <div class="plans">
-          <div class="plan">
-            <h3>Essencial</h3>
-            <div class="price">R$ 89<span>/mês</span></div>
-            <p class="desc">Manutenção básica pra não perder o ritmo.</p>
-            <ul>
-              <li>Limpeza semestral</li>
-              <li>Avaliação de rotina</li>
-              <li>Desconto em procedimentos</li>
-            </ul>
-            <a href="${wa}" class="btn btn-ghost" onclick="track('contact_click','clinica')">Assinar</a>
-          </div>
-          <div class="plan featured">
-            <span class="plan-tag">Mais popular</span>
-            <h3>Cuidado Completo</h3>
-            <div class="price">R$ 159<span>/mês</span></div>
-            <p class="desc">Acompanhamento trimestral com prioridade.</p>
-            <ul>
-              <li>Limpeza trimestral</li>
-              <li>Prioridade no agendamento</li>
-              <li>20% de desconto em procedimentos</li>
-              <li>Atendimento de urgência incluso</li>
-            </ul>
-            <a href="${wa}" class="btn btn-primary" onclick="track('contact_click','clinica')">Assinar</a>
-          </div>
-          <div class="plan">
-            <h3>Família</h3>
-            <div class="price">R$ 349<span>/mês</span></div>
-            <p class="desc">Até 4 pessoas na mesma casa.</p>
-            <ul>
-              <li>Limpeza trimestral p/ até 4 pessoas</li>
-              <li>Prioridade no agendamento</li>
-              <li>15% de desconto em procedimentos</li>
-            </ul>
-            <a href="${wa}" class="btn btn-ghost" onclick="track('contact_click','clinica')">Assinar</a>
-          </div>
-        </div>
-        <p class="plans-note">Valores fictícios — exemplo de estrutura de planos para o case demonstrativo.</p>
       </div>
     </section>
 
