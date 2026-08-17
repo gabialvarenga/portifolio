@@ -70,9 +70,9 @@ function nav(){
   return `<div class="nav"><div class="wrap nav-inner">
     <a href="#/" class="brand">${brandMark()}Portfólio</a>
     <ul class="nav-links">
-      <li><a href="#servicos" onclick="goToSection(event,'servicos')">Processo</a></li>
+      <li><a href="#servicos" onclick="goToSection(event,'servicos')">Serviços</a></li>
       <li><a href="#projetos" onclick="goToSection(event,'projetos')">Projetos</a></li>
-      <li><a href="#equipe" onclick="goToSection(event,'equipe')">Equipe</a></li>
+      <li><a href="#processo" onclick="goToSection(event,'processo')">Como funciona</a></li>
       <li><a href="#faq" onclick="goToSection(event,'faq')">FAQ</a></li>
     </ul>
     <a href="#contato" class="btn btn-primary" onclick="goToSection(event,'contato')">Contato</a>
@@ -117,64 +117,6 @@ function initReveal(){
   },{threshold:0.12, rootMargin:'0px 0px -6% 0px'});
   els.forEach(e=>io.observe(e));
 }
-/* ---------- carrossel de cases ----------
- * Rolagem nativa com scroll-snap; o JS só cuida dos controles. Quando
- * todos os cards já cabem na largura disponível (desktop), os controles
- * se escondem sozinhos — não faz sentido paginar o que já está visível.
- */
-function initCarousels(){
-  document.querySelectorAll('[data-carousel]').forEach(root => {
-    const rail = root.querySelector('.carousel-rail');
-    const dotsBox = root.querySelector('.carousel-dots');
-    const btns = root.querySelectorAll('.carousel-btn');
-    const cards = Array.from(rail.children);
-    if(!cards.length) return;
-
-    dotsBox.innerHTML = cards.map((_, i) =>
-      `<button type="button" class="carousel-dot" data-i="${i}" role="tab" aria-label="Ir para o projeto ${i+1}"></button>`
-    ).join('');
-    const dots = Array.from(dotsBox.children);
-
-    const step = () => {
-      if(cards.length < 2) return rail.clientWidth;
-      return cards[1].offsetLeft - cards[0].offsetLeft;
-    };
-    /* índice do card mais próximo do início visível da pista */
-    const current = () => Math.round(rail.scrollLeft / step());
-    const overflows = () => rail.scrollWidth - rail.clientWidth > 2;
-
-    function sync(){
-      const on = overflows();
-      root.classList.toggle('is-static', !on);
-      if(!on) return;
-      const i = current();
-      const maxIndex = cards.length - Math.round(rail.clientWidth / step());
-      dots.forEach((d, di) => d.classList.toggle('is-on', di === i));
-      btns.forEach(b => {
-        const dir = Number(b.dataset.dir);
-        b.disabled = dir < 0 ? i <= 0 : i >= maxIndex;
-      });
-    }
-
-    function scrollToIndex(i){
-      rail.scrollTo({ left: i * step(), behavior: 'smooth' });
-    }
-
-    btns.forEach(b => b.addEventListener('click', () => {
-      scrollToIndex(Math.max(0, current() + Number(b.dataset.dir)));
-    }));
-    dots.forEach(d => d.addEventListener('click', () => scrollToIndex(Number(d.dataset.i))));
-
-    let raf = null;
-    rail.addEventListener('scroll', () => {
-      if(raf) return;
-      raf = requestAnimationFrame(() => { raf = null; sync(); });
-    }, { passive: true });
-    window.addEventListener('resize', sync);
-    sync();
-  });
-}
-
 /* fire project_view quando um case entra na tela (uma vez por sessão) */
 function initProjectTracking(){
   const cards = document.querySelectorAll('.case-track');

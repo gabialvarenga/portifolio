@@ -61,9 +61,9 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-0.005em;line-height:1.1
 .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
 /* escalonamento automático dos cards do carrossel, sem precisar de
    classe .d1/.d2 em cada um */
-.carousel-rail>.reveal:nth-child(2){transition-delay:.1s}
-.carousel-rail>.reveal:nth-child(3){transition-delay:.2s}
-.carousel-rail>.reveal:nth-child(4){transition-delay:.3s}
+.case-list>.reveal:nth-child(2){transition-delay:.08s}
+.case-list>.reveal:nth-child(3){transition-delay:.16s}
+.case-list>.reveal:nth-child(4){transition-delay:.24s}
 /* etapas do processo: a linha superior "desenha" da esquerda pra direita */
 .step{position:relative}
 .step::after{content:"";position:absolute;top:-1px;left:0;height:2px;width:0;background:var(--cobalt);transition:width .7s cubic-bezier(.2,.7,.2,1) .15s}
@@ -165,41 +165,28 @@ section[id]{scroll-margin-top:calc(var(--nav-h, 68px) + 1.25rem)}
 .section-head p{color:var(--muted);margin-top:.75rem;font-size:.98rem;max-width:62ch}
 
 /* TEAM (quem faz) */
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-.team-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:1.7rem;transition:transform .2s ease, box-shadow .2s ease}
-.team-card:hover{transform:translateY(-4px);box-shadow:0 22px 44px -28px rgba(27,31,38,0.5)}
-.team-mark{display:inline-flex;width:26px;height:26px;margin-bottom:.9rem}
-.team-role{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cobalt);display:block}
-.team-card h3{font-size:1.2rem;font-weight:600;margin-top:.4rem}
-.team-card p{color:var(--muted);margin-top:.65rem;font-size:.92rem}
+/* SERVIÇOS — escopado em .portfolio de propósito: a landing da Clínica
+ * também usa .services-grid/.service-card no seu markup, e um seletor
+ * global aqui vazaria para dentro dela. */
+.portfolio .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.portfolio .service-card{background:#FFFFFF;border:1px solid rgba(11,27,43,.12);border-radius:var(--radius);padding:1.7rem;transition:transform .2s ease, box-shadow .2s ease}
+.portfolio .service-card.in:hover{transform:translateY(-4px);box-shadow:0 22px 44px -28px rgba(11,27,43,.35)}
+.portfolio .service-card .idx{font-family:var(--font-mono);font-size:.75rem;color:var(--bp-stamp)}
+.portfolio .service-card h3{font-size:1.15rem;font-weight:600;margin-top:.8rem;color:var(--bp-ink)}
+.portfolio .service-card p{color:rgba(11,27,43,.64);margin-top:.65rem;font-size:.92rem}
 
 /* PROJECTS */
 
-/* CARROSSEL — rolagem nativa com scroll-snap; o JS só liga os controles.
- * .is-static (posto pelo JS quando tudo já cabe) esconde a paginação. */
-.carousel{position:relative}
-/* overflow-x:auto força overflow-y a recortar: o padding vertical dá
- * espaço pro lift do hover e pra sombra do card não serem cortados. */
-.carousel-rail{display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 0 26px;scrollbar-width:none;-ms-overflow-style:none}
-.carousel-rail::-webkit-scrollbar{display:none}
-.carousel-rail>*{flex:0 0 calc((100% - 3rem)/3);scroll-snap-align:start}
-.carousel-controls{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1.75rem}
-.carousel.is-static .carousel-controls{display:none}
-.carousel-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line-strong);background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s ease, background .2s ease, opacity .2s ease}
-.carousel-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.carousel-btn:disabled{opacity:.3;cursor:default}
-.carousel-dots{display:flex;align-items:center;gap:.5rem}
-.carousel-dot{width:7px;height:7px;padding:0;border-radius:50%;border:none;background:currentColor;opacity:.3;cursor:pointer;transition:opacity .2s ease, transform .2s ease}
-.carousel-dot.is-on{opacity:1;transform:scale(1.5)}
-
-/* cases com landing page */
-.case-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(1.1rem,2.5vw,1.5rem);display:flex;flex-direction:column;gap:1.1rem}
-.case-card.in:hover{transform:translateY(-6px)}
-.case-meta{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+/* cases em linhas largas: preview à esquerda, conteúdo à direita */
+.case-list{display:flex;flex-direction:column;gap:1.5rem}
+.case-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(1.25rem,3vw,2rem);display:grid;grid-template-columns:minmax(240px,360px) 1fr;gap:clamp(1.5rem,3vw,2.5rem);align-items:start}
+.case-card.in:hover{transform:translateY(-4px)}
+.case-body{display:flex;flex-direction:column;align-items:flex-start;gap:.55rem}
+.case-meta{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
 .case-badge{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);border:1px solid var(--line-strong);border-radius:999px;padding:.24rem .6rem;white-space:nowrap}
 .case-fig{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
-.case-title{font-size:1.2rem;font-weight:600;margin-top:.4rem}
-.case-summary{font-size:.9rem;color:var(--muted);margin-top:.4rem}
+.case-title{font-size:1.35rem;font-weight:600}
+.case-summary{font-size:.94rem;color:var(--muted);max-width:60ch}
 .case-block{margin-top:1rem}
 .case-block:first-child{margin-top:0}
 .case-block .label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mustard)}
@@ -214,13 +201,13 @@ section[id]{scroll-margin-top:calc(var(--nav-h, 68px) + 1.25rem)}
 .preview-hint span{font-size:.82rem;font-weight:500;color:var(--white);border:1px solid rgba(255,255,255,.6);padding:.4rem .9rem;border-radius:999px}
 /* detalhe do case: link de texto discreto, deliberadamente sem cara
  * de botão — o botão "Ver página" é a ação principal do card. */
-.case-detail{border-top:1px solid var(--line);padding-top:.85rem}
+.case-detail{border-top:1px solid var(--line);padding-top:.85rem;margin-top:.4rem;align-self:stretch}
 .case-detail summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.45rem;font-size:.82rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong)}
 .case-detail summary::-webkit-details-marker{display:none}
 .case-detail summary::before{content:"+";font-family:var(--font-mono);font-size:.9rem;text-decoration:none;flex-shrink:0}
 .case-detail[open] summary::before{content:"–"}
 .case-detail summary:hover{color:var(--ink)}
-.case-foot{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap}
+.case-foot{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;margin-top:.35rem}
 
 /* PROCESS */
 .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
@@ -372,16 +359,6 @@ th{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;color:va
 .portfolio .hd-pin{fill:var(--bp-stamp)}
 .portfolio .hd-pin-text{fill:var(--bp-chalk);font-family:var(--font-mono);font-size:12px;font-weight:600}
 .portfolio .hero-legend li{color:rgba(243,247,250,.8)}
-
-/* EQUIPE */
-.portfolio .team-card{background:#FFFFFF;border-color:rgba(11,27,43,.12)}
-.portfolio .team-card:hover{box-shadow:0 22px 44px -28px rgba(11,27,43,.35)}
-.portfolio .team-mark .bm-corner,.portfolio .team-mark .bm-dim,.portfolio .team-mark .bm-tick{stroke:var(--bp-stamp)}
-.portfolio .team-mark .bm-pin{fill:var(--bp-stamp)}
-.portfolio .team-role{color:var(--bp-stamp)}
-.portfolio .team-card h3{color:var(--bp-ink)}
-.portfolio .team-card p{color:rgba(11,27,43,.64)}
-
 /* FAQ — seção própria, faixa navy */
 .portfolio .faq-item{border-color:rgba(111,168,199,.28);background:rgba(234,242,246,.04);transition:border-color .2s ease, background-color .2s ease}
 .portfolio .faq-item:hover{border-color:rgba(111,168,199,.5);background:rgba(234,242,246,.07)}
@@ -394,10 +371,6 @@ th{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;color:va
 .portfolio .case-card.in:hover{box-shadow:0 34px 60px -30px rgba(0,0,0,.65)}
 .portfolio .case-badge{color:rgba(11,27,43,.5);border-color:rgba(11,27,43,.22)}
 .portfolio .case-fig{color:rgba(11,27,43,.45)}
-.portfolio .carousel-btn{color:var(--bp-chalk);border-color:rgba(111,168,199,.4)}
-.portfolio .carousel-btn:not(:disabled):hover{border-color:var(--bp-stamp);background:rgba(8,145,178,.12)}
-.portfolio .carousel-dots{color:var(--bp-line)}
-.portfolio .carousel-dot.is-on{color:var(--bp-stamp)}
 .portfolio .case-title{color:var(--bp-ink)}
 .portfolio .case-summary{color:rgba(11,27,43,.66)}
 .portfolio .case-detail{border-top-color:rgba(11,27,43,.14)}
@@ -438,7 +411,7 @@ th{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;color:va
   .hero-grid{grid-template-columns:1fr}
   .hero-visual{order:-1}
   .portfolio .hero-diagram{order:-1}
-  .team-grid{grid-template-columns:1fr}
+  .portfolio .services-grid{grid-template-columns:1fr}
   .process-grid{grid-template-columns:1fr;gap:0}
   .step{border-top:none;border-left:1px solid var(--line-strong);padding:0 0 1.75rem 1.1rem;margin-left:.3rem}
   .portfolio .step{border-left-color:rgba(11,27,43,.16)}
@@ -456,8 +429,7 @@ th{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;color:va
   .funnel{flex-direction:column}
   footer .footer-inner{flex-direction:column;align-items:flex-start}
 }
-@media(max-width:1000px){.carousel-rail>*{flex-basis:calc((100% - 1.5rem)/2)}}
-@media(max-width:720px){.carousel-rail>*{flex-basis:100%}}
+@media(max-width:860px){.case-card{grid-template-columns:1fr}}
 @media(max-width:640px){
   table{display:block;overflow-x:auto;white-space:nowrap}
   .dash-cards{grid-template-columns:1fr}

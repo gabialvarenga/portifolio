@@ -73,14 +73,25 @@ function renderHome(){
 
     <section id="servicos" class="band-paper"><div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">Como trabalhamos</span>
-        <h2>Como uma página toma forma</h2>
+        <span class="eyebrow">O que fazemos</span>
+        <h2>Duas frentes, um só objetivo</h2>
       </div>
-      <div class="process-grid">
-        <div class="step reveal"><span class="n">01</span><h3>Diagnóstico</h3><p>Entendemos o negócio, o público e o que a página precisa fazer.</p></div>
-        <div class="step reveal d1"><span class="n">02</span><h3>Landing page</h3><p>Organizamos conteúdo, estrutura e interface em torno do objetivo definido.</p></div>
-        <div class="step reveal d2"><span class="n">03</span><h3>Campanha</h3><p>Quando há divulgação, conectamos a campanha à página e configuramos o acompanhamento das conversões.</p></div>
-        <div class="step reveal d3"><span class="n">04</span><h3>Acompanhamento</h3><p>Acompanhamos os dados da página e das campanhas para identificar o que precisa ser ajustado.</p></div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <span class="idx">01</span>
+          <h3>Desenvolvimento de landing pages</h3>
+          <p>Páginas rápidas e responsivas, construídas em torno de um único objetivo, com rastreamento configurado desde o primeiro dia.</p>
+        </div>
+        <div class="service-card reveal d1">
+          <span class="idx">02</span>
+          <h3>Divulgação e tráfego pago</h3>
+          <p>Planejamento e otimização de campanhas em Google Ads e Meta Ads, com relatórios simples de entender.</p>
+        </div>
+        <div class="service-card reveal d2">
+          <span class="idx">03</span>
+          <h3>Página e campanha juntas</h3>
+          <p>As duas frentes acompanhadas pelas mesmas pessoas, para o anúncio levar exatamente ao que promete.</p>
+        </div>
       </div>
     </div></section>
 
@@ -90,45 +101,19 @@ function renderHome(){
         <h2>Algumas páginas que construímos</h2>
         <p>Os projetos apresentados são cases conceituais desenvolvidos para demonstrar diferentes possibilidades de aplicação.</p>
       </div>
-      <div class="carousel" data-carousel>
-        <div class="carousel-rail">${liveCases}</div>
-        <div class="carousel-controls">
-          <button type="button" class="carousel-btn" data-dir="-1" aria-label="Projeto anterior">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
-          </button>
-          <div class="carousel-dots" role="tablist" aria-label="Projetos"></div>
-          <button type="button" class="carousel-btn" data-dir="1" aria-label="Próximo projeto">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
+      <div class="case-list">${liveCases}</div>
     </div></section>
 
-    <section id="equipe" class="band-paper"><div class="wrap">
+    <section id="processo" class="band-paper"><div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">Quem faz</span>
-        <h2>Um trio, não uma agência</h2>
-        <p>Sem camadas de atendimento entre você e quem constrói a página.</p>
+        <span class="eyebrow">Como funciona</span>
+        <h2>Como uma página toma forma</h2>
       </div>
-      <div class="team-grid">
-        <div class="team-card reveal">
-          <span class="team-mark">${brandMark()}</span>
-          <span class="team-role">Desenvolvimento</span>
-          <h3>Carlos</h3>
-          <p>Desenvolve a página, da estrutura ao rastreamento.</p>
-        </div>
-        <div class="team-card reveal d1">
-          <span class="team-mark">${brandMark()}</span>
-          <span class="team-role">Desenvolvimento</span>
-          <h3>Gabriela</h3>
-          <p>Define a arquitetura da página: conteúdo, hierarquia e sequência de navegação.</p>
-        </div>
-        <div class="team-card reveal d2">
-          <span class="team-mark">${brandMark()}</span>
-          <span class="team-role">Divulgação</span>
-          <h3>Rebeca</h3>
-          <p>Planeja e acompanha a divulgação das páginas nas campanhas digitais.</p>
-        </div>
+      <div class="process-grid">
+        <div class="step reveal"><span class="n">01</span><h3>Diagnóstico</h3><p>Entendemos o negócio, o público e o que a página precisa fazer.</p></div>
+        <div class="step reveal d1"><span class="n">02</span><h3>Landing page</h3><p>Organizamos conteúdo, estrutura e interface em torno do objetivo definido.</p></div>
+        <div class="step reveal d2"><span class="n">03</span><h3>Campanha</h3><p>Quando há divulgação, conectamos a campanha à página e configuramos o acompanhamento das conversões.</p></div>
+        <div class="step reveal d3"><span class="n">04</span><h3>Acompanhamento</h3><p>Acompanhamos os dados da página e das campanhas para identificar o que precisa ser ajustado.</p></div>
       </div>
     </div></section>
 

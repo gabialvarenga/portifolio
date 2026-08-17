@@ -56,17 +56,20 @@ Conceito: a home parece uma prancheta de desenho técnico — o produto de você
 
 **Ritmo das seções** — faixas alternando navy e paper, começando e terminando em navy (hero e contato fazem um "bookend"):
 1. Hero — navy. Elemento-assinatura: diagrama estático da anatomia de uma landing page, com linhas de chamada reais ligando cada anotação à região certa (não pontinhos numerados soltos). Também carrega a marca-d'água (`wm-hero`).
-2. Como trabalhamos — paper. Etapas numeradas 01–04 que já declaram o entregável de cada uma (fusão do que antes eram duas seções separadas, "Serviços" e "Como funciona").
-3. Projetos/cases — navy. **Só entram os cases com `status: LIVE`** (`renderHome()` filtra). Card compacto: preview clicável, resumo, botão "Ver página" e um `<details>` discreto com as decisões. Cases sem landing page ficam em `CASES` como planejamento e não aparecem na home — nada de selo "em breve" para o visitante.
-4. Quem faz — paper. Carlos, Gabriela e Rebeca, um card cada, com a marca de canto (`.team-mark`).
+2. Serviços — paper. Três cards numerados 01–03 (`.services-grid`/`.service-card`). **Esses seletores são escopados sob `.portfolio` de propósito**: a landing da Clínica usa as mesmas classes no seu markup, e um seletor global vazaria para dentro dela.
+3. Projetos/cases — navy. **Só entram os cases com `status: LIVE`** (`renderHome()` filtra). Linhas largas empilhadas (`.case-list`/`.case-card`, grid de duas colunas): preview clicável à esquerda; à direita a etiqueta "Case conceitual", título, resumo, botão "Ver página" e um `<details>` discreto com as decisões. Cases sem landing page ficam em `CASES` como planejamento e não aparecem na home — nada de selo "em breve" para o visitante.
+4. Como funciona — paper. Etapas 01–04 (`.process-grid`/`.step`), com a linha superior animando ao entrar na tela.
 5. FAQ — navy. Acordeão (`.faq-list`, `<details>`), itens em largura total da faixa, com o `<summary>` ocupando a linha inteira como área de clique.
-6. Contato (CTA final) — navy, com a marca-d'água (`wm-cta`). É a única quebra na alternância navy/paper: FAQ e contato são duas faixas navy seguidas, e o contraste vem do `.cta-box`, um cartão de papel flutuando sobre o navy.
+6. Contato (CTA final) — `band-navy-2`, com a marca-d'água (`wm-cta`). Como FAQ e contato são duas faixas escuras vizinhas, o contato usa o navy secundário (`--bp-navy-2`) mais uma hairline no topo: só o navy puro fazia as duas lerem como uma faixa contínua.
 7. Nav — barra fixa navy translúcida com blur, constante em todas as faixas.
 8. Footer — navy. Inclui o carimbo decorativo `.bp-stamp-mark` ("Prancha 01 · Rev. ..."), visível só dentro do portfólio (`display:none` fora de `.portfolio`, já que o `footer()` é compartilhado com as landing pages e o dashboard).
 
 O mockup de blueprint dos cases (`previewInner()` em `js/projects.js`, classes `.bp`/`.marker`/`.frame`) já foi restilizado com os tokens `--bp-*` (ver `.portfolio .bp` etc. em `css/styles.css`) — ele só aparece dentro do portfólio (nos cards de case), nunca nas landing pages individuais.
 
-**Âncoras internas da home** — o roteador é por hash, então um `href="#secao"` que siga seu curso normal dispara `hashchange`, cai no `else` do `render()` e redesenha a home com `scrollTo(0,0)` (o clique parece não fazer nada). Toda âncora interna usa `goToSection(event, id)` de `js/shared.js`, que cancela o default e só rola.
+**Âncoras internas da home** — duas armadilhas, ambas já resolvidas em `js/shared.js`:
+
+1. O roteador é por hash, então um `href="#secao"` que siga seu curso normal dispara `hashchange`, cai no `else` do `render()` e redesenha a home com `scrollTo(0,0)` (o clique parece não fazer nada). Toda âncora interna usa `goToSection(event, id)`, que cancela o default e só rola.
+2. A barra do topo é sticky, então rolar até uma seção escondia o título dela atrás da barra. `syncNavHeight()` mede a altura real da barra e publica em `--nav-h`; o CSS usa `section[id]{scroll-margin-top:calc(var(--nav-h) + 1.25rem)}`. É medido, não chutado, porque a barra muda de altura conforme a largura da tela — ao mexer no nav, não é preciso ajustar número nenhum.
 
 **Landing pages individuais não seguem esse sistema** — cada uma (Professora, Clínica, Advocacia, e as futuras) mantém identidade própria, isolada por CSS escopado. O sistema "blueprint" é exclusivo da home do portfólio.
 
