@@ -9,7 +9,7 @@ Sistema de portfólio desenvolvido pela dupla **Carlos & Gabriela** para apresen
 Um site único, sem build, que reúne duas partes:
 
 1. **Portfólio** (`#/`) — vitrine dos projetos/cases de landing page, com a estrutura Desafio → O que a página resolve → Estratégia de divulgação → CTA para ver a landing page.
-2. **Landing pages demonstrativas** — cada case tem (ou terá) sua própria landing page, com identidade visual independente do portfólio e do restante do site. Prontas até agora: **Professora de Inglês** (`#/landing/professora-ingles`), **Clínica Sorriso** (`#/landing/clinica`), **Bastos & Vieira Advocacia** (`#/landing/advocacia`) e **Braseiro** (`#/landing/restaurante`).
+2. **Landing pages demonstrativas** — cada case tem sua própria landing page, com identidade visual independente do portfólio e do restante do site: **Professora de Inglês** (`#/landing/professora-ingles`), **Clínica Sorriso** (`#/landing/clinica`), **Bastos & Vieira Advocacia** (`#/landing/advocacia`), **Braseiro** (`#/landing/restaurante`) e **ALMA Atelier** (`#/landing/moda`).
 
 Também existe uma rota `#/dashboard` (painel de divulgação / rastreamento de eventos) herdada da versão anterior do projeto. **Está fora do escopo de desenvolvimento no momento** — ver seção [Fora de escopo](#fora-de-escopo-por-enquanto) abaixo.
 
@@ -37,6 +37,7 @@ css/
   landing-advocacia.css         → CSS isolado da landing da Advocacia, sob .lp-advocacia
   landing-clinica.css           → CSS isolado da landing da Clínica, sob .lp-clinica
   landing-restaurante.css       → CSS isolado da landing do Restaurante, sob .lp-restaurante
+  landing-moda.css              → CSS isolado da landing da Loja de moda, sob .lp-moda
 js/
   storage.js                    → storageService: única camada que fala com window.storage
   analytics.js                   → rastreamento de eventos (congelado, ver "Fora de escopo")
@@ -48,8 +49,9 @@ js/
   landing-advocacia.js                 → landing page da Advocacia
   landing-clinica.js                    → landing page da Clínica
   landing-restaurante.js                 → landing page do Restaurante
-  landing-registry.js                     → LANDING_PAGES + renderLanding(id)
-  router.js                                → roteamento por hash e boot da aplicação
+  landing-moda.js                         → landing page da Loja de moda
+  landing-registry.js                      → LANDING_PAGES + renderLanding(id)
+  router.js                                 → roteamento por hash e boot da aplicação
 ```
 
 ## Rotas
@@ -88,13 +90,12 @@ A rota `#/dashboard`, o rastreamento de eventos (`portfolio_view`, `project_view
 ## Limitações atuais
 
 - `window.storage` (usado pelo tema e pelo rastreamento congelado) só existe dentro do ambiente Claude Artifacts. Fora dele, `storageService` (`js/storage.js`) cai automaticamente num fallback em memória — a aplicação não quebra, mas nada persiste entre recarregamentos da página.
-- 1 dos 5 projetos do portfólio (Marca de Moda) ainda não tem landing page própria.
 - A navegação do topo (`nav-links`) fica oculta em telas estreitas, sem um menu alternativo — funciona por rolagem, mas ainda não tem um menu mobile dedicado.
 
 ## Roadmap
 
 - [x] Landing page do Restaurante & delivery
-- [ ] Landing page da Loja de moda
+- [x] Landing page da Loja de moda
 - [ ] Menu de navegação para telas estreitas (mobile)
 - [ ] Revisão de acessibilidade (foco por teclado, `aria-label`, contraste) nas landing pages novas
 - [ ] Retomar o painel de divulgação/rastreamento como etapa própria, quando entrar no escopo

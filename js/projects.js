@@ -46,7 +46,7 @@ const CASES = {
     preview:'menu'
   },
   'moda': {
-    fig:'Fig. 04 — Loja de moda', segment:'Moda', status: PROJECT_STATUS.CONCEPT,
+    fig:'Fig. 04 — Loja de moda', segment:'Moda', status: PROJECT_STATUS.LIVE,
     title:'Testar venda online sem montar um e-commerce inteiro',
     challenge:'Loja física querendo vender uma coleção específica online, sem investir numa loja virtual completa ainda.',
     resolves:['Vitrine enxuta com os produtos da coleção','Compra finalizada direto pelo WhatsApp','Rastreamento pronto para remarketing'],
