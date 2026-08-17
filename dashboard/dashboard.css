@@ -1,0 +1,30 @@
+/* Painel de divulgação (congelado, ver CLAUDE.md "Fora de escopo").
+ * Usa os tokens/base definidos em core/base.css. */
+.dash{background:var(--white);min-height:100vh}
+.dash-nav{border-bottom:1px solid var(--line);padding:18px 0}
+.dash-nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.dash-title{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.dash-body{padding:36px 0 60px}
+.dash-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:40px}
+.dcard{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px}
+.dcard .n{font-family:var(--font-display);font-size:28px;font-weight:700}
+.dcard .l{font-family:var(--font-mono);font-size:11px;color:var(--muted);text-transform:uppercase;margin-top:4px}
+.funnel{display:flex;align-items:stretch;gap:2px;margin-bottom:44px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.fstep{flex:1;background:var(--paper);padding:16px 14px;text-align:center}
+.fstep .n{font-family:var(--font-display);font-weight:700;font-size:22px}
+.fstep .l{font-size:11px;font-family:var(--font-mono);color:var(--muted);margin-top:2px}
+.fstep .r{font-size:11px;color:var(--cobalt);margin-top:6px;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:40px}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}
+th{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;color:var(--faint);font-weight:500}
+.empty{color:var(--faint);font-size:13.5px;padding:20px 0}
+.dash-body h3.sub{font-family:var(--font-mono);font-size:13px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+
+@media(max-width:900px){
+  .dash-cards{grid-template-columns:repeat(2,1fr)}
+  .funnel{flex-direction:column}
+}
+@media(max-width:640px){
+  table{display:block;overflow-x:auto;white-space:nowrap}
+  .dash-cards{grid-template-columns:1fr}
+}

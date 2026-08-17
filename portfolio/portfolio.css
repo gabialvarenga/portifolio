@@ -1,0 +1,201 @@
+/* =========================================================
+   PORTFOLIO — sistema "blueprint" (só a home, #/).
+   Re-skin sobre a base compartilhada (core/base.css) — nada aqui
+   é usado pelo dashboard ou pelas landing pages individuais, tudo
+   escopado sob .portfolio. Ver CLAUDE.md para o racional.
+   Tokens --bp-* são exclusivos deste arquivo.
+   ========================================================= */
+:root{
+  --bp-navy:#0E2A47;
+  --bp-navy-2:#153756;
+  --bp-line:#6FA8C7;
+  --bp-paper:#EAF2F6;
+  --bp-paper-2:#DCE8ED;
+  --bp-ink:#0B1B2B;
+  --bp-chalk:#F3F7FA;
+  --bp-stamp:#0891B2;
+  --bp-blue-ink:#1F5C82;
+  --bp-font-display:'Poppins', sans-serif;
+}
+
+.portfolio h1,.portfolio h2,.portfolio h3{font-family:var(--bp-font-display)}
+.portfolio :focus-visible{outline-color:var(--bp-stamp)}
+
+.portfolio .band-navy{
+  color:var(--bp-chalk);
+  background-color:var(--bp-navy);
+  background-image:
+    linear-gradient(rgba(111,168,199,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111,168,199,.07) 1px, transparent 1px);
+  background-size:32px 32px;
+}
+.portfolio .band-navy .eyebrow{color:var(--bp-stamp)}
+.portfolio .band-navy .eyebrow::before{background:var(--bp-stamp)}
+.portfolio .band-navy .section-head p{color:rgba(243,247,250,.72)}
+
+/* faixa navy secundária: mesmo idioma, um tom acima. Existe para
+ * separar duas faixas escuras vizinhas (FAQ e contato) sem quebrar a
+ * paleta — só o navy puro não bastava, as duas liam como uma faixa só. */
+.portfolio .band-navy-2{
+  color:var(--bp-chalk);
+  background-color:var(--bp-navy-2);
+  background-image:
+    linear-gradient(rgba(111,168,199,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111,168,199,.06) 1px, transparent 1px);
+  background-size:32px 32px;
+  border-top:1px solid rgba(111,168,199,.22);
+}
+.portfolio .band-navy-2 .eyebrow{color:var(--bp-stamp)}
+.portfolio .band-navy-2 .eyebrow::before{background:var(--bp-stamp)}
+
+.portfolio .band-paper{background:var(--bp-paper);color:var(--bp-ink)}
+.portfolio .band-paper .eyebrow{color:var(--bp-stamp)}
+.portfolio .band-paper .eyebrow::before{background:var(--bp-stamp)}
+.portfolio .band-paper .section-head p{color:rgba(11,27,43,.64)}
+
+/* .frame só aparece sobre superfícies de papel (cards), nunca direto no navy */
+.portfolio .frame::before,.portfolio .frame::after{border-color:rgba(11,27,43,.32)}
+
+/* NAV — sempre navy translúcido, independente da faixa por trás */
+.portfolio .nav{background:rgba(14,42,71,.86);border-bottom:1px solid rgba(111,168,199,.22)}
+.portfolio .brand{color:var(--bp-chalk);font-family:var(--bp-font-display)}
+.portfolio .brand-mark .bm-corner,.portfolio .brand-mark .bm-dim,.portfolio .brand-mark .bm-tick{stroke:var(--bp-stamp)}
+.portfolio .brand-mark .bm-pin{fill:var(--bp-stamp)}
+
+/* marca-d'água — mesmo símbolo, grande e sutil, nas faixas navy */
+.portfolio .wm-host{position:relative;overflow:hidden}
+.portfolio .wm-host>.wrap{position:relative;z-index:1}
+.portfolio .bp-watermark{position:absolute;width:440px;height:440px;z-index:0;opacity:.07;pointer-events:none}
+.portfolio .bp-watermark .bm-corner,.portfolio .bp-watermark .bm-dim,.portfolio .bp-watermark .bm-tick{stroke:var(--bp-line);stroke-width:.6}
+.portfolio .bp-watermark .bm-pin{fill:var(--bp-line)}
+.portfolio .bp-watermark.wm-hero{top:-70px;right:-90px;transform:rotate(-8deg)}
+.portfolio .bp-watermark.wm-cta{bottom:-110px;left:-70px;transform:rotate(9deg)}
+@media(max-width:760px){.portfolio .bp-watermark{width:280px;height:280px}}
+.portfolio .nav-links{color:rgba(243,247,250,.65)}
+.portfolio .nav-links a:hover{color:var(--bp-chalk)}
+
+/* BOTÕES — no portfólio são discretos: sans, caixa normal, sem
+ * letter-spacing. O .btn global (mono/caixa-alta) continua valendo
+ * para o dashboard e as landing pages. */
+.portfolio .btn{font-family:var(--font-body);font-size:.92rem;font-weight:500;letter-spacing:0;text-transform:none;padding:.8rem 1.45rem}
+.portfolio .btn-primary{background:var(--bp-stamp);color:var(--bp-chalk);border:1px solid var(--bp-stamp)}
+.portfolio .btn-primary:hover{background:#0A7691;border-color:#0A7691;box-shadow:0 10px 24px -12px var(--bp-stamp)}
+.portfolio .btn-ghost{border:1px solid rgba(243,247,250,.35);color:var(--bp-chalk);background:transparent}
+.portfolio .btn-ghost:hover{border-color:var(--bp-chalk)}
+.portfolio .case-card .btn-ghost,.portfolio .cta-box .btn-ghost{border-color:rgba(11,27,43,.28);color:var(--bp-ink)}
+.portfolio .case-card .btn-ghost:hover,.portfolio .cta-box .btn-ghost:hover{border-color:var(--bp-stamp);color:var(--bp-stamp)}
+
+/* HERO + diagrama-assinatura */
+.portfolio .hero h1,.portfolio .hero .hero-title{color:var(--bp-chalk)}
+.portfolio .hero h1 em,.portfolio .hero .hero-title em{color:var(--bp-stamp);font-style:normal}
+.portfolio .hero .lead{color:rgba(243,247,250,.72)}
+.portfolio .num-badge{background:var(--bp-stamp);color:var(--bp-chalk)}
+.portfolio .hero-diagram{background:transparent}
+.portfolio .hero-diagram svg{width:100%;height:auto;display:block;overflow:visible}
+.portfolio .hd-card{fill:var(--bp-paper);stroke:var(--bp-line);stroke-width:1.5}
+.portfolio .hd-dot{fill:rgba(11,27,43,.3)}
+.portfolio .hd-bar{fill:rgba(11,27,43,.12)}
+.portfolio .hd-div{stroke:var(--bp-line);stroke-width:1}
+.portfolio .hd-headline{fill:var(--bp-ink)}
+.portfolio .hd-cta{fill:var(--bp-stamp)}
+.portfolio .hd-box{fill:none;stroke:var(--bp-line);stroke-width:1.5}
+.portfolio .hd-form{fill:none;stroke:var(--bp-line);stroke-width:1.5}
+.portfolio .hd-field{fill:rgba(11,27,43,.15)}
+.portfolio .hd-fbtn{fill:none;stroke:var(--bp-ink);stroke-width:1.5}
+.portfolio .hd-leader{stroke:var(--bp-line);stroke-width:1.5}
+.portfolio .hd-pin{fill:var(--bp-stamp)}
+.portfolio .hd-pin-text{fill:var(--bp-chalk);font-family:var(--font-mono);font-size:12px;font-weight:600}
+.portfolio .hero-legend li{color:rgba(243,247,250,.8)}
+
+/* FAQ — seção própria, faixa navy. Escopado sob .portfolio de
+ * propósito: as landing pages também usam .faq-item no próprio
+ * markup (com design bem diferente), e um seletor global aqui
+ * vazaria pra dentro delas. */
+.portfolio .faq-list{display:flex;flex-direction:column;gap:.7rem}
+.portfolio .faq-item{border:1px solid rgba(111,168,199,.28);border-radius:var(--radius);background:rgba(234,242,246,.04);transition:border-color .2s ease, background-color .2s ease}
+.portfolio .faq-item:hover{border-color:rgba(111,168,199,.5);background:rgba(234,242,246,.07)}
+.portfolio .faq-item summary{cursor:pointer;font-weight:600;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.15rem 1.5rem;color:var(--bp-chalk)}
+.portfolio .faq-item summary::-webkit-details-marker{display:none}
+.portfolio .faq-item summary::after{content:"+";font-family:var(--font-mono);font-size:1.1rem;flex-shrink:0;transition:transform .2s ease;color:var(--bp-stamp)}
+.portfolio .faq-item[open] summary::after{transform:rotate(45deg)}
+.portfolio .faq-item p{margin:0 1.5rem 1.15rem;font-size:.92rem;color:rgba(243,247,250,.72);max-width:72ch}
+
+/* SERVIÇOS — escopado em .portfolio de propósito: a landing da Clínica
+ * também usa .services-grid/.service-card no seu markup, e um seletor
+ * global aqui vazaria para dentro dela. */
+.portfolio .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.portfolio .service-card{background:#FFFFFF;border:1px solid rgba(11,27,43,.12);border-radius:var(--radius);padding:1.7rem;transition:transform .2s ease, box-shadow .2s ease}
+.portfolio .service-card.in:hover{transform:translateY(-4px);box-shadow:0 22px 44px -28px rgba(11,27,43,.35)}
+.portfolio .service-card .idx{font-family:var(--font-mono);font-size:.75rem;color:var(--bp-stamp)}
+.portfolio .service-card h3{font-size:1.15rem;font-weight:600;margin-top:.8rem;color:var(--bp-ink)}
+.portfolio .service-card p{color:rgba(11,27,43,.64);margin-top:.65rem;font-size:.92rem}
+
+/* PROJETOS — cases em linhas largas (preview à esquerda, conteúdo à
+ * direita), cards flutuando como papel sobre o navy. */
+.portfolio .case-list{display:flex;flex-direction:column;gap:1.5rem}
+/* escalonamento automático dos cards, sem precisar de classe .d1/.d2 em cada um */
+.portfolio .case-list>.reveal:nth-child(2){transition-delay:.08s}
+.portfolio .case-list>.reveal:nth-child(3){transition-delay:.16s}
+.portfolio .case-list>.reveal:nth-child(4){transition-delay:.24s}
+.portfolio .case-card{background:var(--bp-paper);border:1px solid rgba(11,27,43,.12);border-radius:var(--radius);color:var(--bp-ink);box-shadow:0 26px 50px -32px rgba(0,0,0,.55);padding:clamp(1.25rem,3vw,2rem);display:grid;grid-template-columns:minmax(240px,360px) 1fr;gap:clamp(1.5rem,3vw,2.5rem);align-items:start}
+.portfolio .case-card.in:hover{transform:translateY(-4px);box-shadow:0 34px 60px -30px rgba(0,0,0,.65)}
+.portfolio .case-body{display:flex;flex-direction:column;align-items:flex-start;gap:.55rem}
+.portfolio .case-meta{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.portfolio .case-badge{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(11,27,43,.5);border:1px solid rgba(11,27,43,.22);border-radius:999px;padding:.24rem .6rem;white-space:nowrap}
+.portfolio .case-fig{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;color:rgba(11,27,43,.45);text-transform:uppercase}
+.portfolio .case-title{font-size:1.35rem;font-weight:600;color:var(--bp-ink)}
+.portfolio .case-summary{font-size:.94rem;color:rgba(11,27,43,.66);max-width:60ch}
+.portfolio .case-block{margin-top:1rem}
+.portfolio .case-block:first-child{margin-top:0}
+.portfolio .case-block .label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bp-blue-ink)}
+.portfolio .case-block p{margin-top:.35rem;font-size:.92rem;color:rgba(11,27,43,.66)}
+.portfolio .legend-list{list-style:none;margin:.5rem 0 0;display:flex;flex-direction:column;gap:.45rem}
+.portfolio .legend-list li{display:flex;gap:.55rem;align-items:flex-start;font-size:.9rem;color:rgba(11,27,43,.66)}
+.portfolio .preview-link{display:block;cursor:pointer}
+.portfolio .preview-link .bp{transition:border-color .2s ease, transform .2s ease}
+.portfolio .preview-link:hover .bp,.portfolio .preview-link:focus-visible .bp{border-color:var(--bp-stamp);transform:translateY(-2px)}
+.portfolio .preview-hint{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:.8rem;background:linear-gradient(to top, rgba(27,31,38,0.72), transparent 55%);opacity:0;transition:opacity .2s ease;border-radius:var(--radius)}
+.portfolio .preview-link:hover .preview-hint,.portfolio .preview-link:focus-visible .preview-hint{opacity:1}
+.portfolio .preview-hint span{font-size:.82rem;font-weight:500;color:var(--bp-chalk);border:1px solid rgba(255,255,255,.6);padding:.4rem .9rem;border-radius:999px}
+/* detalhe do case: link de texto discreto, deliberadamente sem cara
+ * de botão — o botão "Ver página" é a ação principal do card. */
+.portfolio .case-detail{border-top:1px solid rgba(11,27,43,.14);padding-top:.85rem;margin-top:.4rem;align-self:stretch}
+.portfolio .case-detail summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.45rem;font-size:.82rem;color:rgba(11,27,43,.6);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(11,27,43,.28)}
+.portfolio .case-detail summary::-webkit-details-marker{display:none}
+.portfolio .case-detail summary::before{content:"+";font-family:var(--font-mono);font-size:.9rem;text-decoration:none;flex-shrink:0}
+.portfolio .case-detail[open] summary::before{content:"–"}
+.portfolio .case-detail summary:hover{color:var(--bp-stamp);text-decoration-color:var(--bp-stamp)}
+.portfolio .bp{background:var(--bp-paper);border-color:rgba(11,27,43,.18)}
+.portfolio .bp-dot{background:var(--bp-paper-2)}
+.portfolio .bp-btn{background:rgba(8,145,178,.15);border-color:var(--bp-stamp)}
+.portfolio .bp-fab{background:var(--bp-stamp);border-color:var(--bp-paper)}
+.portfolio .bp-tag{color:var(--bp-blue-ink);border-color:var(--bp-blue-ink)}
+.portfolio .marker{background:var(--bp-stamp);color:var(--bp-chalk);animation-name:markerPulseBp}
+.portfolio .case-foot{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;margin-top:.35rem}
+
+/* PROCESSO */
+.portfolio .step{border-top-color:rgba(11,27,43,.16)}
+.portfolio .step::after{background:var(--bp-stamp)}
+.portfolio .step .n{color:var(--bp-stamp)}
+.portfolio .step h3{color:var(--bp-ink)}
+.portfolio .step p{color:rgba(11,27,43,.6)}
+
+/* CTA final */
+.portfolio .cta-box{background:var(--bp-paper);color:var(--bp-ink);border-color:rgba(11,27,43,.14);box-shadow:0 26px 50px -32px rgba(0,0,0,.55)}
+.portfolio .cta-box p{color:rgba(11,27,43,.64)}
+
+/* FOOTER */
+.portfolio footer{background:var(--bp-navy);border-top:1px solid rgba(111,168,199,.22);color:rgba(243,247,250,.7)}
+.portfolio .footer-credit .made{color:rgba(243,247,250,.5)}
+.portfolio .footer-credit .names{color:var(--bp-chalk);font-family:var(--bp-font-display)}
+.portfolio .footer-credit .names span{color:var(--bp-stamp)}
+.portfolio .footer-links{color:rgba(243,247,250,.55)}
+.portfolio .footer-links a:hover{color:var(--bp-stamp)}
+.portfolio .bp-stamp-mark{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(243,247,250,.55);border:1px dashed rgba(111,168,199,.4);padding:.3rem .6rem;border-radius:3px;transform:rotate(-2deg)}
+
+@media(max-width:900px){
+  .portfolio .hero-diagram{order:-1}
+  .portfolio .step{border-left-color:rgba(11,27,43,.16)}
+  .portfolio .services-grid{grid-template-columns:1fr}
+}
+@media(max-width:860px){.portfolio .case-card{grid-template-columns:1fr}}

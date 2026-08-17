@@ -63,7 +63,8 @@
 .lp-clinica .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem}
 @media (max-width:860px){ .lp-clinica .services-grid{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:560px){ .lp-clinica .services-grid{grid-template-columns:1fr} }
-.lp-clinica .service-card{background:var(--bg-2); border-radius:22px; padding:1.7rem; border:1px solid var(--line)}
+.lp-clinica .service-card{background:var(--bg-2); border-radius:22px; padding:1.7rem; border:1px solid var(--line); transition:transform .2s ease, box-shadow .2s ease}
+.lp-clinica .service-card:hover{transform:translateY(-4px); box-shadow:0 22px 44px -28px rgba(12,59,61,.35)}
 .lp-clinica .service-card .ico{width:44px; height:44px; border-radius:14px; background:var(--accent-2); color:var(--ink); display:inline-flex; align-items:center; justify-content:center}
 .lp-clinica .service-card .ico svg{width:22px; height:22px}
 .lp-clinica .service-card h3{font-size:1.05rem; margin-top:1rem}

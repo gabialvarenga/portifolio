@@ -23,20 +23,26 @@ Detalhes de rotas, arquitetura de arquivos e como rodar: ver [README.md](README.
 
 ## Escopo atual: fora de escopo por enquanto
 
-A rota `#/dashboard` e todo o rastreamento de eventos (`js/analytics.js`, `js/dashboard.js`: `portfolio_view`, `project_view`, `landing_page_view`, `contact_click`, captura de UTM) são uso interno da Rebeca e estão **congelados** — não desenvolva, não expanda, não refatore essa parte a menos que o usuário peça explicitamente para tirá-la desse estado. Pode continuar *chamando* o `track()` existente a partir de conteúdo novo (ex.: CTA de uma landing page nova) — isso é reuso, não é expandir a feature.
+A rota `#/dashboard` e todo o rastreamento de eventos (`core/analytics.js`, `dashboard/dashboard.js`: `portfolio_view`, `project_view`, `landing_page_view`, `contact_click`, captura de UTM) são uso interno da Rebeca e estão **congelados** — não desenvolva, não expanda, não refatore essa parte a menos que o usuário peça explicitamente para tirá-la desse estado. Pode continuar *chamando* o `track()` existente a partir de conteúdo novo (ex.: CTA de uma landing page nova) — isso é reuso, não é expandir a feature.
+
+## Estrutura de pastas: uma pasta por página
+
+Cada página (portfólio, dashboard, cada landing page) mora na própria pasta na raiz do repo, com o JS e o CSS dela lado a lado (`landing-<id>/landing-<id>.js` + `landing-<id>/landing-<id>.css`). Isso é deliberado: as landing pages hoje no repo são cases demonstrativos, e a estrutura existe justamente pra permitir apagar a pasta de um case de exemplo e colocar uma landing page real de cliente no lugar, sem precisar caçar arquivos espalhados. Infraestrutura compartilhada (roteador, dados dos cases, tema, componentes de nav/footer, CSS base) fica em `core/`. Ver [README.md](README.md) para o mapa completo de arquivos.
 
 ## Como adicionar uma landing page nova
 
-1. Case novo em `CASES` (`js/projects.js`), `status: PROJECT_STATUS.LIVE`.
-2. Se tiver identidade visual própria (CSS extenso), criar `css/landing-<id>.css` com **todo seletor prefixado por uma classe única** (`.lp-<id> .hero{...}`, `.lp-<id> h1{...}`, etc.) — inclusive seletores de elemento (`body`, `section`, `footer`, `h1,h2,h3`, `p`, `a`) que no arquivo original não eram escopados. Sem isso, o CSS vaza pro resto da SPA (é tudo uma stylesheet global, não por rota). Ligar o arquivo em `index.html`.
-3. Função de render em `js/landing-<id>.js` (arquivo próprio, um por landing page), HTML todo dentro de `<div class="lp-<id>">...</div>`. Trocar qualquer link/texto de "voltar" para `#/` e créditos para "Carlos & Gabriela" (nunca reaproveitar nome de marca de um arquivo externo). Componentes compartilhados (`nav()`, `footer()`, `themeToggleBtn()`, `demoBadge()`) vêm de `js/shared.js`.
-4. Ligar `js/landing-<id>.js` em `index.html`, **antes** de `js/landing-registry.js`, e registrar a função lá: `LANDING_PAGES['<id>'] = renderMinhaLanding`.
+1. Case novo em `CASES` (`core/projects.js`), `status: PROJECT_STATUS.LIVE`.
+2. Criar a pasta `landing-<id>/` com `landing-<id>.css` — **todo seletor prefixado por uma classe única** (`.lp-<id> .hero{...}`, `.lp-<id> h1{...}`, etc.), inclusive seletores de elemento (`body`, `section`, `footer`, `h1,h2,h3`, `p`, `a`) que no arquivo original não eram escopados. Sem isso, o CSS vaza pro resto da SPA (é tudo uma stylesheet global, não por rota). Ligar o arquivo em `index.html`.
+3. Na mesma pasta, `landing-<id>.js` com a função de render, HTML todo dentro de `<div class="lp-<id>">...</div>`. Trocar qualquer link/texto de "voltar" para `#/` e créditos para "Carlos & Gabriela" (nunca reaproveitar nome de marca de um arquivo externo). Componentes compartilhados (`nav()`, `footer()`, `themeToggleBtn()`, `demoBadge()`) vêm de `core/shared.js`.
+4. Ligar `landing-<id>/landing-<id>.js` em `index.html`, **antes** de `core/landing-registry.js`, e registrar a função lá: `LANDING_PAGES['<id>'] = renderMinhaLanding`.
 
-O roteador e o `track('landing_page_view', id)` já funcionam pra qualquer id novo automaticamente — não precisa mexer em `js/router.js`.
+O roteador e o `track('landing_page_view', id)` já funcionam pra qualquer id novo automaticamente — não precisa mexer em `core/router.js`.
+
+Para **remover** uma landing page (ex.: trocar um case de exemplo por um cliente real): apagar a pasta `landing-<id>/`, tirar o `<link>`/`<script>` de `index.html` e a entrada de `LANDING_PAGES` (`core/landing-registry.js`). Se o case não deve mais aparecer no portfólio, remover também a entrada de `CASES`.
 
 ## Sistema visual do portfólio ("blueprint")
 
-O portfólio (home, `#/`, código em `js/portfolio.js`) tem identidade própria e fixa — **não** segue mais o alternador claro/escuro (esse toggle foi removido só do portfólio; `toggleTheme()` em `js/shared.js` continua existindo e é usado pela landing da Professora e pelo dashboard, que mantêm seus próprios esquemas).
+O portfólio (home, `#/`, código em `portfolio/portfolio.js`) tem identidade própria e fixa — **não** segue mais o alternador claro/escuro (esse toggle foi removido só do portfólio; `toggleTheme()` em `core/shared.js` continua existindo e é usado pela landing da Professora e pelo dashboard, que mantêm seus próprios esquemas).
 
 Conceito: a home parece uma prancheta de desenho técnico — o produto de vocês é literalmente desenhar a página antes de construir, e o visual leva isso ao pé da letra.
 
@@ -52,7 +58,7 @@ Conceito: a home parece uma prancheta de desenho técnico — o produto de você
 
 **Tipografia** — títulos em **Poppins** (carregada no Google Fonts do projeto). Corpo continua Inter, legendas/anotações continuam JetBrains Mono.
 
-**Marca** — símbolo abstrato do próprio vocabulário de desenho técnico (corte de canto de prancheta + linha de cota com pino), não um nome de produto (ver "Regra de nome do produto" acima). Definido em `brandMark()` (`js/shared.js`), usado em três escalas: pequeno no nav (dentro de `.brand`), grande e bem sutil como marca-d'água nas faixas navy (`brandWatermark()`, classes `.wm-host`/`.bp-watermark`) e pequeno de novo como marca de canto nos cards da seção "quem faz" (`.team-mark`). Ao criar uma nova aplicação da marca, reaproveite `brandMark()` — não desenhe um símbolo novo solto.
+**Marca** — símbolo abstrato do próprio vocabulário de desenho técnico (corte de canto de prancheta + linha de cota com pino), não um nome de produto (ver "Regra de nome do produto" acima). Definido em `brandMark()` (`core/shared.js`), usado em três escalas: pequeno no nav (dentro de `.brand`), grande e bem sutil como marca-d'água nas faixas navy (`brandWatermark()`, classes `.wm-host`/`.bp-watermark`) e pequeno de novo como marca de canto nos cards da seção "quem faz" (`.team-mark`). Ao criar uma nova aplicação da marca, reaproveite `brandMark()` — não desenhe um símbolo novo solto.
 
 **Ritmo das seções** — faixas alternando navy e paper, começando e terminando em navy (hero e contato fazem um "bookend"):
 1. Hero — navy. Elemento-assinatura: diagrama estático da anatomia de uma landing page, com linhas de chamada reais ligando cada anotação à região certa (não pontinhos numerados soltos). Também carrega a marca-d'água (`wm-hero`).
@@ -64,9 +70,9 @@ Conceito: a home parece uma prancheta de desenho técnico — o produto de você
 7. Nav — barra fixa navy translúcida com blur, constante em todas as faixas.
 8. Footer — navy. Inclui o carimbo decorativo `.bp-stamp-mark` ("Prancha 01 · Rev. ..."), visível só dentro do portfólio (`display:none` fora de `.portfolio`, já que o `footer()` é compartilhado com as landing pages e o dashboard).
 
-O mockup de blueprint dos cases (`previewInner()` em `js/projects.js`, classes `.bp`/`.marker`/`.frame`) já foi restilizado com os tokens `--bp-*` (ver `.portfolio .bp` etc. em `css/styles.css`) — ele só aparece dentro do portfólio (nos cards de case), nunca nas landing pages individuais.
+O mockup de blueprint dos cases (`previewInner()` em `core/projects.js`, classes `.bp`/`.marker`/`.frame`) tem sua base em `core/base.css` e é restilizado com os tokens `--bp-*` via `.portfolio .bp` etc. em `portfolio/portfolio.css` — ele só aparece dentro do portfólio (nos cards de case), nunca nas landing pages individuais.
 
-**Âncoras internas da home** — duas armadilhas, ambas já resolvidas em `js/shared.js`:
+**Âncoras internas da home** — duas armadilhas, ambas já resolvidas em `core/shared.js`:
 
 1. O roteador é por hash, então um `href="#secao"` que siga seu curso normal dispara `hashchange`, cai no `else` do `render()` e redesenha a home com `scrollTo(0,0)` (o clique parece não fazer nada). Toda âncora interna usa `goToSection(event, id)`, que cancela o default e só rola.
 2. A barra do topo é sticky, então rolar até uma seção escondia o título dela atrás da barra. `syncNavHeight()` mede a altura real da barra e publica em `--nav-h`; o CSS usa `section[id]{scroll-margin-top:calc(var(--nav-h) + 1.25rem)}`. É medido, não chutado, porque a barra muda de altura conforme a largura da tela — ao mexer no nav, não é preciso ajustar número nenhum.

@@ -159,3 +159,10 @@ html[data-theme="dark"] .lp-professora .lp-avatar{background:linear-gradient(160
 @media (max-width:640px){
   .lp-professora .lp-steps{grid-template-columns:1fr}
 }
+@media (max-width:900px){
+  .lp-professora .lp-hero-copy .lp-btn{align-self:center}
+  .lp-professora .lp-hero p{margin-left:auto; margin-right:auto}
+}
+@media (max-width:420px){
+  .lp-professora .lp-avatar::after{font-size:11px; padding:8px 14px}
+}

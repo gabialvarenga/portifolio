@@ -41,8 +41,8 @@ function syncNavHeight(){
 window.addEventListener('resize', syncNavHeight);
 
 /* ---------- componentes compartilhados ----------
- * Usados pelo portfólio (js/portfolio.js) e pelas landing pages
- * (js/landing-*.js). Nada aqui é específico de uma página.
+ * Usados pelo portfólio (portfolio/portfolio.js) e pelas landing pages
+ * (landing-<id>/landing-<id>.js). Nada aqui é específico de uma página.
  */
 /* marca: corte de canto de prancheta + linha de cota com pino — o
  * mesmo vocabulário do diagrama do hero e dos marcadores dos cases,
