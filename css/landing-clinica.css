@@ -1,8 +1,10 @@
 /* Landing page: Clínica Sorriso — identidade própria,
- * isolada do resto do site sob o wrapper .lp-clinica. */
+ * isolada do resto do site sob o wrapper .lp-clinica.
+ * Paleta em tons de branco clínico + verde-água (associação com
+ * odontologia/higiene bucal), ver CLAUDE.md sobre isolamento de CSS. */
 .lp-clinica{
-  --bg:#F2F6F1; --bg-2:#FFFFFF; --ink:#16302B; --ink-dim:rgba(22,48,43,0.68);
-  --accent:#FF7A59; --accent-2:#FFDCC9; --line:rgba(22,48,43,0.12);
+  --bg:#F2FAF9; --bg-2:#FFFFFF; --ink:#0C3B3D; --ink-dim:rgba(12,59,61,0.68);
+  --accent:#14B8A6; --accent-2:#D3F3EE; --line:rgba(12,59,61,0.12);
   --font-d:'Fraunces', serif; --font-b:'Plus Jakarta Sans', sans-serif;
   background:var(--bg); color:var(--ink); font-family:var(--font-b); line-height:1.6; min-height:100vh;
 }
@@ -10,24 +12,25 @@
 .lp-clinica h1,.lp-clinica h2,.lp-clinica h3{font-family:var(--font-d); margin:0; letter-spacing:-.01em}
 .lp-clinica p{margin:0}
 .lp-clinica :focus-visible{outline:2px solid var(--ink); outline-offset:3px}
+.lp-clinica .container{max-width:1080px; margin-inline:auto; padding-inline:clamp(1.25rem,4vw,3rem)}
 .lp-clinica .arc-rule{display:block; width:52px; height:14px; margin-top:.7rem; border-bottom:4px solid var(--accent); border-radius:0 0 60% 60%}
 .lp-clinica .eyebrow{font-size:.82rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); font-weight:600}
 
-.lp-clinica .concept-badge{position:fixed; left:16px; bottom:16px; z-index:60; background:rgba(255,255,255,0.9); border:1px solid var(--line); backdrop-filter:blur(6px); padding:.5rem .85rem; border-radius:999px; font-size:.74rem; text-decoration:none; color:var(--ink-dim); box-shadow:0 4px 14px rgba(22,48,43,.08)}
+.lp-clinica .concept-badge{position:fixed; left:16px; bottom:16px; z-index:60; background:rgba(255,255,255,0.9); border:1px solid var(--line); backdrop-filter:blur(6px); padding:.5rem .85rem; border-radius:999px; font-size:.74rem; text-decoration:none; color:var(--ink-dim); box-shadow:0 4px 14px rgba(12,59,61,.08)}
 .lp-clinica .concept-badge:hover{color:var(--ink)}
 
 .lp-clinica .btn{display:inline-flex; align-items:center; gap:.5rem; font-weight:600; font-size:.95rem; text-decoration:none; padding:.85rem 1.5rem; border-radius:999px; transition:transform .2s ease, box-shadow .2s ease}
 .lp-clinica .btn-primary{background:var(--ink); color:var(--bg)}
-.lp-clinica .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(22,48,43,.22)}
+.lp-clinica .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(12,59,61,.22)}
 .lp-clinica .btn-ghost{border:1.5px solid var(--ink); color:var(--ink)}
 .lp-clinica .btn-ghost:hover{background:var(--ink); color:var(--bg)}
 
-.lp-clinica .nav{position:sticky; top:0; z-index:50; background:rgba(242,246,241,0.88); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.lp-clinica .nav{position:sticky; top:0; z-index:50; background:rgba(242,250,249,0.88); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
 .lp-clinica .nav-inner{display:flex; align-items:center; justify-content:space-between; padding-block:1rem}
 .lp-clinica .brand{font-family:var(--font-d); font-weight:600; font-size:1.15rem; text-decoration:none}
 .lp-clinica .nav-links{display:flex; gap:1.6rem; list-style:none; margin:0; padding:0; font-size:.92rem}
 .lp-clinica .nav-links a{text-decoration:none}
-@media (max-width:720px){ .lp-clinica .nav-links{display:none} }
+@media (max-width:760px){ .lp-clinica .nav-links{display:none} }
 
 .lp-clinica .hero{position:relative; overflow:hidden; padding-block:clamp(3.5rem,8vw,6rem)}
 .lp-clinica .hero-blob{position:absolute; width:640px; height:640px; background:var(--accent-2); border-radius:44% 56% 60% 40%/50% 45% 55% 50%; top:-220px; right:-180px; z-index:0}
@@ -35,6 +38,11 @@
 .lp-clinica .hero h1{font-size:clamp(2.1rem,5vw,3.4rem); line-height:1.12; margin-top:.9rem}
 .lp-clinica .hero p.lead{font-size:1.08rem; color:var(--ink-dim); margin-top:1.1rem; max-width:36ch}
 .lp-clinica .hero-actions{display:flex; gap:.9rem; margin-top:2rem; flex-wrap:wrap}
+
+.lp-clinica .hero-badge{position:absolute; z-index:2; top:54px; right:9%; background:var(--bg-2); border:1px solid var(--line); border-radius:20px; padding:.9rem 1.3rem; box-shadow:0 18px 36px -20px rgba(12,59,61,.3); text-align:center; animation:floaty 5s ease-in-out infinite}
+.lp-clinica .hero-badge strong{display:block; font-family:var(--font-d); font-size:1.4rem; color:var(--ink)}
+.lp-clinica .hero-badge span{display:block; font-size:.68rem; color:var(--ink-dim); text-transform:uppercase; letter-spacing:.04em; margin-top:.15rem}
+@media (max-width:900px){ .lp-clinica .hero-badge{display:none} }
 
 .lp-clinica .trust-row{display:flex; gap:2.2rem; flex-wrap:wrap; margin-top:3rem; position:relative; z-index:1}
 .lp-clinica .trust-item{display:flex; align-items:center; gap:.6rem; font-size:.9rem; color:var(--ink-dim)}
@@ -44,10 +52,20 @@
 .lp-clinica .section-head{max-width:42ch; margin-bottom:2.4rem}
 .lp-clinica .section-head h2{font-size:clamp(1.6rem,3.2vw,2.15rem)}
 
+/* SOBRE */
+.lp-clinica .about{display:grid; grid-template-columns:1fr 1fr; gap:2.6rem; align-items:start}
+.lp-clinica .about p{color:var(--ink-dim); font-size:.95rem; margin-top:.9rem; max-width:44ch}
+.lp-clinica .credentials{list-style:none; display:flex; flex-direction:column; gap:.85rem; margin:1.4rem 0 0; padding:0}
+.lp-clinica .credentials li{display:flex; gap:.7rem; align-items:flex-start; font-size:.92rem}
+.lp-clinica .credentials .ico{flex-shrink:0; width:24px; height:24px; border-radius:50%; background:var(--accent); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:.72rem; font-weight:700; margin-top:1px}
+@media (max-width:780px){ .lp-clinica .about{grid-template-columns:1fr} }
+
 .lp-clinica .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem}
 @media (max-width:860px){ .lp-clinica .services-grid{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:560px){ .lp-clinica .services-grid{grid-template-columns:1fr} }
 .lp-clinica .service-card{background:var(--bg-2); border-radius:22px; padding:1.7rem; border:1px solid var(--line)}
+.lp-clinica .service-card .ico{width:44px; height:44px; border-radius:14px; background:var(--accent-2); color:var(--ink); display:inline-flex; align-items:center; justify-content:center}
+.lp-clinica .service-card .ico svg{width:22px; height:22px}
 .lp-clinica .service-card h3{font-size:1.05rem; margin-top:1rem}
 .lp-clinica .service-card p{font-size:.88rem; color:var(--ink-dim); margin-top:.55rem}
 
@@ -58,9 +76,42 @@
 .lp-clinica .step-card h3{font-size:1.05rem; margin-top:.1rem}
 .lp-clinica .step-card p{font-size:.88rem; color:var(--ink-dim); margin-top:.5rem}
 
+/* PLANOS */
+.lp-clinica .plans{display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; align-items:stretch}
+@media (max-width:900px){ .lp-clinica .plans{grid-template-columns:1fr} }
+.lp-clinica .plan{background:var(--bg-2); border:1px solid var(--line); border-radius:24px; padding:1.8rem 1.6rem; display:flex; flex-direction:column; position:relative}
+.lp-clinica .plan.featured{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.lp-clinica .plan-tag{position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--accent); color:var(--ink); font-size:.7rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:.35rem .9rem; border-radius:999px}
+.lp-clinica .plan h3{font-size:1.1rem}
+.lp-clinica .plan .price{font-family:var(--font-d); font-size:2rem; font-weight:600; margin-top:.6rem}
+.lp-clinica .plan .price span{font-family:var(--font-b); font-size:.8rem; font-weight:400; opacity:.7}
+.lp-clinica .plan .desc{font-size:.85rem; opacity:.75; margin-top:.3rem; margin-bottom:1.1rem}
+.lp-clinica .plan ul{list-style:none; display:flex; flex-direction:column; gap:.55rem; margin:0 0 1.3rem; padding:0; flex:1}
+.lp-clinica .plan li{font-size:.85rem; display:flex; gap:.5rem; align-items:flex-start}
+.lp-clinica .plan li::before{content:"✓"; color:var(--accent); font-weight:700; flex-shrink:0}
+.lp-clinica .plan .btn{justify-content:center; width:100%}
+.lp-clinica .plan.featured .btn-primary{background:var(--accent); color:var(--ink)}
+.lp-clinica .plans-note{font-size:.78rem; color:var(--ink-dim); text-align:center; margin-top:1.2rem}
+
+/* DEPOIMENTOS */
+.lp-clinica .testimonials{display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem}
+@media (max-width:860px){ .lp-clinica .testimonials{grid-template-columns:1fr} }
+.lp-clinica .testi{background:var(--accent-2); border-radius:22px; padding:1.6rem}
+.lp-clinica .testi p{font-size:.9rem; font-style:italic; color:var(--ink)}
+.lp-clinica .testi .who{font-size:.8rem; font-weight:600; margin-top:.9rem; color:var(--ink-dim)}
+
+/* FAQ */
+.lp-clinica .faq{max-width:44rem}
+.lp-clinica .faq-item{border-bottom:1px solid var(--line); padding:1.1rem 0}
+.lp-clinica .faq-item summary{cursor:pointer; font-family:var(--font-d); font-weight:600; font-size:1rem; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:.8rem}
+.lp-clinica .faq-item summary::-webkit-details-marker{display:none}
+.lp-clinica .faq-item summary::after{content:"+"; font-size:1.4rem; font-weight:400; color:var(--accent); transition:transform .2s ease; flex-shrink:0}
+.lp-clinica .faq-item[open] summary::after{transform:rotate(45deg)}
+.lp-clinica .faq-item p{font-size:.88rem; color:var(--ink-dim); margin-top:.7rem; max-width:60ch}
+
 .lp-clinica .cta-final{background:var(--ink); color:var(--bg); border-radius:28px; padding:clamp(2.2rem,5vw,3.8rem); text-align:center}
 .lp-clinica .cta-final h2{color:var(--bg); font-size:clamp(1.6rem,3.4vw,2.3rem)}
-.lp-clinica .cta-final p{color:rgba(242,246,241,0.75); margin-top:.85rem; max-width:40ch; margin-inline:auto}
+.lp-clinica .cta-final p{color:rgba(242,250,249,0.75); margin-top:.85rem; max-width:40ch; margin-inline:auto}
 .lp-clinica .cta-final .hero-actions{justify-content:center; margin-top:2rem}
 .lp-clinica .cta-final .btn-primary{background:var(--accent); color:var(--ink)}
 .lp-clinica .cta-final .btn-ghost{border-color:var(--bg); color:var(--bg)}
