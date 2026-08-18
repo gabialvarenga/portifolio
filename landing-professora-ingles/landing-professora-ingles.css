@@ -52,6 +52,9 @@ html[data-theme="dark"] .lp-professora .lp-avatar{background:linear-gradient(160
 
 .lp-professora .lp-avatar-wrap{display:flex; justify-content:center; position:relative; opacity:0; animation:fadeInUp .9s cubic-bezier(.2,.7,.2,1) .25s forwards}
 .lp-professora .lp-avatar{width:100%; max-width:320px; aspect-ratio:1; border-radius:50% 50% 46% 54%/54% 46% 54% 46%; background:linear-gradient(160deg,#EBD3B6,#D96B72 120%); position:relative; animation:floaty 6s ease-in-out infinite}
+/* o retrato preenche o blob; sem overflow:hidden aqui, senão a legenda
+   do ::after (que fica fora, em bottom negativo) seria recortada */
+.lp-professora .lp-avatar-art{position:absolute; inset:0; width:100%; height:100%; display:block}
 .lp-professora .lp-avatar::before{content:""; position:absolute; inset:-18px; border:1px dashed var(--lp-rose-soft); border-radius:inherit; opacity:.6; animation:floaty 6s ease-in-out infinite reverse}
 .lp-professora .lp-avatar::after{content:"\201C Speak with confidence \201D"; font-family:'Fraunces',serif; font-style:italic; position:absolute; bottom:-14px; left:50%; transform:translateX(-50%); background:var(--lp-cream); border:1px solid var(--lp-line); padding:10px 18px; border-radius:30px; font-size:13px; white-space:nowrap; box-shadow:0 12px 26px -14px color-mix(in srgb, var(--lp-plum) 35%, transparent)}
 .lp-professora .lp-avatar-badge{position:absolute; top:6%; left:-8%; background:var(--lp-cream); border:1px solid var(--lp-line); border-radius:14px; padding:10px 16px; box-shadow:0 14px 30px -16px color-mix(in srgb, var(--lp-plum) 40%, transparent); text-align:center; animation:floaty 5s ease-in-out infinite}
@@ -136,7 +139,9 @@ html[data-theme="dark"] .lp-professora .lp-avatar{background:linear-gradient(160
 .lp-professora .lp-final-actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; position:relative}
 .lp-professora .lp-final .lp-btn{background:var(--lp-cream); color:var(--lp-plum); position:relative}
 .lp-professora .lp-final .lp-btn:hover{background:var(--lp-rose); color:var(--lp-cream)}
-.lp-professora .lp-final .lp-btn-ghost{border-color:color-mix(in srgb, var(--lp-cream) 40%, transparent); color:var(--lp-cream)}
+/* precisa zerar o background aqui: a regra .lp-final .lp-btn acima pinta
+ * o botão de cream, e sem isso o ghost fica cream sobre cream (texto some) */
+.lp-professora .lp-final .lp-btn-ghost{background:transparent; border-color:color-mix(in srgb, var(--lp-cream) 40%, transparent); color:var(--lp-cream)}
 .lp-professora .lp-final .lp-btn-ghost:hover{border-color:var(--lp-cream); background:transparent; color:var(--lp-cream)}
 
 .lp-professora .lp-foot{padding:30px 0 40px; font-size:12px; color:color-mix(in srgb, var(--lp-plum) 55%, transparent); text-align:center}

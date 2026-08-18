@@ -39,9 +39,9 @@ function renderLandingAdvocacia(){
       <div class="container nav-inner">
         <a href="#/landing/advocacia" class="brand">Bastos &amp; Vieira</a>
         <ul class="nav-links">
-          <li><a href="#areas">Áreas de atuação</a></li>
-          <li><a href="#processo">Como funciona</a></li>
-          <li><a href="#planos">Planos</a></li>
+          <li><a href="#areas" onclick="goToSection(event,'areas')">Áreas de atuação</a></li>
+          <li><a href="#processo" onclick="goToSection(event,'processo')">Como funciona</a></li>
+          <li><a href="#planos" onclick="goToSection(event,'planos')">Planos</a></li>
         </ul>
         <a href="${wa}" class="btn btn-primary" style="padding:.6rem 1.1rem; font-size:.8rem" onclick="track('contact_click','advocacia')">Agendar consulta</a>
       </div>
@@ -55,7 +55,7 @@ function renderLandingAdvocacia(){
           <p class="lead">Uma conversa inicial pra entender seu caso e mostrar, com clareza, quais são os próximos passos possíveis.</p>
           <div class="hero-actions">
             <a href="${wa}" class="btn btn-primary" onclick="track('contact_click','advocacia')">Agendar consulta inicial</a>
-            <a href="#areas" class="btn btn-ghost">Ver áreas de atuação</a>
+            <a href="#areas" class="btn btn-ghost" onclick="goToSection(event,'areas')">Ver áreas de atuação</a>
           </div>
           <div class="trust-strip">
             <div class="trust-item">Atendimento inicial sem custo</div>

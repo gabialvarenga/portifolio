@@ -38,6 +38,8 @@ Cada página (portfólio, dashboard, cada landing page) mora na própria pasta n
 
 O roteador e o `track('landing_page_view', id)` já funcionam pra qualquer id novo automaticamente — não precisa mexer em `core/router.js`.
 
+**Âncoras internas (vale para a home e para toda landing page).** O roteador é por hash, então um `<a href="#planos">` que siga seu curso normal muda `location.hash` para `#planos`, dispara `hashchange`, cai no `else` do `render()` e redesenha a **home** por cima da landing — o clique parece "abrir outra página". Toda âncora interna precisa de `onclick="goToSection(event,'planos')"` (`core/shared.js`), que cancela o default e só rola. Um `onclick="scrollToId(...)"` **não** basta: ele rola, mas não impede o hash de mudar.
+
 Para **remover** uma landing page (ex.: trocar um case de exemplo por um cliente real): apagar a pasta `landing-<id>/`, tirar o `<link>`/`<script>` de `index.html` e a entrada de `LANDING_PAGES` (`core/landing-registry.js`). Se o case não deve mais aparecer no portfólio, remover também a entrada de `CASES`.
 
 ## Sistema visual do portfólio ("blueprint")

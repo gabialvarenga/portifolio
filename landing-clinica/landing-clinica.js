@@ -21,8 +21,8 @@ function renderLandingClinica(){
       <div class="container nav-inner">
         <a href="#/landing/clinica" class="brand">Clínica Sorriso</a>
         <ul class="nav-links">
-          <li><a href="#especialidades">Especialidades</a></li>
-          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#especialidades" onclick="goToSection(event,'especialidades')">Especialidades</a></li>
+          <li><a href="#como-funciona" onclick="goToSection(event,'como-funciona')">Como funciona</a></li>
         </ul>
         <a href="${wa}" class="btn btn-primary" style="padding:.6rem 1.2rem; font-size:.85rem" onclick="track('contact_click','clinica')">Agendar avaliação</a>
       </div>
@@ -36,7 +36,7 @@ function renderLandingClinica(){
         <p class="lead">Avaliação inicial sem compromisso, horários flexíveis e uma equipe que explica cada etapa do tratamento antes de começar.</p>
         <div class="hero-actions">
           <a href="${wa}" class="btn btn-primary" onclick="track('contact_click','clinica')">Agendar avaliação gratuita</a>
-          <a href="#especialidades" class="btn btn-ghost">Ver especialidades</a>
+          <a href="#especialidades" class="btn btn-ghost" onclick="goToSection(event,'especialidades')">Ver especialidades</a>
         </div>
         <div class="trust-row">
           <div class="trust-item"><span class="arc-dot"></span>+12 anos cuidando de sorrisos</div>

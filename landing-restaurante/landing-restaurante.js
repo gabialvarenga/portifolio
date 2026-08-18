@@ -26,8 +26,8 @@ function renderLandingRestaurante(){
       <div class="container nav-inner">
         <a href="#/landing/restaurante" class="brand">Braseiro</a>
         <ul class="nav-links">
-          <li><a href="#cardapio" onclick="scrollToId('cardapio')">Cardápio</a></li>
-          <li><a href="#combos" onclick="scrollToId('combos')">Combos</a></li>
+          <li><a href="#cardapio" onclick="goToSection(event,'cardapio')">Cardápio</a></li>
+          <li><a href="#combos" onclick="goToSection(event,'combos')">Combos</a></li>
         </ul>
         <a href="${wa}" class="btn btn-primary" style="padding:.6rem 1.2rem; font-size:.85rem" onclick="track('contact_click','restaurante')">Pedir agora</a>
       </div>
@@ -41,7 +41,7 @@ function renderLandingRestaurante(){
           <p class="lead">Pratos preparados na hora, com ingrediente fresco e aquele tempero que só dá em casa. Peça direto pelo WhatsApp e receba quentinho, sem pagar a mais pelas taxas dos apps de entrega.</p>
           <div class="hero-actions">
             <a href="${wa}" class="btn btn-primary" onclick="track('contact_click','restaurante')">Pedir pelo WhatsApp</a>
-            <a href="#cardapio" class="btn btn-ghost-invert" onclick="scrollToId('cardapio')">Ver cardápio</a>
+            <a href="#cardapio" class="btn btn-ghost-invert" onclick="goToSection(event,'cardapio')">Ver cardápio</a>
           </div>
           <div class="trust-row">
             <div class="trust-item"><span class="trust-dot"></span>Entrega em até 40 min</div>
@@ -213,7 +213,7 @@ function renderLandingRestaurante(){
         <p>Chama a gente no WhatsApp — sem taxa de aplicativo, sem enrolação.</p>
         <div class="hero-actions">
           <a href="${wa}" class="btn btn-primary" onclick="track('contact_click','restaurante')">Pedir pelo WhatsApp</a>
-          <a href="#cardapio" class="btn btn-ghost-invert" onclick="scrollToId('cardapio')">Ver cardápio</a>
+          <a href="#cardapio" class="btn btn-ghost-invert" onclick="goToSection(event,'cardapio')">Ver cardápio</a>
         </div>
       </div>
     </section>

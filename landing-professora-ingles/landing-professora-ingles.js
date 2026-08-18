@@ -12,6 +12,52 @@ function lpIcon(name){
   return `<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${paths[name] || ''}</svg></span>`;
 }
 
+/* Retrato ilustrado da professora (personagem fictícia deste case).
+ * É SVG inline de propósito: o site precisa continuar abrindo via
+ * file:// e sem dependências externas, então nada de <img> remota. */
+function lpTeacherPortrait(){
+  return `<svg class="lp-avatar-art" viewBox="0 0 320 320" role="img" aria-label="Ilustração da professora">
+    <defs><clipPath id="lpFaceClip"><circle cx="160" cy="160" r="156"/></clipPath></defs>
+    <g clip-path="url(#lpFaceClip)">
+      <!-- cabelo (volume de trás, na altura dos ombros) -->
+      <path d="M74 170 C68 92 108 50 160 50 C212 50 252 92 246 170 C244 200 238 220 231 234 L211 234 C221 204 219 178 217 160 C199 178 121 178 103 160 C101 178 99 204 109 234 L89 234 C82 220 76 200 74 170 Z" fill="#3B2622"/>
+      <!-- pescoço -->
+      <path d="M142 186 h36 v40 q0 14 -18 14 q-18 0 -18 -14 Z" fill="#D89B72"/>
+      <!-- rosto -->
+      <ellipse cx="160" cy="152" rx="54" ry="62" fill="#E8B48D"/>
+      <!-- orelhas -->
+      <ellipse cx="107" cy="156" rx="9" ry="12" fill="#E8B48D"/>
+      <ellipse cx="213" cy="156" rx="9" ry="12" fill="#E8B48D"/>
+      <!-- brincos -->
+      <circle cx="107" cy="170" r="4" fill="#EBD3B6"/>
+      <circle cx="213" cy="170" r="4" fill="#EBD3B6"/>
+      <!-- franja -->
+      <path d="M105 132 C109 86 132 64 160 64 C188 64 211 86 215 132 C197 110 184 105 160 105 C136 105 123 110 105 132 Z" fill="#3B2622"/>
+      <!-- sobrancelhas -->
+      <path d="M126 138 q12 -6 24 -1" stroke="#3B2622" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M194 138 q-12 -6 -24 -1" stroke="#3B2622" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- olhos -->
+      <circle cx="138" cy="156" r="5" fill="#3B2622"/>
+      <circle cx="182" cy="156" r="5" fill="#3B2622"/>
+      <!-- óculos -->
+      <g stroke="#3B2622" stroke-width="3.5" fill="none" stroke-linecap="round">
+        <circle cx="138" cy="156" r="21"/>
+        <circle cx="182" cy="156" r="21"/>
+        <path d="M159 156 h2"/>
+        <path d="M117 152 l-12 -5"/>
+        <path d="M203 152 l12 -5"/>
+      </g>
+      <!-- nariz e sorriso -->
+      <path d="M160 164 v11 q0 4 5 5" stroke="#C98A63" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M147 190 q13 11 26 0" stroke="#A8544F" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <!-- busto / blusa -->
+      <path d="M44 320 C44 262 96 232 160 232 C224 232 276 262 276 320 Z" fill="#3A1F2B"/>
+      <!-- gola -->
+      <path d="M142 236 q18 22 36 0" stroke="#EBD3B6" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </g>
+  </svg>`;
+}
+
 function renderLandingProfessoraIngles(){
   const wa = 'https://wa.me/5511999999999';
   return `
@@ -19,8 +65,12 @@ function renderLandingProfessoraIngles(){
     <nav class="lp-nav"><div class="wrap">
       <div class="lp-logo">Ana Duarte</div>
       <ul class="lp-nav-links">
-        <li><a href="#como-funciona" onclick="scrollToId('como-funciona')">Como funciona</a></li>
-        <li><a href="#planos" onclick="scrollToId('planos')">Planos</a></li>
+        <li><a href="#sobre" onclick="goToSection(event,'sobre')">Quem ensina</a></li>
+        <li><a href="#metodo" onclick="goToSection(event,'metodo')">Método</a></li>
+        <li><a href="#como-funciona" onclick="goToSection(event,'como-funciona')">Como funciona</a></li>
+        <li><a href="#planos" onclick="goToSection(event,'planos')">Planos</a></li>
+        <li><a href="#depoimentos" onclick="goToSection(event,'depoimentos')">Depoimentos</a></li>
+        <li><a href="#duvidas" onclick="goToSection(event,'duvidas')">Dúvidas</a></li>
       </ul>
       <div class="lp-nav-actions">
         ${themeToggleBtn()}
@@ -38,7 +88,7 @@ function renderLandingProfessoraIngles(){
           <p class="lead">Aulas particulares para quem quer resultado real — seja para viagem, entrevista de emprego ou intercâmbio. Sem decoreba, com conversação desde o primeiro dia.</p>
           <div class="lp-hero-actions">
             <a href="${wa}" class="lp-btn" onclick="track('contact_click','professora-ingles')">Agendar aula experimental gratuita</a>
-            <a href="#planos" class="lp-btn lp-btn-ghost" onclick="scrollToId('planos')">Ver planos</a>
+            <a href="#planos" class="lp-btn lp-btn-ghost" onclick="goToSection(event,'planos')">Ver planos</a>
           </div>
           <div class="lp-trust">
             <div class="lp-trust-item"><span class="dot"></span>+5 anos de experiência</div>
@@ -47,13 +97,13 @@ function renderLandingProfessoraIngles(){
           </div>
         </div>
         <div class="lp-avatar-wrap">
-          <div class="lp-avatar"></div>
+          <div class="lp-avatar">${lpTeacherPortrait()}</div>
           <div class="lp-avatar-badge"><strong>4.9 ★</strong><span>+80 avaliações</span></div>
         </div>
       </div>
     </section>
 
-    <section class="lp-section"><div class="wrap">
+    <section class="lp-section" id="sobre"><div class="wrap">
       <div class="reveal lp-about">
         <div>
           <div class="lp-eyebrow">Quem ensina</div>
@@ -70,7 +120,7 @@ function renderLandingProfessoraIngles(){
       </div>
     </div></section>
 
-    <section class="lp-section alt"><div class="wrap">
+    <section class="lp-section alt" id="metodo"><div class="wrap">
       <div class="reveal"><div class="lp-eyebrow">Método</div><h2>Aulas pensadas para conversar de verdade, não só decorar regras.</h2></div>
       <div class="lp-cols3">
         <div class="lp-card reveal">${lpIcon('chat')}<h3>Conversação guiada</h3><p>Cada aula parte de situações reais — o foco é destravar a fala desde a primeira semana.</p></div>
@@ -150,7 +200,7 @@ function renderLandingProfessoraIngles(){
       <p class="lp-plans-note">Valores fictícios — exemplo de estrutura de planos para o case demonstrativo.</p>
     </div></section>
 
-    <section class="lp-section"><div class="wrap">
+    <section class="lp-section" id="depoimentos"><div class="wrap">
       <div class="reveal"><div class="lp-eyebrow">Depoimentos</div><h2>O que dizem os alunos.</h2></div>
       <div class="lp-testimonials">
         <div class="lp-testi reveal"><p>Em 4 meses consegui fazer minha entrevista de emprego toda em inglês. Nunca imaginei chegar tão rápido.</p><div class="who">— Camila R., aluna há 6 meses</div></div>
@@ -159,7 +209,7 @@ function renderLandingProfessoraIngles(){
       </div>
     </div></section>
 
-    <section class="lp-section alt"><div class="wrap">
+    <section class="lp-section alt" id="duvidas"><div class="wrap">
       <div class="reveal"><div class="lp-eyebrow">Dúvidas frequentes</div><h2>Antes de agendar, você provavelmente quer saber:</h2></div>
       <div class="lp-faq reveal d1">
         <details class="lp-faq-item">
