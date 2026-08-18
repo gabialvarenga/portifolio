@@ -34,7 +34,6 @@ function renderLandingAdvocacia(){
   const wa = 'https://wa.me/5511999999999';
   return `
   <div class="lp-advocacia">
-    <a href="#/" class="concept-badge">← Voltar ao portfólio</a>
 
     <div class="nav">
       <div class="container nav-inner">
