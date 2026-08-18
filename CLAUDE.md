@@ -33,7 +33,7 @@ Cada página (portfólio, dashboard, cada landing page) mora na própria pasta n
 
 1. Case novo em `CASES` (`core/projects.js`), `status: PROJECT_STATUS.LIVE`.
 2. Criar a pasta `landing-<id>/` com `landing-<id>.css` — **todo seletor prefixado por uma classe única** (`.lp-<id> .hero{...}`, `.lp-<id> h1{...}`, etc.), inclusive seletores de elemento (`body`, `section`, `footer`, `h1,h2,h3`, `p`, `a`) que no arquivo original não eram escopados. Sem isso, o CSS vaza pro resto da SPA (é tudo uma stylesheet global, não por rota). Ligar o arquivo em `index.html`.
-3. Na mesma pasta, `landing-<id>.js` com a função de render, HTML todo dentro de `<div class="lp-<id>">...</div>`. Trocar qualquer link/texto de "voltar" para `#/` e créditos para "Carlos & Gabriela" (nunca reaproveitar nome de marca de um arquivo externo). Componentes compartilhados (`nav()`, `footer()`, `themeToggleBtn()`, `demoBadge()`) vêm de `core/shared.js`.
+3. Na mesma pasta, `landing-<id>.js` com a função de render, HTML todo dentro de `<div class="lp-<id>">...</div>`. Trocar qualquer link/texto de "voltar" para `#/` e créditos para "Carlos & Gabriela" (nunca reaproveitar nome de marca de um arquivo externo). Componentes compartilhados (`nav()`, `footer()`, `themeToggleBtn()`) vêm de `core/shared.js`.
 4. Ligar `landing-<id>/landing-<id>.js` em `index.html`, **antes** de `core/landing-registry.js`, e registrar a função lá: `LANDING_PAGES['<id>'] = renderMinhaLanding`.
 
 O roteador e o `track('landing_page_view', id)` já funcionam pra qualquer id novo automaticamente — não precisa mexer em `core/router.js`.

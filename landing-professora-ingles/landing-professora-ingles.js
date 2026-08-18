@@ -16,7 +16,6 @@ function renderLandingProfessoraIngles(){
   const wa = 'https://wa.me/5511999999999';
   return `
   <div class="lp-professora">
-    ${demoBadge()}
     <nav class="lp-nav"><div class="wrap">
       <div class="lp-logo">Ana Duarte</div>
       <ul class="lp-nav-links">

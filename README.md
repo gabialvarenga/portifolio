@@ -86,7 +86,7 @@ Cada projeto é uma entrada em `CASES` (`core/projects.js`), com um `status`:
 1. Adicionar o case em `CASES` (`core/projects.js`), com `status: PROJECT_STATUS.LIVE`.
 2. Criar uma pasta `landing-<id>/` com dois arquivos:
    - `landing-<id>.css` — todos os seletores prefixados por uma classe única (ex.: `.lp-<id> .hero{...}`) — isso evita que o CSS de uma landing vaze para outra ou para o portfólio.
-   - `landing-<id>.js` — função de render da landing page, HTML todo dentro de um elemento raiz com a classe usada acima (ex.: `<div class="lp-<id>">...</div>`). Componentes compartilhados (`nav()`, `footer()`, `themeToggleBtn()`, `demoBadge()`) vêm de `core/shared.js`.
+   - `landing-<id>.js` — função de render da landing page, HTML todo dentro de um elemento raiz com a classe usada acima (ex.: `<div class="lp-<id>">...</div>`). Componentes compartilhados (`nav()`, `footer()`, `themeToggleBtn()`) vêm de `core/shared.js`.
 3. Ligar os dois arquivos em `index.html` — o `<link>` do CSS perto dos outros `<link>`, o `<script>` do JS **antes** de `core/landing-registry.js` — e registrar a função em `LANDING_PAGES` (`core/landing-registry.js`) com a chave igual ao id do case.
 
 Para **remover** uma landing page (ex.: trocar um case demonstrativo por um cliente real): apagar a pasta `landing-<id>/`, tirar o `<link>`/`<script>` correspondentes de `index.html` e a entrada de `LANDING_PAGES`. Se o case também não deve mais aparecer no portfólio, remover a entrada de `CASES` também.
